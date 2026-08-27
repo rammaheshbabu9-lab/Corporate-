@@ -1,0 +1,1502 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>India Digital Profile</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
+<style>
+*{box-sizing:border-box}
+
+body{
+margin:0;
+background:#f1f3f5;
+font-family:Arial,Helvetica,sans-serif;
+color:#172b4d;
+}
+
+.app{
+max-width:1100px;
+margin:auto;
+padding:16px;
+}
+
+.top{
+text-align:center;
+margin-bottom:18px;
+}
+
+.top h1{
+margin:0;
+font-size:26px;
+}
+
+.top p{
+margin:6px 0 0;
+color:#667085;
+font-size:12px;
+}
+
+/* FORM */
+
+.panel{
+background:#fff;
+padding:16px;
+border-radius:12px;
+margin-bottom:20px;
+box-shadow:0 4px 18px rgba(0,0,0,.08);
+}
+
+.panel-title{
+font-size:14px;
+font-weight:bold;
+margin-bottom:12px;
+}
+
+.form{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.form input{
+width:100%;
+padding:11px 12px;
+border:1px solid #d0d5dd;
+border-radius:8px;
+outline:none;
+font-size:13px;
+}
+
+.form input:focus{
+border-color:#172b4d;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+/* CARDS */
+
+.cards{
+display:flex;
+justify-content:center;
+align-items:flex-start;
+gap:20px;
+flex-wrap:wrap;
+}
+
+.card{
+width:490px;
+min-height:350px;
+background:#fff;
+border-radius:16px;
+position:relative;
+overflow:hidden;
+border:1px solid #d9dee5;
+box-shadow:0 8px 25px rgba(0,0,0,.10);
+}
+
+/* INDIA TRICOLOUR BORDER */
+
+.tricolor{
+height:6px;
+display:flex;
+}
+
+.tricolor .saffron{
+flex:1;
+background:#ff9933;
+}
+
+.tricolor .white{
+flex:1;
+background:#fff;
+}
+
+.tricolor .green{
+flex:1;
+background:#138808;
+}
+
+.inner{
+padding:20px 20px 45px;
+}
+
+/* HEADER */
+
+.header{
+display:flex;
+align-items:center;
+margin-bottom:18px;
+}
+
+.brand{
+display:flex;
+align-items:center;
+gap:10px;
+}
+
+.logo{
+width:42px;
+height:42px;
+border-radius:50%;
+background:#172b4d;
+color:#fff;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:12px;
+font-weight:bold;
+}
+
+.brand b{
+display:block;
+font-size:14px;
+}
+
+.brand small{
+display:block;
+margin-top:3px;
+color:#667085;
+font-size:7px;
+}
+
+/* FRONT */
+
+.front{
+display:grid;
+grid-template-columns:100px 1fr;
+gap:17px;
+}
+
+.photo{
+width:100px;
+height:125px;
+background:#f8f9fa;
+border:1px dashed #98a2b3;
+border-radius:9px;
+display:flex;
+justify-content:center;
+align-items:center;
+text-align:center;
+color:#667085;
+font-size:9px;
+cursor:pointer;
+overflow:hidden;
+}
+
+.photo img{
+width:100%;
+height:100%;
+object-fit:cover;
+display:none;
+}
+
+.fields{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:9px 12px;
+}
+
+.field{
+padding:3px;
+border-radius:5px;
+cursor:pointer;
+}
+
+.field:hover{
+background:#f5f7fa;
+}
+
+.field label{
+display:block;
+color:#98a2b3;
+font-size:6.5px;
+text-transform:uppercase;
+margin-bottom:3px;
+}
+
+.field strong{
+display:block;
+font-size:9px;
+color:#172b4d;
+word-break:break-word;
+}
+
+.profile-id{
+margin-top:15px;
+padding:9px;
+background:#f6f7f9;
+border:1px solid #eaecf0;
+border-radius:7px;
+font-size:8px;
+}
+
+/* BACK */
+
+.back-heading{
+font-size:13px;
+font-weight:bold;
+padding-bottom:9px;
+border-bottom:1px solid #dfe3e8;
+margin-bottom:14px;
+}
+
+.section{
+margin-bottom:14px;
+}
+
+.section-title{
+font-size:9px;
+font-weight:bold;
+text-transform:uppercase;
+margin-bottom:7px;
+}
+
+.instructions{
+background:#fafbfc;
+border:1px solid #e4e7ec;
+border-radius:8px;
+padding:11px;
+}
+
+.instructions ol{
+margin:0;
+padding-left:17px;
+}
+
+.instructions li{
+font-size:7px;
+line-height:1.65;
+color:#475467;
+margin-bottom:3px;
+}
+
+.contact{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:10px;
+}
+
+.contact-box{
+background:#fafbfc;
+border:1px solid #e4e7ec;
+border-radius:8px;
+padding:10px;
+cursor:pointer;
+}
+
+.contact-box:hover{
+background:#f5f7fa;
+}
+
+.contact-box label{
+display:block;
+color:#98a2b3;
+font-size:6.5px;
+text-transform:uppercase;
+margin-bottom:4px;
+}
+
+.contact-box strong{
+font-size:8px;
+word-break:break-word;
+}
+
+.verify{
+background:#fafbfc;
+border:1px solid #e4e7ec;
+border-radius:8px;
+padding:10px;
+}
+
+.verify b{
+font-size:8px;
+}
+
+.verify p{
+margin:5px 0 0;
+font-size:7px;
+line-height:1.6;
+color:#475467;
+}
+
+.privacy{
+background:#f8faf9;
+border:1px solid #dfe8e2;
+border-radius:8px;
+padding:10px;
+font-size:7px;
+line-height:1.6;
+color:#475467;
+}
+
+/* FOOTER */
+
+.footer{
+position:absolute;
+left:0;
+right:0;
+bottom:0;
+padding:7px;
+background:#f5f6f8;
+border-top:1px solid #e4e7ec;
+text-align:center;
+color:#667085;
+font-size:6.5px;
+}
+
+/* BUTTONS */
+
+.actions{
+text-align:center;
+margin-top:22px;
+}
+
+button{
+border:0;
+border-radius:8px;
+padding:11px 15px;
+margin:4px;
+cursor:pointer;
+font-weight:bold;
+font-size:12px;
+}
+
+.btn-dark{
+background:#172b4d;
+color:#fff;
+}
+
+.btn-green{
+background:#138808;
+color:#fff;
+}
+
+.btn-orange{
+background:#ff9933;
+color:#111;
+}
+
+.btn-gray{
+background:#e8ebef;
+color:#172b4d;
+}
+
+button:active{
+transform:scale(.97);
+}
+
+/* MODAL */
+
+.modal{
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.65);
+display:none;
+align-items:center;
+justify-content:center;
+padding:20px;
+z-index:1000;
+}
+
+.modal-box{
+width:100%;
+max-width:380px;
+background:#fff;
+border-radius:14px;
+padding:18px;
+}
+
+.modal-box h3{
+margin:0 0 12px;
+font-size:17px;
+}
+
+.modal-box input,
+.modal-box textarea{
+width:100%;
+padding:11px;
+border:1px solid #d0d5dd;
+border-radius:8px;
+margin-bottom:10px;
+outline:none;
+}
+
+.modal-box textarea{
+min-height:80px;
+resize:vertical;
+}
+
+.modal-actions{
+text-align:right;
+}
+
+/* TOAST */
+
+.toast{
+position:fixed;
+left:50%;
+bottom:20px;
+transform:translateX(-50%);
+background:#172b4d;
+color:white;
+padding:11px 18px;
+border-radius:8px;
+font-size:12px;
+display:none;
+z-index:2000;
+}
+
+/* MOBILE */
+
+@media(max-width:700px){
+
+.form{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:auto;
+}
+
+.cards{
+flex-direction:column;
+align-items:center;
+}
+
+.card{
+width:100%;
+max-width:490px;
+}
+}
+
+@media(max-width:470px){
+
+.front{
+grid-template-columns:82px 1fr;
+gap:10px;
+}
+
+.photo{
+width:82px;
+height:110px;
+}
+
+.brand b{
+font-size:11px;
+}
+}
+</style>
+</head>
+
+<body>
+
+<div class="app">
+
+<div class="top">
+<h1>India Digital Profile</h1>
+<p>Digital Profile • Personal &amp; Business Services</p>
+</div>
+
+
+<!-- PROFILE ENTRY -->
+
+<div class="panel">
+
+<div class="panel-title">
+Profile Information
+</div>
+
+<div class="form">
+
+<input id="fName" placeholder="Full Name">
+<input id="fDob" placeholder="Date of Birth">
+<input id="fGender" placeholder="Gender">
+<input id="fMobile" placeholder="Mobile Number">
+
+<input id="fState" placeholder="State">
+<input id="fDistrict" placeholder="District">
+
+<input id="fVillage" placeholder="Village / City">
+<input id="fProfession" placeholder="Profession">
+
+<input id="fEmail" class="full" placeholder="Email Address">
+<input id="fAddress" class="full" placeholder="Address">
+
+</div>
+</div>
+
+
+<!-- CARDS -->
+
+<div class="cards">
+
+
+<!-- FRONT -->
+
+<div class="card" id="frontCard">
+
+<div class="tricolor">
+<div class="saffron"></div>
+<div class="white"></div>
+<div class="green"></div>
+</div>
+
+<div class="inner">
+
+<div class="header">
+
+<div class="brand">
+
+<div class="logo">
+IDP
+</div>
+
+<div>
+<b>INDIA DIGITAL PROFILE</b>
+<small>Digital Profile</small>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="front">
+
+
+<div class="photo" onclick="uploadPhoto()">
+
+<span id="photoText">
+TAP TO<br>
+UPLOAD<br>
+PHOTO
+</span>
+
+<img id="photoImg">
+
+</div>
+
+<input
+id="photoInput"
+type="file"
+accept="image/*"
+style="display:none"
+onchange="photoSelected(event)"
+>
+
+
+<div class="fields">
+
+<div class="field full" onclick="edit('name')">
+<label>Full Name</label>
+<strong id="name">Tap to enter</strong>
+</div>
+
+<div class="field" onclick="edit('dob')">
+<label>Date of Birth</label>
+<strong id="dob">Tap to enter</strong>
+</div>
+
+<div class="field" onclick="edit('gender')">
+<label>Gender</label>
+<strong id="gender">Tap to enter</strong>
+</div>
+
+<div class="field" onclick="edit('mobile')">
+<label>Mobile</label>
+<strong id="mobile">Tap to enter</strong>
+</div>
+
+<div class="field" onclick="edit('state')">
+<label>State</label>
+<strong id="state">Tap to enter</strong>
+</div>
+
+<div class="field" onclick="edit('district')">
+<label>District</label>
+<strong id="district">Tap to enter</strong>
+</div>
+
+<div class="field" onclick="edit('village')">
+<label>Village / City</label>
+<strong id="village">Tap to enter</strong>
+</div>
+
+<div class="field full" onclick="edit('profession')">
+<label>Profession</label>
+<strong id="profession">Tap to enter</strong>
+</div>
+
+</div>
+</div>
+
+
+<div class="profile-id">
+<b>PROFILE ID:</b>
+<span id="profileId"></span>
+</div>
+
+</div>
+
+<div class="footer">
+DIGITAL PROFILE • NOT A GOVERNMENT ID
+</div>
+
+</div>
+
+
+<!-- BACK -->
+
+<div class="card" id="backCard">
+
+<div class="tricolor">
+<div class="saffron"></div>
+<div class="white"></div>
+<div class="green"></div>
+</div>
+
+<div class="inner">
+
+<div class="back-heading">
+IMPORTANT INSTRUCTIONS
+</div>
+
+
+<div class="section">
+
+<div class="instructions">
+
+<ol>
+
+<li>
+Enter your details carefully and review them before saving.
+</li>
+
+<li>
+Use accurate personal information belonging to you.
+</li>
+
+<li>
+Do not share sensitive document numbers or document copies unnecessarily.
+</li>
+
+<li>
+For official identity verification, use the relevant Government or authorised service.
+</li>
+
+<li>
+This digital profile is not a Government ID and does not replace PAN, Aadhaar or any other official document.
+</li>
+
+</ol>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">
+Contact Information
+</div>
+
+<div class="contact">
+
+<div class="contact-box" onclick="edit('email')">
+
+<label>Email Address</label>
+
+<strong id="email">
+Tap to enter
+</strong>
+
+</div>
+
+
+<div class="contact-box" onclick="edit('address')">
+
+<label>Address</label>
+
+<strong id="address">
+Tap to enter
+</strong>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="section">
+
+<div class="section-title">
+Verification
+</div>
+
+<div class="verify">
+
+<b>
+Verification Information
+</b>
+
+<p>
+Information displayed on this profile is provided by
+the profile owner. Where identity verification is
+required, use the appropriate official service.
+</p>
+
+</div>
+
+</div>
+
+
+<div class="section">
+
+<div class="section-title">
+Privacy &amp; Security
+</div>
+
+<div class="privacy">
+
+<b>Keep your personal information secure.</b>
+
+<br><br>
+
+This profile is not a Government ID and does not
+replace official documents.
+
+</div>
+
+</div>
+
+</div>
+
+
+<div class="footer">
+POWERED BY INDIA DIGITAL PRODUCTS PVT LTD
+</div>
+
+</div>
+
+</div>
+
+
+<!-- ACTION BUTTONS -->
+
+<div class="actions">
+
+<button class="btn-green" onclick="saveProfile()">
+SAVE PROFILE
+</button>
+
+<button class="btn-dark" onclick="loadProfile()">
+LOAD PROFILE
+</button>
+
+<button class="btn-green" onclick="downloadPNG()">
+DOWNLOAD PNG
+</button>
+
+<button class="btn-orange" onclick="downloadPDF()">
+DOWNLOAD PDF
+</button>
+
+<button class="btn-gray" onclick="window.print()">
+PRINT
+</button>
+
+<button class="btn-gray" onclick="newProfile()">
+NEW PROFILE
+</button>
+
+</div>
+
+
+<div style="text-align:center;margin-top:10px;color:#667085;font-size:9px;">
+Profile information is stored locally in this browser.
+</div>
+
+</div>
+
+
+<!-- EDIT MODAL -->
+
+<div class="modal" id="modal">
+
+<div class="modal-box">
+
+<h3 id="modalTitle">
+Edit Information
+</h3>
+
+<input
+id="modalInput"
+placeholder="Enter value"
+>
+
+<textarea
+id="modalText"
+style="display:none"
+placeholder="Enter Address">
+</textarea>
+
+<div class="modal-actions">
+
+<button class="btn-gray" onclick="closeModal()">
+CANCEL
+</button>
+
+<button class="btn-dark" onclick="saveEdit()">
+SAVE
+</button>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="toast" id="toast">
+Saved
+</div>
+
+
+<script>
+
+/* PROFILE DATA */
+
+let profile={
+id:createID(),
+name:"",
+dob:"",
+gender:"",
+mobile:"",
+state:"",
+district:"",
+village:"",
+profession:"",
+email:"",
+address:"",
+photo:""
+};
+
+let editing="";
+
+
+/* AUTO ID */
+
+function createID(){
+
+return "IDP-" +
+new Date().getFullYear() +
+"-" +
+Math.floor(100000 + Math.random()*900000);
+
+}
+
+
+/* EDIT */
+
+function edit(field){
+
+editing=field;
+
+const titles={
+
+name:"Enter Full Name",
+dob:"Enter Date of Birth",
+gender:"Enter Gender",
+mobile:"Enter Mobile Number",
+state:"Enter State",
+district:"Enter District",
+village:"Enter Village / City",
+profession:"Enter Profession",
+email:"Enter Email Address",
+address:"Enter Address"
+
+};
+
+document.getElementById("modalTitle")
+.textContent=titles[field];
+
+const input=
+document.getElementById("modalInput");
+
+const text=
+document.getElementById("modalText");
+
+
+if(field==="address"){
+
+input.style.display="none";
+text.style.display="block";
+text.value=profile[field]||"";
+text.focus();
+
+}else{
+
+text.style.display="none";
+input.style.display="block";
+input.value=profile[field]||"";
+input.focus();
+
+}
+
+document.getElementById("modal")
+.style.display="flex";
+
+}
+
+
+/* SAVE EDIT */
+
+function saveEdit(){
+
+let value;
+
+if(editing==="address"){
+
+value=
+document.getElementById("modalText")
+.value.trim();
+
+}else{
+
+value=
+document.getElementById("modalInput")
+.value.trim();
+
+}
+
+profile[editing]=value;
+
+closeModal();
+
+updateUI();
+
+showToast("Updated");
+
+}
+
+
+/* CLOSE MODAL */
+
+function closeModal(){
+
+document.getElementById("modal")
+.style.display="none";
+
+}
+
+
+/* PHOTO */
+
+function uploadPhoto(){
+
+document.getElementById("photoInput").click();
+
+}
+
+
+function photoSelected(event){
+
+const file=event.target.files[0];
+
+if(!file)return;
+
+if(!file.type.startsWith("image/")){
+
+alert("Please select a valid image.");
+
+return;
+}
+
+const reader=new FileReader();
+
+reader.onload=function(e){
+
+profile.photo=e.target.result;
+
+updateUI();
+
+showToast("Photo added");
+
+};
+
+reader.readAsDataURL(file);
+
+}
+
+
+/* SET TEXT */
+
+function setText(id,value,placeholder){
+
+document.getElementById(id)
+.textContent=value||placeholder;
+
+}
+
+
+/* UPDATE UI */
+
+function updateUI(){
+
+setText("profileId",profile.id,"");
+
+setText("name",profile.name,"Tap to enter");
+setText("dob",profile.dob,"Tap to enter");
+setText("gender",profile.gender,"Tap to enter");
+setText("mobile",profile.mobile,"Tap to enter");
+setText("state",profile.state,"Tap to enter");
+setText("district",profile.district,"Tap to enter");
+setText("village",profile.village,"Tap to enter");
+setText("profession",profile.profession,"Tap to enter");
+
+setText("email",profile.email,"Tap to enter");
+setText("address",profile.address,"Tap to enter");
+
+
+const img=
+document.getElementById("photoImg");
+
+const text=
+document.getElementById("photoText");
+
+
+if(profile.photo){
+
+img.src=profile.photo;
+img.style.display="block";
+text.style.display="none";
+
+}else{
+
+img.style.display="none";
+text.style.display="block";
+
+}
+
+
+const map={
+
+fName:"name",
+fDob:"dob",
+fGender:"gender",
+fMobile:"mobile",
+fState:"state",
+fDistrict:"district",
+fVillage:"village",
+fProfession:"profession",
+fEmail:"email",
+fAddress:"address"
+
+};
+
+
+Object.keys(map).forEach(function(id){
+
+document.getElementById(id).value=
+profile[map[id]]||"";
+
+});
+
+}
+
+
+/* FORM INPUT */
+
+const quick={
+
+fName:"name",
+fDob:"dob",
+fGender:"gender",
+fMobile:"mobile",
+fState:"state",
+fDistrict:"district",
+fVillage:"village",
+fProfession:"profession",
+fEmail:"email",
+fAddress:"address"
+
+};
+
+
+Object.keys(quick).forEach(function(id){
+
+document.getElementById(id)
+.addEventListener("input",function(){
+
+profile[quick[id]]=this.value;
+
+updateCardOnly();
+
+});
+
+});
+
+
+function updateCardOnly(){
+
+setText("name",profile.name,"Tap to enter");
+setText("dob",profile.dob,"Tap to enter");
+setText("gender",profile.gender,"Tap to enter");
+setText("mobile",profile.mobile,"Tap to enter");
+setText("state",profile.state,"Tap to enter");
+setText("district",profile.district,"Tap to enter");
+setText("village",profile.village,"Tap to enter");
+setText("profession",profile.profession,"Tap to enter");
+setText("email",profile.email,"Tap to enter");
+setText("address",profile.address,"Tap to enter");
+
+}
+
+
+/* LOCAL SAVE */
+
+function saveProfile(){
+
+try{
+
+localStorage.setItem(
+"IDP_PROFILE",
+JSON.stringify(profile)
+);
+
+showToast("Profile saved successfully");
+
+}catch(error){
+
+alert(
+"Could not save profile. Try using a smaller photo."
+);
+
+}
+
+}
+
+
+/* LOCAL LOAD */
+
+function loadProfile(){
+
+const saved=
+localStorage.getItem("IDP_PROFILE");
+
+if(!saved){
+
+alert("No saved profile found.");
+
+return;
+}
+
+try{
+
+profile=JSON.parse(saved);
+
+updateUI();
+
+showToast("Profile loaded");
+
+}catch(error){
+
+alert("Could not load saved profile.");
+
+}
+
+}
+
+
+/* NEW PROFILE */
+
+function newProfile(){
+
+if(!confirm("Create a new profile?"))
+return;
+
+profile={
+
+id:createID(),
+name:"",
+dob:"",
+gender:"",
+mobile:"",
+state:"",
+district:"",
+village:"",
+profession:"",
+email:"",
+address:"",
+photo:""
+
+};
+
+document.getElementById("photoInput").value="";
+
+updateUI();
+
+showToast("New profile created");
+
+}
+
+
+/* CREATE PNG CANVASES */
+
+async function createImages(){
+
+const front=
+await html2canvas(
+document.getElementById("frontCard"),
+{
+scale:2,
+useCORS:true,
+backgroundColor:"#ffffff"
+}
+);
+
+
+const back=
+await html2canvas(
+document.getElementById("backCard"),
+{
+scale:2,
+useCORS:true,
+backgroundColor:"#ffffff"
+}
+);
+
+
+return{
+front,
+back
+};
+
+}
+
+
+/* PNG DOWNLOAD */
+
+async function downloadPNG(){
+
+try{
+
+showToast("Preparing PNG...");
+
+const{front,back}=
+await createImages();
+
+const gap=40;
+
+const canvas=
+document.createElement("canvas");
+
+canvas.width=
+front.width+
+gap+
+back.width;
+
+canvas.height=
+Math.max(front.height,back.height);
+
+const ctx=
+canvas.getContext("2d");
+
+ctx.fillStyle="#ffffff";
+
+ctx.fillRect(
+0,
+0,
+canvas.width,
+canvas.height
+);
+
+ctx.drawImage(front,0,0);
+
+ctx.drawImage(
+back,
+front.width+gap,
+0
+);
+
+canvas.toBlob(function(blob){
+
+if(!blob){
+
+alert("PNG creation failed.");
+
+return;
+}
+
+const url=
+URL.createObjectURL(blob);
+
+const a=
+document.createElement("a");
+
+a.href=url;
+
+a.download=
+"India-Digital-Profile-"+profile.id+".png";
+
+document.body.appendChild(a);
+
+a.click();
+
+document.body.removeChild(a);
+
+setTimeout(function(){
+
+URL.revokeObjectURL(url);
+
+},1500);
+
+showToast("PNG download started");
+
+},"image/png");
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"PNG download failed. Please try again."
+);
+
+}
+
+}
+
+
+/* PDF DOWNLOAD */
+
+async function downloadPDF(){
+
+try{
+
+showToast("Preparing PDF...");
+
+const{front,back}=
+await createImages();
+
+const{jsPDF}=
+window.jspdf;
+
+const pdf=
+new jsPDF({
+
+orientation:"landscape",
+unit:"mm",
+format:"a4"
+
+});
+
+const pageWidth=
+pdf.internal.pageSize.getWidth();
+
+const pageHeight=
+pdf.internal.pageSize.getHeight();
+
+const margin=10;
+const gap=6;
+
+const cardWidth=
+(pageWidth-margin*2-gap)/2;
+
+const cardHeight=
+cardWidth*
+(front.height/front.width);
+
+const y=
+(pageHeight-cardHeight)/2;
+
+
+pdf.addImage(
+front.toDataURL("image/png"),
+"PNG",
+margin,
+y,
+cardWidth,
+cardHeight
+);
+
+
+pdf.addImage(
+back.toDataURL("image/png"),
+"PNG",
+margin+cardWidth+gap,
+y,
+cardWidth,
+cardHeight
+);
+
+
+pdf.save(
+"India-Digital-Profile-"+profile.id+".pdf"
+);
+
+showToast("PDF download started");
+
+}catch(error){
+
+console.error(error);
+
+alert(
+"PDF download failed. Please try again."
+);
+
+}
+
+}
+
+
+/* TOAST */
+
+function showToast(message){
+
+const toast=
+document.getElementById("toast");
+
+toast.textContent=message;
+
+toast.style.display="block";
+
+clearTimeout(window.toastTimer);
+
+window.toastTimer=
+setTimeout(function(){
+
+toast.style.display="none";
+
+},2200);
+
+}
+
+
+/* RESTORE LOCAL PROFILE */
+
+const existing=
+localStorage.getItem("IDP_PROFILE");
+
+if(existing){
+
+try{
+
+profile=JSON.parse(existing);
+
+}catch(error){}
+
+}
+
+updateUI();
+
+</script>
+
+</body>
+</html>
