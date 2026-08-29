@@ -1,0 +1,2041 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+<title>ONE MILLION PIXELS HOMEPAGE</title>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<style>
+*{
+box-sizing:border-box;
+}
+
+body{
+margin:0;
+font-family:Arial,Helvetica,sans-serif;
+background:#f5f7fb;
+color:#111827;
+}
+
+.hero{
+background:linear-gradient(135deg,#0f172a,#1e3a8a);
+color:#fff;
+text-align:center;
+padding:42px 18px;
+}
+
+.hero h1{
+margin:10px 0;
+font-size:clamp(30px,5vw,52px);
+}
+
+.hero p{
+max-width:700px;
+margin:0 auto;
+color:#cbd5e1;
+line-height:1.6;
+}
+
+.badge{
+display:inline-block;
+padding:7px 14px;
+border-radius:30px;
+background:rgba(255,255,255,.1);
+border:1px solid rgba(255,255,255,.2);
+font-size:12px;
+}
+
+.container{
+width:94%;
+max-width:1200px;
+margin:25px auto 50px;
+}
+
+/* STATS */
+
+.stats{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-bottom:18px;
+}
+
+.stat{
+background:#fff;
+padding:17px;
+border-radius:15px;
+border:1px solid #e5e7eb;
+}
+
+.stat span{
+color:#64748b;
+font-size:12px;
+}
+
+.stat strong{
+display:block;
+font-size:23px;
+margin-top:7px;
+}
+
+/* TOOLBAR */
+
+.toolbar{
+background:#fff;
+border:1px solid #e5e7eb;
+padding:13px;
+border-radius:15px;
+display:flex;
+gap:10px;
+margin-bottom:15px;
+}
+
+.search{
+flex:1;
+}
+
+.search input,
+select{
+width:100%;
+padding:12px;
+border:1px solid #dbe1ea;
+border-radius:9px;
+outline:none;
+}
+
+select{
+width:180px;
+background:#fff;
+}
+
+/* LEGEND */
+
+.legend{
+display:flex;
+gap:8px;
+flex-wrap:wrap;
+margin-bottom:15px;
+}
+
+.legend span{
+background:#fff;
+border:1px solid #e5e7eb;
+padding:7px 11px;
+border-radius:20px;
+font-size:11px;
+}
+
+.dot{
+display:inline-block;
+width:9px;
+height:9px;
+border-radius:50%;
+margin-right:5px;
+}
+
+.available{
+background:#dbe3ec;
+}
+
+.sold{
+background:#22c55e;
+}
+
+.premium{
+background:#f59e0b;
+}
+
+.corner{
+background:#8b5cf6;
+}
+
+/* WALL */
+
+.wall{
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:18px;
+}
+
+.wall-header{
+display:flex;
+justify-content:space-between;
+align-items:center;
+margin-bottom:17px;
+}
+
+.wall-header h2{
+margin:0;
+font-size:21px;
+}
+
+.wall-header small{
+color:#64748b;
+}
+
+.row{
+margin-bottom:13px;
+}
+
+.row-head{
+display:flex;
+justify-content:space-between;
+margin-bottom:5px;
+}
+
+.row-head strong{
+font-size:11px;
+}
+
+.row-head span{
+font-size:10px;
+color:#94a3b8;
+}
+
+/* SMALL SQUARES */
+
+.grid{
+display:grid;
+grid-template-columns:repeat(20,1fr);
+gap:3px;
+}
+
+.pixel{
+height:39px;
+border:1px solid #dbe2ea;
+border-radius:6px;
+background:#fff;
+cursor:pointer;
+position:relative;
+display:flex;
+align-items:center;
+justify-content:center;
+transition:.15s;
+}
+
+.pixel:hover{
+transform:translateY(-2px);
+box-shadow:0 4px 10px rgba(0,0,0,.12);
+}
+
+.pixel.premium{
+background:#fffaf0;
+border-color:#f6c866;
+}
+
+.pixel.edge{
+background:#f8faff;
+}
+
+.pixel.corner{
+background:#faf7ff;
+border-color:#b99af7;
+}
+
+.pixel.is-sold{
+background:#dcfce7;
+border-color:#4ade80;
+}
+
+.pixel.highlight{
+outline:3px solid #2563eb;
+}
+
+.logo{
+width:25px;
+height:25px;
+object-fit:contain;
+background:#fff;
+border-radius:5px;
+padding:2px;
+}
+
+.company-name{
+position:absolute;
+left:2px;
+right:2px;
+bottom:2px;
+background:rgba(15,23,42,.82);
+color:#fff;
+font-size:6px;
+text-align:center;
+padding:2px;
+border-radius:3px;
+overflow:hidden;
+white-space:nowrap;
+text-overflow:ellipsis;
+}
+
+/* SELECTED */
+
+.selection{
+display:none;
+margin-top:15px;
+background:#0f172a;
+color:#fff;
+border-radius:15px;
+padding:18px;
+}
+
+.selection.show{
+display:block;
+}
+
+.selection-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:8px;
+}
+
+.selection-item{
+background:#1e293b;
+padding:10px;
+border-radius:8px;
+}
+
+.selection-item small{
+color:#94a3b8;
+display:block;
+font-size:10px;
+}
+
+.selection-item strong{
+font-size:13px;
+}
+
+.continue{
+width:100%;
+margin-top:12px;
+padding:12px;
+border:0;
+border-radius:9px;
+background:#2563eb;
+color:#fff;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* PRICING */
+
+.pricing{
+margin-top:25px;
+}
+
+.pricing h2{
+margin-bottom:5px;
+}
+
+.subtitle{
+color:#64748b;
+font-size:13px;
+}
+
+.price-grid{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:12px;
+margin-top:15px;
+}
+
+.price-card{
+background:#fff;
+border:1px solid #e5e7eb;
+border-radius:15px;
+padding:18px;
+}
+
+.price-card.corner-card{
+border:2px solid #8b5cf6;
+}
+
+.price-card h3{
+margin:0;
+}
+
+.price{
+font-size:27px;
+font-weight:900;
+margin:10px 0;
+}
+
+.price-card p{
+color:#64748b;
+font-size:12px;
+line-height:1.5;
+}
+
+/* FORM */
+
+.form{
+background:#fff;
+margin-top:25px;
+border:1px solid #e5e7eb;
+border-radius:18px;
+padding:22px;
+}
+
+.form h2{
+margin-top:0;
+}
+
+.form-grid{
+display:grid;
+grid-template-columns:1fr 1fr;
+gap:13px;
+}
+
+.form-group label{
+display:block;
+font-size:12px;
+font-weight:bold;
+margin-bottom:5px;
+}
+
+.form-group input,
+.form-group textarea{
+width:100%;
+padding:11px;
+border:1px solid #dbe1ea;
+border-radius:8px;
+outline:none;
+}
+
+.form-group textarea{
+min-height:90px;
+}
+
+.full{
+grid-column:1/-1;
+}
+
+.summary{
+margin-top:15px;
+padding:13px;
+background:#f8fafc;
+border-radius:9px;
+font-size:13px;
+line-height:1.8;
+}
+
+.reserve{
+width:100%;
+margin-top:12px;
+padding:13px;
+background:#111827;
+color:#fff;
+border:0;
+border-radius:9px;
+font-weight:bold;
+cursor:pointer;
+}
+
+/* PROFILE POPUP */
+
+.overlay{
+display:none;
+position:fixed;
+inset:0;
+background:rgba(0,0,0,.7);
+align-items:center;
+justify-content:center;
+z-index:1000;
+padding:20px;
+}
+
+.overlay.show{
+display:flex;
+}
+
+.profile-box{
+width:100%;
+max-width:370px;
+background:#fff;
+border-radius:20px;
+padding:25px;
+text-align:center;
+}
+
+.profile-logo{
+width:85px;
+height:85px;
+object-fit:contain;
+border:1px solid #e5e7eb;
+border-radius:15px;
+padding:5px;
+}
+
+.profile-box h2{
+margin:12px 0 5px;
+}
+
+.profile-box p{
+color:#64748b;
+line-height:1.6;
+font-size:13px;
+}
+
+.profile-btn{
+display:block;
+width:100%;
+padding:12px;
+border:0;
+border-radius:9px;
+margin-top:10px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.view{
+background:#2563eb;
+color:#fff;
+}
+
+.close{
+background:#e2e8f0;
+}
+
+
+/* PAYMENT */
+.payment-overlay{display:none;position:fixed;inset:0;background:rgba(2,6,23,.78);z-index:2000;align-items:center;justify-content:center;padding:18px;}
+.payment-overlay.show{display:flex;}
+.payment-box{width:100%;max-width:430px;max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 25px 70px rgba(0,0,0,.3);}
+.payment-box h2{margin-top:0;}
+.payment-amount{font-size:34px;font-weight:900;margin:8px 0 15px;}
+.upi-id{background:#f1f5f9;padding:13px;border-radius:10px;font-weight:bold;margin:12px 0;word-break:break-all;}
+#qrcode{display:flex;justify-content:center;margin:18px auto;}
+#qrcode img,#qrcode canvas{border:8px solid #fff;box-shadow:0 5px 20px rgba(0,0,0,.12);}
+.pay-btn,.paid-btn,.cancel-btn{display:block;width:100%;padding:14px;border:0;border-radius:11px;color:#fff;font-weight:bold;cursor:pointer;font-size:15px;margin-top:10px;}
+.pay-btn{background:#16a34a;}
+.copy-btn{background:#0f766e;}
+.paid-btn{background:#2563eb;}
+.cancel-btn{background:#e2e8f0;color:#111827;}
+#statusMessage{display:none;position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#111827;color:#fff;padding:13px 18px;border-radius:30px;z-index:3000;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+
+/* RESPONSIVE */
+
+@media(max-width:900px){
+
+.stats{
+grid-template-columns:repeat(2,1fr);
+}
+
+.price-grid{
+grid-template-columns:repeat(2,1fr);
+}
+
+.grid{
+grid-template-columns:repeat(10,1fr);
+}
+
+}
+
+@media(max-width:600px){
+
+.toolbar{
+flex-direction:column;
+}
+
+select{
+width:100%;
+}
+
+.grid{
+grid-template-columns:repeat(5,1fr);
+gap:3px;
+}
+
+.pixel{
+height:45px;
+}
+
+.selection-grid{
+grid-template-columns:1fr 1fr;
+}
+
+.form-grid{
+grid-template-columns:1fr;
+}
+
+.full{
+grid-column:auto;
+}
+
+.price-grid{
+grid-template-columns:1fr;
+}
+
+}
+</style>
+</head>
+
+<body>
+
+<header class="hero">
+
+<div class="badge">
+✦ 1,00,000 Pixel Business Wall
+</div>
+
+<h1>
+ONE MILLION PIXELS HOMEPAGE
+</h1>
+
+<p>
+Give your business a permanent digital space
+where customers can discover your brand,
+view your profile and visit your website.
+</p>
+
+</header>
+
+
+<div class="container">
+
+<!-- STATS -->
+
+<div class="stats">
+
+<div class="stat">
+<span>Total Pixels</span>
+<strong>1,00,000</strong>
+</div>
+
+<div class="stat">
+<span>Sold Pixels</span>
+<strong id="soldPixels">0</strong>
+</div>
+
+<div class="stat">
+<span>Available</span>
+<strong id="availablePixels">1,00,000</strong>
+</div>
+
+<div class="stat">
+<span>Business Blocks</span>
+<strong id="soldBlocks">0</strong>
+</div>
+
+</div>
+
+
+<!-- SEARCH -->
+
+<div class="toolbar">
+
+<div class="search">
+
+<input
+id="search"
+type="text"
+placeholder="Search company / brand...">
+
+</div>
+
+<select id="filter">
+
+<option value="all">
+All Spaces
+</option>
+
+<option value="center">
+Center ₹49
+</option>
+
+<option value="premium">
+Premium ₹69
+</option>
+
+<option value="edge">
+Edge ₹79
+</option>
+
+<option value="corner">
+Corner ₹99
+</option>
+
+</select>
+
+</div>
+
+
+<!-- LEGEND -->
+
+<div class="legend">
+
+<span>
+<i class="dot available"></i>
+Available
+</span>
+
+<span>
+<i class="dot sold"></i>
+Sold
+</span>
+
+<span>
+<i class="dot premium"></i>
+Premium
+</span>
+
+<span>
+<i class="dot corner"></i>
+Corner
+</span>
+
+</div>
+
+
+<!-- WALL -->
+
+<section class="wall">
+
+<div class="wall-header">
+
+<div>
+
+<h2>
+Live Business Wall
+</h2>
+
+<small>
+1 block = 100 pixels
+</small>
+
+</div>
+
+<small>
+1,000 Blocks
+</small>
+
+</div>
+
+
+<div id="board"></div>
+
+</section>
+
+
+<!-- SELECTION -->
+
+<div
+id="selection"
+class="selection">
+
+<h3>
+Selected Space
+</h3>
+
+<div class="selection-grid">
+
+<div class="selection-item">
+
+<small>Row</small>
+
+<strong id="selRow">
+-
+</strong>
+
+</div>
+
+<div class="selection-item">
+
+<small>Pixels</small>
+
+<strong id="selPixels">
+-
+</strong>
+
+</div>
+
+<div class="selection-item">
+
+<small>Zone</small>
+
+<strong id="selZone">
+-
+</strong>
+
+</div>
+
+<div class="selection-item">
+
+<small>Price</small>
+
+<strong>
+₹<span id="selPrice">0</span>
+</strong>
+
+</div>
+
+</div>
+
+<button
+class="continue"
+onclick="goRegistration()">
+
+Continue →
+
+</button>
+
+</div>
+
+
+<!-- PRICING -->
+
+<section class="pricing">
+
+<h2>
+Simple Pricing
+</h2>
+
+<div class="subtitle">
+Choose your preferred location.
+</div>
+
+
+<div class="price-grid">
+
+<div class="price-card">
+
+<h3>Center</h3>
+
+<div class="price">
+₹49
+</div>
+
+<p>
+Standard business visibility.
+</p>
+
+</div>
+
+
+<div class="price-card">
+
+<h3>Premium</h3>
+
+<div class="price">
+₹69
+</div>
+
+<p>
+Better visibility placement.
+</p>
+
+</div>
+
+
+<div class="price-card">
+
+<h3>Edge</h3>
+
+<div class="price">
+₹79
+</div>
+
+<p>
+High visibility position.
+</p>
+
+</div>
+
+
+<div class="price-card corner-card">
+
+<h3>
+Corner ⭐
+</h3>
+
+<div class="price">
+₹99
+</div>
+
+<p>
+Premium corner visibility.
+Minimum 20 Corner blocks available.
+</p>
+
+</div>
+
+</div>
+
+</section>
+
+
+<!-- REGISTRATION -->
+
+<section
+id="registration"
+class="form">
+
+<h2>
+Register Your Business
+</h2>
+
+<p class="subtitle">
+Select a space and enter your business details.
+</p>
+
+
+<div class="form-grid">
+
+<div class="form-group">
+
+<label>
+Company / Brand Name *
+</label>
+
+<input
+id="company"
+type="text"
+placeholder="Example: Ram Solutions">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Website
+</label>
+
+<input
+id="website"
+type="url"
+placeholder="https://example.com">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Company Logo *
+</label>
+
+<input
+id="logoInput"
+type="file"
+accept="image/*">
+
+</div>
+
+
+<div class="form-group">
+
+<label>
+Business Category
+</label>
+
+<input
+id="category"
+type="text"
+placeholder="Technology">
+
+</div>
+
+
+<div class="form-group full">
+
+<label>
+Business Description
+</label>
+
+<textarea
+id="description"
+placeholder="Tell customers about your business..."></textarea>
+
+</div>
+
+</div>
+
+
+<div class="summary">
+
+<strong>Selected:</strong>
+<span id="summary">
+No space selected
+</span>
+
+</div>
+
+
+<button
+class="reserve"
+onclick="reserve()">
+
+Continue to Payment
+
+</button>
+
+</section>
+
+</div>
+
+
+<footer style="text-align:center;padding:20px;color:#64748b;font-size:12px">
+
+© 2026 ONE MILLION PIXELS HOMEPAGE • Digital Business Visibility Platform
+
+</footer>
+
+
+<!-- VIEW PROFILE -->
+
+<div
+id="profileOverlay"
+class="overlay">
+
+<div class="profile-box">
+
+<img
+id="profileLogo"
+class="profile-logo"
+src=""
+alt="Company Logo">
+
+<h2 id="profileCompany">
+Company
+</h2>
+
+<p id="profileInfo">
+Business Profile
+</p>
+
+<button
+class="profile-btn view"
+onclick="openProfile()">
+
+View Profile
+
+</button>
+
+<button
+class="profile-btn close"
+onclick="closeProfile()">
+
+Close
+
+</button>
+
+</div>
+
+</div>
+
+
+
+<!-- PAYMENT -->
+<div id="paymentOverlay" class="payment-overlay">
+  <div class="payment-box">
+    <h2>💳 Complete Payment</h2>
+    <p id="paymentCompany">Business</p>
+    <div class="payment-amount">₹<span id="paymentAmount">0</span></div>
+    <div class="upi-id">UPI ID: <span id="upiText">9640467264@ibl</span></div>
+    <button class="pay-btn" onclick="openUPI()">📲 Pay with UPI App</button>
+    <p style="font-size:12px;color:#64748b;margin:14px 0 5px;">Or scan this QR code</p>
+    <div id="qrcode"></div>
+    <button class="pay-btn copy-btn" onclick="copyUPI()">📋 Copy UPI ID</button>
+    <p style="font-size:11px;color:#64748b;line-height:1.6;margin-top:15px;">Pay the exact amount shown above. After completing payment, return here and press the button below.</p>
+    <button class="paid-btn" onclick="confirmPaymentSubmitted()">✅ I Have Completed Payment</button>
+    <button class="cancel-btn" onclick="closePayment()">Cancel</button>
+  </div>
+</div>
+<div id="statusMessage"></div>
+
+<script>
+
+/* =========================
+CONFIG
+========================= */
+
+const ROWS = 10;
+
+const BLOCKS = 100;
+
+const PIXELS_PER_BLOCK = 100;
+
+const TOTAL_PIXELS = 100000;
+
+const UPI_ID = "9640467264@ibl";
+
+
+/* =========================
+PRICES
+========================= */
+
+const prices = {
+
+center:49,
+
+premium:69,
+
+edge:79,
+
+corner:99
+
+};
+
+
+/* =========================
+BUSINESS DATA
+========================= */
+
+let businesses = {};
+
+
+/* =========================
+STATE
+========================= */
+
+let selected = null;
+
+let selectedBusiness = null;
+
+let uploadedLogo = null;
+
+
+/* =========================
+LOGO
+========================= */
+
+function defaultLogo(){
+
+return "data:image/svg+xml," +
+encodeURIComponent(`
+
+<svg xmlns="http://www.w3.org/2000/svg"
+width="100"
+height="100">
+
+<rect
+width="100"
+height="100"
+rx="15"
+fill="#f1f5f9"/>
+
+<text
+x="50"
+y="63"
+text-anchor="middle"
+font-size="35">
+
+🏢
+
+</text>
+
+</svg>
+
+`);
+
+}
+
+
+/* =========================
+ZONE
+========================= */
+
+function zone(row,block){
+
+/*
+Corner:
+first/last row + first/last 10 blocks
+*/
+
+if(
+(row===0 || row===9) &&
+(block<10 || block>=90)
+){
+
+return "corner";
+
+}
+
+
+/*
+Edge
+*/
+
+if(
+row===0 ||
+row===9 ||
+block<10 ||
+block>=90
+){
+
+return "edge";
+
+}
+
+
+/*
+Premium
+*/
+
+if(
+row===1 ||
+row===8 ||
+block<30 ||
+block>=70
+){
+
+return "premium";
+
+}
+
+
+return "center";
+
+}
+
+
+/* =========================
+BUILD WALL
+========================= */
+
+function buildWall(){
+
+const board =
+document.getElementById(
+"board"
+);
+
+board.innerHTML = "";
+
+
+for(
+let row=0;
+row<ROWS;
+row++
+){
+
+const rowDiv =
+document.createElement(
+"div"
+);
+
+rowDiv.className =
+"row";
+
+
+const rowStart =
+row*10000+1;
+
+const rowEnd =
+(row+1)*10000;
+
+
+rowDiv.innerHTML = `
+
+<div class="row-head">
+
+<strong>
+ROW ${String(row+1).padStart(2,"0")}
+</strong>
+
+<span>
+${rowStart.toLocaleString("en-IN")}
+-
+${rowEnd.toLocaleString("en-IN")}
+</span>
+
+</div>
+
+`;
+
+
+const grid =
+document.createElement(
+"div"
+);
+
+grid.className =
+"grid";
+
+
+for(
+let block=0;
+block<BLOCKS;
+block++
+){
+
+const id =
+row*BLOCKS+block;
+
+
+const start =
+rowStart+
+block*PIXELS_PER_BLOCK;
+
+
+const end =
+start+
+PIXELS_PER_BLOCK-
+1;
+
+
+const currentZone =
+zone(row,block);
+
+
+const pixel =
+document.createElement(
+"div"
+);
+
+
+pixel.className =
+"pixel " +
+currentZone;
+
+
+pixel.dataset.id =
+id;
+
+pixel.dataset.zone =
+currentZone;
+
+
+if(
+businesses[id]
+){
+
+pixel.classList.add(
+"is-sold"
+);
+
+
+const business =
+businesses[id];
+
+
+pixel.innerHTML = `
+
+<img
+class="logo"
+src="${business.logo || defaultLogo()}"
+alt="Logo">
+
+<div class="company-name">
+${escapeHtml(business.company)}
+</div>
+
+`;
+
+}
+else{
+
+pixel.innerHTML = `
+<span style="
+font-size:7px;
+color:#94a3b8">
+${block+1}
+</span>
+`;
+
+}
+
+
+pixel.onclick =
+function(){
+
+if(
+businesses[id]
+){
+
+showProfile(
+businesses[id]
+);
+
+}
+else{
+
+selectSpace(
+id,
+row,
+block,
+start,
+end,
+currentZone,
+pixel
+);
+
+}
+
+};
+
+
+grid.appendChild(
+pixel
+);
+
+}
+
+
+rowDiv.appendChild(
+grid
+);
+
+
+board.appendChild(
+rowDiv
+);
+
+}
+
+
+updateStats();
+
+}
+
+
+/* =========================
+SELECT
+========================= */
+
+function selectSpace(
+id,
+row,
+block,
+start,
+end,
+currentZone,
+element
+){
+
+document
+.querySelectorAll(
+".pixel.highlight"
+)
+.forEach(
+x =>
+x.classList.remove(
+"highlight"
+)
+);
+
+
+element.classList.add(
+"highlight"
+);
+
+
+selected = {
+
+id,
+
+row,
+
+block,
+
+start,
+
+end,
+
+zone:currentZone,
+
+price:prices[currentZone],
+
+element
+
+};
+
+
+document.getElementById(
+"selRow"
+).innerText =
+"Row " +
+(row+1);
+
+
+document.getElementById(
+"selPixels"
+).innerText =
+start.toLocaleString("en-IN") +
+" - " +
+end.toLocaleString("en-IN");
+
+
+document.getElementById(
+"selZone"
+).innerText =
+currentZone.toUpperCase();
+
+
+document.getElementById(
+"selPrice"
+).innerText =
+prices[currentZone];
+
+
+document
+.getElementById(
+"selection"
+)
+.classList.add(
+"show"
+);
+
+
+document.getElementById(
+"summary"
+).innerText =
+
+`Row ${row+1} • ` +
+`${start.toLocaleString("en-IN")} - ` +
+`${end.toLocaleString("en-IN")} • ` +
+`${currentZone.toUpperCase()} • ` +
+`₹${prices[currentZone]}`;
+
+}
+
+
+/* =========================
+GO FORM
+========================= */
+
+function goRegistration(){
+
+if(!selected){
+
+alert(
+"Please select a space first."
+);
+
+return;
+
+}
+
+
+document
+.getElementById(
+"registration"
+)
+.scrollIntoView({
+behavior:"smooth"
+});
+
+}
+
+
+/* =========================
+LOGO UPLOAD
+========================= */
+
+document
+.getElementById(
+"logoInput"
+)
+.addEventListener(
+"change",
+function(e){
+
+const file =
+e.target.files[0];
+
+
+if(!file){
+
+uploadedLogo = null;
+
+return;
+
+}
+
+
+if(
+!file.type.startsWith(
+"image/"
+)
+){
+
+alert(
+"Please select an image."
+);
+
+this.value="";
+
+return;
+
+}
+
+
+const reader =
+new FileReader();
+
+
+reader.onload =
+function(event){
+
+uploadedLogo =
+event.target.result;
+
+};
+
+
+reader.readAsDataURL(
+file
+);
+
+}
+);
+
+
+/* =========================
+RESERVE
+========================= */
+
+function reserve(){
+
+if(!selected){
+alert("Please select a pixel block.");
+return;
+}
+
+const company=document.getElementById("company").value.trim();
+const website=document.getElementById("website").value.trim();
+const category=document.getElementById("category").value.trim();
+const description=document.getElementById("description").value.trim();
+
+if(!company){
+alert("Please enter company name.");
+return;
+}
+
+if(!uploadedLogo){
+alert("Please upload company logo.");
+return;
+}
+
+if(selected.zone === "corner") {
+const cornerCount=Object.keys(businesses).filter(id=>{
+const r=Math.floor(Number(id)/BLOCKS);
+const b=Number(id)%BLOCKS;
+return zone(r,b)==="corner";
+}).length;
+if(cornerCount>=20){
+alert("All 20 Corner spaces are currently reserved.");
+return;
+}
+}
+
+pendingBooking={
+company:company,
+website:website,
+category:category,
+description:description,
+logo:uploadedLogo,
+amount:selected.price,
+block:selected.id+1
+};
+
+showPayment();
+}
+
+let pendingBooking=null;
+
+function showPayment(){
+const p=pendingBooking;
+if(!p)return;
+document.getElementById("paymentCompany").innerText=p.company;
+document.getElementById("paymentAmount").innerText=Number(p.amount).toFixed(2);
+document.getElementById("upiText").innerText=UPI_ID;
+document.getElementById("paymentOverlay").classList.add("show");
+const qr=document.getElementById("qrcode");
+qr.innerHTML="";
+const upiUrl="upi://pay"+
+"?pa="+encodeURIComponent(UPI_ID)+
+"&pn="+encodeURIComponent("ONE MILLION PIXELS HOMEPAGE")+
+"&am="+encodeURIComponent(Number(p.amount).toFixed(2))+
+"&cu=INR"+
+"&tn="+encodeURIComponent("ONE MILLION PIXELS - Block "+p.block);
+new QRCode(qr,{text:upiUrl,width:220,height:220,correctLevel:QRCode.CorrectLevel.H});
+}
+
+function openUPI(){
+if(!pendingBooking)return;
+const upiUrl="upi://pay"+
+"?pa="+encodeURIComponent(UPI_ID)+
+"&pn="+encodeURIComponent("ONE MILLION PIXELS HOMEPAGE")+
+"&am="+encodeURIComponent(Number(pendingBooking.amount).toFixed(2))+
+"&cu=INR"+
+"&tn="+encodeURIComponent("ONE MILLION PIXELS - Block "+pendingBooking.block);
+window.location.href=upiUrl;
+}
+
+function copyUPI(){
+if(navigator.clipboard){
+navigator.clipboard.writeText(UPI_ID).then(()=>showStatus("UPI ID copied successfully ✓")).catch(()=>alert("UPI ID: "+UPI_ID));
+}else{alert("UPI ID: "+UPI_ID);}
+setTimeout(hideStatus,2500);
+}
+
+function confirmPaymentSubmitted(){
+if(!pendingBooking || !selected)return;
+const ok=confirm("Have you completed the UPI payment of ₹"+Number(pendingBooking.amount).toFixed(2)+"?");
+if(!ok)return;
+
+businesses[selected.id]={
+company:pendingBooking.company,
+website:pendingBooking.website,
+category:pendingBooking.category,
+description:pendingBooking.description,
+logo:pendingBooking.logo,
+payment_status:"PENDING",
+booking_status:"PENDING",
+block:selected.id+1
+};
+
+try{localStorage.setItem("one_million_pixels_businesses",JSON.stringify(businesses));}catch(e){}
+
+document.getElementById("paymentOverlay").classList.remove("show");
+clearRegistrationForm();
+uploadedLogo=null;
+selected=null;
+pendingBooking=null;
+document.getElementById("selection").classList.remove("show");
+buildWall();
+alert("Registration submitted successfully. Your business block is now registered. Payment verification status: PENDING.");
+}
+
+function closePayment(){
+document.getElementById("paymentOverlay").classList.remove("show");
+}
+
+function clearRegistrationForm(){
+["company","website","category","description"].forEach(id=>document.getElementById(id).value="");
+document.getElementById("logoInput").value="";
+}
+
+function showStatus(message){
+const box=document.getElementById("statusMessage");
+box.innerText=message;
+box.style.display="block";
+}
+
+function hideStatus(){
+document.getElementById("statusMessage").style.display="none";
+}
+
+
+/* =========================
+VIEW PROFILE
+========================= */
+
+function showProfile(
+business
+){
+
+selectedBusiness =
+business;
+
+
+document.getElementById(
+"profileLogo"
+).src =
+business.logo ||
+defaultLogo();
+
+
+document.getElementById(
+"profileCompany"
+).innerText =
+business.company;
+
+
+document.getElementById(
+"profileInfo"
+).innerText =
+business.category ||
+"Verified Business";
+
+
+document
+.getElementById(
+"profileOverlay"
+)
+.classList.add(
+"show"
+);
+
+}
+
+
+/* =========================
+FULL PROFILE
+========================= */
+
+function openProfile(){
+
+if(!selectedBusiness){
+
+return;
+
+}
+
+
+const business =
+selectedBusiness;
+
+
+const website =
+business.website;
+
+
+let message =
+
+`${business.company}\n\n` +
+
+`${business.description || "Verified Business"}\n\n` +
+
+`Category: ${
+business.category ||
+"Business"
+}`;
+
+
+if(website){
+
+const validWebsite =
+/^https?:\/\//i.test(
+website
+)
+?
+website
+:
+"https://" +
+website;
+
+
+const open =
+confirm(
+message +
+"\n\nOpen company website?"
+);
+
+
+if(open){
+
+window.open(
+validWebsite,
+"_blank"
+);
+
+}
+
+}
+else{
+
+alert(
+message
+);
+
+}
+
+}
+
+
+/* =========================
+CLOSE PROFILE
+========================= */
+
+function closeProfile(){
+
+document
+.getElementById(
+"profileOverlay"
+)
+.classList.remove(
+"show"
+);
+
+}
+
+
+/* =========================
+SEARCH
+========================= */
+
+document
+.getElementById(
+"search"
+)
+.addEventListener(
+"input",
+function(){
+
+const value =
+this.value
+.toLowerCase()
+.trim();
+
+
+document
+.querySelectorAll(
+".pixel"
+)
+.forEach(
+pixel => {
+
+pixel.classList.remove(
+"highlight"
+);
+
+
+const id =
+Number(
+pixel.dataset.id
+);
+
+
+if(
+value &&
+businesses[id] &&
+businesses[id]
+.company
+.toLowerCase()
+.includes(value)
+){
+
+pixel.classList.add(
+"highlight"
+);
+
+}
+
+}
+);
+
+}
+);
+
+
+/* =========================
+FILTER
+========================= */
+
+document
+.getElementById(
+"filter"
+)
+.addEventListener(
+"change",
+function(){
+
+const value =
+this.value;
+
+
+document
+.querySelectorAll(
+".pixel"
+)
+.forEach(
+pixel => {
+
+if(
+value === "all" ||
+pixel.dataset.zone ===
+value
+){
+
+pixel.style.display =
+"flex";
+
+}
+else{
+
+pixel.style.display =
+"none";
+
+}
+
+}
+);
+
+}
+);
+
+
+/* =========================
+STATS
+========================= */
+
+function updateStats(){
+
+const blocks =
+Object.keys(
+businesses
+).length;
+
+
+const sold =
+blocks *
+PIXELS_PER_BLOCK;
+
+
+document.getElementById(
+"soldBlocks"
+).innerText =
+blocks.toLocaleString(
+"en-IN"
+);
+
+
+document.getElementById(
+"soldPixels"
+).innerText =
+sold.toLocaleString(
+"en-IN"
+);
+
+
+document.getElementById(
+"availablePixels"
+).innerText =
+(
+TOTAL_PIXELS -
+sold
+).toLocaleString(
+"en-IN"
+);
+
+}
+
+
+/* =========================
+ESCAPE
+========================= */
+
+function escapeHtml(value){
+
+return String(
+value || ""
+)
+.replace(/&/g,"&amp;")
+.replace(/</g,"&lt;")
+.replace(/>/g,"&gt;")
+.replace(/"/g,"&quot;")
+.replace(/'/g,"&#039;");
+
+}
+
+
+/* =========================
+START
+========================= */
+
+try{
+const saved=localStorage.getItem("one_million_pixels_businesses");
+if(saved) businesses=JSON.parse(saved)||{};
+}catch(e){}
+
+buildWall();
+
+</script>
+
+</body>
+</html>
