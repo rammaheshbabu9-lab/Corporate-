@@ -1,2037 +1,2241 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-
-<title>ONE MILLION PIXELS HOMEPAGE</title>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+<title>ONE MILLION PIXELS MAIN PAGE</title>
 
 <style>
-*{
-box-sizing:border-box;
-}
+*{box-sizing:border-box}
 
 body{
-margin:0;
-font-family:Arial,Helvetica,sans-serif;
-background:#f5f7fb;
-color:#111827;
+    margin:0;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#eef2ff;
+    color:#172033;
 }
 
-.hero{
-background:linear-gradient(135deg,#0f172a,#1e3a8a);
-color:#fff;
-text-align:center;
-padding:42px 18px;
+header{
+    padding:42px 15px;
+    text-align:center;
+    color:white;
+    background:
+      linear-gradient(135deg,#020617,#172554,#075985,#164e63);
+    box-shadow:0 8px 30px rgba(15,23,42,.25);
 }
 
-.hero h1{
-margin:10px 0;
-font-size:clamp(30px,5vw,52px);
+header h1{
+    margin:0;
+    font-size:clamp(30px,7vw,60px);
+    font-weight:1000;
+    letter-spacing:2px;
 }
 
-.hero p{
-max-width:700px;
-margin:0 auto;
-color:#cbd5e1;
-line-height:1.6;
-}
-
-.badge{
-display:inline-block;
-padding:7px 14px;
-border-radius:30px;
-background:rgba(255,255,255,.1);
-border:1px solid rgba(255,255,255,.2);
-font-size:12px;
+header p{
+    margin:10px 0 0;
+    color:#bae6fd;
 }
 
 .container{
-width:94%;
-max-width:1200px;
-margin:25px auto 50px;
+    width:96%;
+    max-width:1450px;
+    margin:22px auto;
 }
 
-/* STATS */
-
 .stats{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-bottom:18px;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:14px;
 }
 
 .stat{
-background:#fff;
-padding:17px;
-border-radius:15px;
-border:1px solid #e5e7eb;
+    background:white;
+    border-radius:17px;
+    padding:20px;
+    box-shadow:0 8px 25px rgba(30,41,59,.08);
+    border-top:5px solid #2563eb;
 }
 
-.stat span{
-color:#64748b;
-font-size:12px;
-}
+.stat:nth-child(2){border-color:#16a34a}
+.stat:nth-child(3){border-color:#f59e0b}
+.stat:nth-child(4){border-color:#9333ea}
 
+.stat small{color:#64748b}
 .stat strong{
-display:block;
-font-size:23px;
-margin-top:7px;
+    display:block;
+    font-size:27px;
+    margin-top:6px;
 }
 
-/* TOOLBAR */
-
-.toolbar{
-background:#fff;
-border:1px solid #e5e7eb;
-padding:13px;
-border-radius:15px;
-display:flex;
-gap:10px;
-margin-bottom:15px;
+.panel{
+    margin-top:18px;
+    padding:22px;
+    background:white;
+    border-radius:20px;
+    box-shadow:0 8px 28px rgba(30,41,59,.07);
 }
 
-.search{
-flex:1;
-}
-
-.search input,
-select{
-width:100%;
-padding:12px;
-border:1px solid #dbe1ea;
-border-radius:9px;
-outline:none;
-}
-
-select{
-width:180px;
-background:#fff;
-}
-
-/* LEGEND */
-
-.legend{
-display:flex;
-gap:8px;
-flex-wrap:wrap;
-margin-bottom:15px;
-}
-
-.legend span{
-background:#fff;
-border:1px solid #e5e7eb;
-padding:7px 11px;
-border-radius:20px;
-font-size:11px;
-}
-
-.dot{
-display:inline-block;
-width:9px;
-height:9px;
-border-radius:50%;
-margin-right:5px;
-}
-
-.available{
-background:#dbe3ec;
-}
-
-.sold{
-background:#22c55e;
-}
-
-.premium{
-background:#f59e0b;
-}
-
-.corner{
-background:#8b5cf6;
-}
-
-/* WALL */
-
-.wall{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:18px;
-padding:18px;
-}
-
-.wall-header{
-display:flex;
-justify-content:space-between;
-align-items:center;
-margin-bottom:17px;
-}
-
-.wall-header h2{
-margin:0;
-font-size:21px;
-}
-
-.wall-header small{
-color:#64748b;
-}
-
-.row{
-margin-bottom:13px;
-}
-
-.row-head{
-display:flex;
-justify-content:space-between;
-margin-bottom:5px;
-}
-
-.row-head strong{
-font-size:11px;
-}
-
-.row-head span{
-font-size:10px;
-color:#94a3b8;
-}
-
-/* SMALL SQUARES */
-
-.grid{
-display:grid;
-grid-template-columns:repeat(20,1fr);
-gap:3px;
-}
-
-.pixel{
-height:39px;
-border:1px solid #dbe2ea;
-border-radius:6px;
-background:#fff;
-cursor:pointer;
-position:relative;
-display:flex;
-align-items:center;
-justify-content:center;
-transition:.15s;
-}
-
-.pixel:hover{
-transform:translateY(-2px);
-box-shadow:0 4px 10px rgba(0,0,0,.12);
-}
-
-.pixel.premium{
-background:#fffaf0;
-border-color:#f6c866;
-}
-
-.pixel.edge{
-background:#f8faff;
-}
-
-.pixel.corner{
-background:#faf7ff;
-border-color:#b99af7;
-}
-
-.pixel.is-sold{
-background:#dcfce7;
-border-color:#4ade80;
-}
-
-.pixel.highlight{
-outline:3px solid #2563eb;
-}
-
-.logo{
-width:25px;
-height:25px;
-object-fit:contain;
-background:#fff;
-border-radius:5px;
-padding:2px;
-}
-
-.company-name{
-position:absolute;
-left:2px;
-right:2px;
-bottom:2px;
-background:rgba(15,23,42,.82);
-color:#fff;
-font-size:6px;
-text-align:center;
-padding:2px;
-border-radius:3px;
-overflow:hidden;
-white-space:nowrap;
-text-overflow:ellipsis;
-}
-
-/* SELECTED */
-
-.selection{
-display:none;
-margin-top:15px;
-background:#0f172a;
-color:#fff;
-border-radius:15px;
-padding:18px;
-}
-
-.selection.show{
-display:block;
-}
-
-.selection-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:8px;
-}
-
-.selection-item{
-background:#1e293b;
-padding:10px;
-border-radius:8px;
-}
-
-.selection-item small{
-color:#94a3b8;
-display:block;
-font-size:10px;
-}
-
-.selection-item strong{
-font-size:13px;
-}
-
-.continue{
-width:100%;
-margin-top:12px;
-padding:12px;
-border:0;
-border-radius:9px;
-background:#2563eb;
-color:#fff;
-font-weight:bold;
-cursor:pointer;
-}
-
-/* PRICING */
-
-.pricing{
-margin-top:25px;
-}
-
-.pricing h2{
-margin-bottom:5px;
-}
-
-.subtitle{
-color:#64748b;
-font-size:13px;
+.panel h2{
+    margin-top:0;
 }
 
 .price-grid{
-display:grid;
-grid-template-columns:repeat(4,1fr);
-gap:12px;
-margin-top:15px;
-}
-
-.price-card{
-background:#fff;
-border:1px solid #e5e7eb;
-border-radius:15px;
-padding:18px;
-}
-
-.price-card.corner-card{
-border:2px solid #8b5cf6;
-}
-
-.price-card h3{
-margin:0;
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:13px;
 }
 
 .price{
-font-size:27px;
-font-weight:900;
-margin:10px 0;
+    text-align:center;
+    padding:20px;
+    border-radius:17px;
+    border:2px solid #e2e8f0;
 }
 
-.price-card p{
-color:#64748b;
-font-size:12px;
-line-height:1.5;
+.price:nth-child(1){
+    background:#eff6ff;
+    border-color:#60a5fa;
 }
 
-/* FORM */
-
-.form{
-background:#fff;
-margin-top:25px;
-border:1px solid #e5e7eb;
-border-radius:18px;
-padding:22px;
+.price:nth-child(2){
+    background:#fffbeb;
+    border-color:#fbbf24;
 }
 
-.form h2{
-margin-top:0;
+.price:nth-child(3){
+    background:#f5f3ff;
+    border-color:#a78bfa;
+}
+
+.price:nth-child(4){
+    background:#fff1f2;
+    border-color:#fb7185;
+}
+
+.price h3{
+    margin:0 0 8px;
+}
+
+.price strong{
+    font-size:31px;
+}
+
+.controls{
+    display:flex;
+    gap:10px;
+    margin:18px 0;
+}
+
+.controls input,
+.controls select{
+    padding:13px;
+    border:1px solid #cbd5e1;
+    border-radius:11px;
+    font-size:14px;
+}
+
+.controls input{
+    flex:1;
+}
+
+.legend{
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+    margin-bottom:15px;
+}
+
+.legend span{
+    padding:7px 11px;
+    border-radius:20px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+    font-size:12px;
+}
+
+#wall-container{
+    padding:14px;
+    background:
+      linear-gradient(135deg,#dbeafe,#ede9fe);
+    border:2px solid #c7d2fe;
+    border-radius:17px;
+    overflow:auto;
+    max-height:70vh;
+}
+
+#wall{
+    display:grid;
+    grid-template-columns:repeat(10,90px);
+    gap:5px;
+    min-width:945px;
+}
+
+.slot{
+    width:90px;
+    height:90px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    border:2px solid #94a3b8;
+    border-radius:8px;
+    cursor:pointer;
+    transition:.18s;
+}
+
+.slot:hover{
+    transform:translateY(-3px) scale(1.02);
+    box-shadow:0 9px 20px rgba(37,99,235,.22);
+    z-index:4;
+}
+
+.slot.center{
+    background:#eff6ff;
+    border-color:#93c5fd;
+}
+
+.slot.premium{
+    background:#fffbeb;
+    border-color:#facc15;
+}
+
+.slot.edge{
+    background:#f5f3ff;
+    border-color:#a78bfa;
+}
+
+.slot.corner{
+    background:#fff1f2;
+    border-color:#fb7185;
+}
+
+.slot.booked{
+    background:linear-gradient(145deg,#dcfce7,#bbf7d0);
+    border:2px solid #16a34a;
+    box-shadow:0 4px 12px rgba(22,163,74,.18);
+}
+
+.slot-number{
+    position:absolute;
+    left:4px;
+    top:3px;
+    font-size:8px;
+    color:#64748b;
+    font-weight:bold;
+    z-index:7;
+}
+
+.slot-price{
+    position:absolute;
+    right:3px;
+    bottom:3px;
+    padding:2px 4px;
+    background:rgba(255,255,255,.9);
+    border-radius:4px;
+    font-size:8px;
+    font-weight:bold;
+    z-index:7;
+}
+
+.booked-badge{
+    position:absolute;
+    top:3px;
+    right:3px;
+    padding:3px 5px;
+    border-radius:5px;
+    background:#16a34a;
+    color:#fff;
+    font-size:7px;
+    font-weight:900;
+    z-index:8;
+}
+
+.slot.booked a{
+    position:absolute;
+    inset:15px 5px 18px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    z-index:5;
+}
+
+.slot.booked a img{
+    width:76px;
+    height:58px;
+    object-fit:contain;
+}
+
+.business-name{
+    display:none;
+}
+
+.slot.booked .business-name{
+    display:block;
+    position:absolute;
+    left:3px;
+    right:3px;
+    bottom:14px;
+    padding:3px;
+    background:rgba(255,255,255,.92);
+    border-radius:5px;
+    text-align:center;
+    color:#166534;
+    font-size:9px;
+    font-weight:900;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    z-index:6;
+}
+
+#selection{
+    display:none;
+    margin-top:18px;
+    padding:22px;
+    color:white;
+    border-radius:20px;
+    background:
+      linear-gradient(135deg,#0f172a,#1d4ed8,#0891b2);
+    box-shadow:0 14px 35px rgba(30,64,175,.28);
+}
+
+#selection.show{
+    display:block;
+}
+
+.selected-title{
+    font-size:21px;
+    font-weight:900;
+    margin-bottom:14px;
+}
+
+.selected-info{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:9px;
+}
+
+.selected-item{
+    padding:12px;
+    border-radius:11px;
+    background:rgba(255,255,255,.12);
+    border:1px solid rgba(255,255,255,.2);
+}
+
+.selected-item small{
+    display:block;
+    color:#bae6fd;
+}
+
+.selected-item strong{
+    display:block;
+    margin-top:4px;
+}
+
+.book-button{
+    width:100%;
+    margin-top:15px;
+    padding:15px;
+    border:0;
+    border-radius:12px;
+    color:white;
+    font-size:15px;
+    font-weight:900;
+    background:linear-gradient(135deg,#f59e0b,#ea580c);
+    cursor:pointer;
+}
+
+#businessForm{
+    display:none;
 }
 
 .form-grid{
-display:grid;
-grid-template-columns:1fr 1fr;
-gap:13px;
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:13px;
 }
 
 .form-group label{
-display:block;
-font-size:12px;
-font-weight:bold;
-margin-bottom:5px;
+    font-size:13px;
+    font-weight:bold;
 }
 
 .form-group input,
 .form-group textarea{
-width:100%;
-padding:11px;
-border:1px solid #dbe1ea;
-border-radius:8px;
-outline:none;
-}
-
-.form-group textarea{
-min-height:90px;
+    width:100%;
+    margin-top:5px;
+    padding:12px;
+    border:1px solid #cbd5e1;
+    border-radius:10px;
+    font-size:14px;
 }
 
 .full{
-grid-column:1/-1;
+    grid-column:1/-1;
 }
 
-.summary{
-margin-top:15px;
-padding:13px;
-background:#f8fafc;
-border-radius:9px;
-font-size:13px;
-line-height:1.8;
+.form-summary{
+    margin-top:15px;
+    padding:14px;
+    background:#eff6ff;
+    border-left:5px solid #2563eb;
+    border-radius:10px;
+    line-height:1.8;
 }
 
-.reserve{
-width:100%;
-margin-top:12px;
-padding:13px;
-background:#111827;
-color:#fff;
-border:0;
-border-radius:9px;
-font-weight:bold;
-cursor:pointer;
+.main-btn{
+    width:100%;
+    margin-top:14px;
+    padding:14px;
+    border:0;
+    border-radius:11px;
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
+    font-weight:900;
+    cursor:pointer;
 }
 
-/* PROFILE POPUP */
-
-.overlay{
-display:none;
-position:fixed;
-inset:0;
-background:rgba(0,0,0,.7);
-align-items:center;
-justify-content:center;
-z-index:1000;
-padding:20px;
+.page-controls{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:7px;
+    flex-wrap:wrap;
+    margin-top:15px;
 }
 
-.overlay.show{
-display:flex;
+.page-controls button{
+    border:0;
+    padding:9px 13px;
+    border-radius:8px;
+    background:#e2e8f0;
+    cursor:pointer;
 }
 
-.profile-box{
-width:100%;
-max-width:370px;
-background:#fff;
-border-radius:20px;
-padding:25px;
-text-align:center;
+.page-controls button.active{
+    color:white;
+    background:#2563eb;
+}
+
+.modal-bg{
+    display:none;
+    position:fixed;
+    inset:0;
+    z-index:1000;
+    align-items:center;
+    justify-content:center;
+    padding:15px;
+    background:rgba(2,6,23,.78);
+}
+
+.modal-bg.show{
+    display:flex;
+}
+
+.modal{
+    width:100%;
+    max-width:480px;
+    max-height:92vh;
+    overflow:auto;
+    padding:23px;
+    border-radius:21px;
+    background:white;
+    box-shadow:0 30px 70px rgba(0,0,0,.3);
+}
+
+.amount{
+    text-align:center;
+    margin:15px;
+    font-size:40px;
+    font-weight:1000;
+    color:#16a34a;
+}
+
+.upi-box{
+    text-align:center;
+    padding:17px;
+    border-radius:13px;
+    background:#f8fafc;
+    border:1px solid #e2e8f0;
+}
+
+.upi-id{
+    margin:8px 0;
+    font-size:18px;
+    font-weight:900;
+}
+
+.modal button{
+    width:100%;
+    margin-top:9px;
+    padding:13px;
+    border:0;
+    border-radius:10px;
+    font-weight:900;
+    cursor:pointer;
+}
+
+.pay{
+    color:white;
+    background:linear-gradient(135deg,#16a34a,#15803d);
+}
+
+.confirm{
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#4f46e5);
+}
+
+.cancel{
+    background:#e5e7eb;
 }
 
 .profile-logo{
-width:85px;
-height:85px;
-object-fit:contain;
-border:1px solid #e5e7eb;
-border-radius:15px;
-padding:5px;
+    display:block;
+    width:210px;
+    height:160px;
+    object-fit:contain;
+    margin:10px auto;
 }
 
-.profile-box h2{
-margin:12px 0 5px;
+.profile-box{
+    padding:15px;
+    border-radius:13px;
+    background:#f8fafc;
+    line-height:1.8;
 }
 
-.profile-box p{
-color:#64748b;
-line-height:1.6;
-font-size:13px;
+.profile-box a{
+    color:#2563eb;
+    font-weight:bold;
+    word-break:break-all;
 }
 
-.profile-btn{
-display:block;
-width:100%;
-padding:12px;
-border:0;
-border-radius:9px;
-margin-top:10px;
-cursor:pointer;
-font-weight:bold;
+.profile-close{
+    color:white;
+    background:linear-gradient(135deg,#2563eb,#7c3aed);
 }
 
-.view{
-background:#2563eb;
-color:#fff;
-}
+@media(max-width:700px){
 
-.close{
-background:#e2e8f0;
-}
+    .stats{
+        grid-template-columns:1fr 1fr;
+    }
 
+    .price-grid{
+        grid-template-columns:1fr 1fr;
+    }
 
-/* PAYMENT */
-.payment-overlay{display:none;position:fixed;inset:0;background:rgba(2,6,23,.78);z-index:2000;align-items:center;justify-content:center;padding:18px;}
-.payment-overlay.show{display:flex;}
-.payment-box{width:100%;max-width:430px;max-height:92vh;overflow:auto;background:#fff;border-radius:22px;padding:24px;text-align:center;box-shadow:0 25px 70px rgba(0,0,0,.3);}
-.payment-box h2{margin-top:0;}
-.payment-amount{font-size:34px;font-weight:900;margin:8px 0 15px;}
-.upi-id{background:#f1f5f9;padding:13px;border-radius:10px;font-weight:bold;margin:12px 0;word-break:break-all;}
-#qrcode{display:flex;justify-content:center;margin:18px auto;}
-#qrcode img,#qrcode canvas{border:8px solid #fff;box-shadow:0 5px 20px rgba(0,0,0,.12);}
-.pay-btn,.paid-btn,.cancel-btn{display:block;width:100%;padding:14px;border:0;border-radius:11px;color:#fff;font-weight:bold;cursor:pointer;font-size:15px;margin-top:10px;}
-.pay-btn{background:#16a34a;}
-.copy-btn{background:#0f766e;}
-.paid-btn{background:#2563eb;}
-.cancel-btn{background:#e2e8f0;color:#111827;}
-#statusMessage{display:none;position:fixed;left:50%;bottom:25px;transform:translateX(-50%);background:#111827;color:#fff;padding:13px 18px;border-radius:30px;z-index:3000;font-size:13px;box-shadow:0 10px 30px rgba(0,0,0,.25);}
+    .controls{
+        flex-direction:column;
+    }
 
-/* RESPONSIVE */
+    .form-grid{
+        grid-template-columns:1fr;
+    }
 
-@media(max-width:900px){
+    .full{
+        grid-column:auto;
+    }
 
-.stats{
-grid-template-columns:repeat(2,1fr);
-}
-
-.price-grid{
-grid-template-columns:repeat(2,1fr);
-}
-
-.grid{
-grid-template-columns:repeat(10,1fr);
-}
-
-}
-
-@media(max-width:600px){
-
-.toolbar{
-flex-direction:column;
-}
-
-select{
-width:100%;
-}
-
-.grid{
-grid-template-columns:repeat(5,1fr);
-gap:3px;
-}
-
-.pixel{
-height:45px;
-}
-
-.selection-grid{
-grid-template-columns:1fr 1fr;
-}
-
-.form-grid{
-grid-template-columns:1fr;
-}
-
-.full{
-grid-column:auto;
-}
-
-.price-grid{
-grid-template-columns:1fr;
-}
-
+    .selected-info{
+        grid-template-columns:1fr 1fr;
+    }
 }
 </style>
 </head>
 
 <body>
 
-<header class="hero">
-
-<div class="badge">
-✦ 1,00,000 Pixel Business Wall
-</div>
-
-<h1>
-ONE MILLION PIXELS HOMEPAGE
-</h1>
-
-<p>
-Give your business a permanent digital space
-where customers can discover your brand,
-view your profile and visit your website.
-</p>
-
+<header>
+<h1>ONE MILLION PIXELS</h1>
+<p>ONE MILLION PIXELS MAIN PAGE</p>
+<p>1,00,000 Digital Advertising Slots • 1 Slot = 1 Square Foot</p>
 </header>
 
-
 <div class="container">
-
-<!-- STATS -->
 
 <div class="stats">
 
 <div class="stat">
-<span>Total Pixels</span>
+<small>Total Digital Slots</small>
 <strong>1,00,000</strong>
 </div>
 
 <div class="stat">
-<span>Sold Pixels</span>
-<strong id="soldPixels">0</strong>
+<small>Booked Slots</small>
+<strong id="bookedCount">0</strong>
 </div>
 
 <div class="stat">
-<span>Available</span>
-<strong id="availablePixels">1,00,000</strong>
+<small>Available Slots</small>
+<strong id="availableCount">1,00,000</strong>
 </div>
 
 <div class="stat">
-<span>Business Blocks</span>
-<strong id="soldBlocks">0</strong>
+<small>Booked Area</small>
+<strong id="areaCount">0 sq.ft</strong>
 </div>
 
 </div>
 
 
-<!-- SEARCH -->
+<div class="panel">
 
-<div class="toolbar">
+<h2>💰 Slot Pricing</h2>
 
-<div class="search">
+<div class="price-grid">
+
+<div class="price">
+<h3>🔵 CENTER</h3>
+<strong>₹599</strong>
+<p>1 sq.ft</p>
+</div>
+
+<div class="price">
+<h3>🟡 PREMIUM</h3>
+<strong>₹699</strong>
+<p>1 sq.ft</p>
+</div>
+
+<div class="price">
+<h3>🟣 EDGE</h3>
+<strong>₹799</strong>
+<p>1 sq.ft</p>
+</div>
+
+<div class="price">
+<h3>🔴 CORNER</h3>
+<strong>₹999</strong>
+<p>1 sq.ft</p>
+</div>
+
+</div>
+
+</div>
+
+
+<div class="panel">
+
+<h2>🌐 ONE MILLION PIXELS MAIN PAGE</h2>
+
+<p>
+Choose an available square. After booking, the company's
+logo appears permanently on that slot on this browser.
+</p>
+
+<div class="controls">
 
 <input
 id="search"
-type="text"
-placeholder="Search company / brand...">
-
-</div>
+placeholder="🔍 Search booked company..."
+>
 
 <select id="filter">
 
-<option value="all">
-All Spaces
-</option>
-
-<option value="center">
-Center ₹49
-</option>
-
-<option value="premium">
-Premium ₹69
-</option>
-
-<option value="edge">
-Edge ₹79
-</option>
-
-<option value="corner">
-Corner ₹99
-</option>
+<option value="all">All Slots</option>
+<option value="available">Available</option>
+<option value="booked">Booked</option>
 
 </select>
 
 </div>
 
-
-<!-- LEGEND -->
-
 <div class="legend">
-
-<span>
-<i class="dot available"></i>
-Available
-</span>
-
-<span>
-<i class="dot sold"></i>
-Sold
-</span>
-
-<span>
-<i class="dot premium"></i>
-Premium
-</span>
-
-<span>
-<i class="dot corner"></i>
-Corner
-</span>
-
+<span>⬜ Available</span>
+<span>🟢 Booked</span>
+<span>🔵 Center ₹599</span>
+<span>🟡 Premium ₹699</span>
+<span>🟣 Edge ₹799</span>
+<span>🔴 Corner ₹999</span>
 </div>
 
-
-<!-- WALL -->
-
-<section class="wall">
-
-<div class="wall-header">
-
-<div>
-
-<h2>
-Live Business Wall
-</h2>
-
-<small>
-1 block = 100 pixels
-</small>
-
+<div id="wall-container">
+<div id="wall"></div>
 </div>
 
-<small>
-1,000 Blocks
-</small>
+<div class="page-controls">
+
+<button onclick="previousPage()">← Previous</button>
+
+<div id="pageNumbers"></div>
+
+<button onclick="nextPage()">Next →</button>
 
 </div>
-
-
-<div id="board"></div>
-
-</section>
-
-
-<!-- SELECTION -->
 
 <div
-id="selection"
-class="selection">
+id="pageInfo"
+style="text-align:center;margin-top:8px;color:#64748b;font-size:13px"
+></div>
 
-<h3>
-Selected Space
-</h3>
 
-<div class="selection-grid">
+<div id="selection">
 
-<div class="selection-item">
-
-<small>Row</small>
-
-<strong id="selRow">
--
-</strong>
-
+<div class="selected-title">
+🎯 Selected Digital Slot
 </div>
 
-<div class="selection-item">
-
-<small>Pixels</small>
-
-<strong id="selPixels">
--
-</strong>
-
-</div>
-
-<div class="selection-item">
-
-<small>Zone</small>
-
-<strong id="selZone">
--
-</strong>
-
-</div>
-
-<div class="selection-item">
-
-<small>Price</small>
-
-<strong>
-₹<span id="selPrice">0</span>
-</strong>
-
-</div>
-
-</div>
+<div id="selectionText"></div>
 
 <button
-class="continue"
-onclick="goRegistration()">
-
-Continue →
-
+class="book-button"
+onclick="openForm()"
+>
+🚀 Continue & Book This Slot
 </button>
 
 </div>
 
-
-<!-- PRICING -->
-
-<section class="pricing">
-
-<h2>
-Simple Pricing
-</h2>
-
-<div class="subtitle">
-Choose your preferred location.
 </div>
 
 
-<div class="price-grid">
+<div
+class="panel"
+id="businessForm"
+>
 
-<div class="price-card">
-
-<h3>Center</h3>
-
-<div class="price">
-₹49
-</div>
-
-<p>
-Standard business visibility.
-</p>
-
-</div>
-
-
-<div class="price-card">
-
-<h3>Premium</h3>
-
-<div class="price">
-₹69
-</div>
-
-<p>
-Better visibility placement.
-</p>
-
-</div>
-
-
-<div class="price-card">
-
-<h3>Edge</h3>
-
-<div class="price">
-₹79
-</div>
-
-<p>
-High visibility position.
-</p>
-
-</div>
-
-
-<div class="price-card corner-card">
-
-<h3>
-Corner ⭐
-</h3>
-
-<div class="price">
-₹99
-</div>
-
-<p>
-Premium corner visibility.
-Minimum 20 Corner blocks available.
-</p>
-
-</div>
-
-</div>
-
-</section>
-
-
-<!-- REGISTRATION -->
-
-<section
-id="registration"
-class="form">
-
-<h2>
-Register Your Business
-</h2>
-
-<p class="subtitle">
-Select a space and enter your business details.
-</p>
-
+<h2>🏢 Business Details</h2>
 
 <div class="form-grid">
 
 <div class="form-group">
-
-<label>
-Company / Brand Name *
-</label>
-
-<input
-id="company"
-type="text"
-placeholder="Example: Ram Solutions">
-
+<label>Company / Brand Name *</label>
+<input id="company" placeholder="Company name">
 </div>
-
 
 <div class="form-group">
-
-<label>
-Website
-</label>
-
-<input
-id="website"
-type="url"
-placeholder="https://example.com">
-
+<label>Contact Person *</label>
+<input id="contactPerson" placeholder="Contact person">
 </div>
-
 
 <div class="form-group">
-
-<label>
-Company Logo *
-</label>
-
+<label>Mobile Number *</label>
 <input
-id="logoInput"
-type="file"
-accept="image/*">
-
+id="phone"
+maxlength="10"
+inputmode="numeric"
+placeholder="10 digit mobile"
+>
 </div>
-
 
 <div class="form-group">
-
-<label>
-Business Category
-</label>
-
-<input
-id="category"
-type="text"
-placeholder="Technology">
-
+<label>Email</label>
+<input id="email" type="email" placeholder="email@company.com">
 </div>
 
+<div class="form-group">
+<label>Website</label>
+<input id="website" placeholder="https://company.com">
+</div>
+
+<div class="form-group">
+<label>Business Category</label>
+<input id="category" placeholder="Company / Shop / Service">
+</div>
+
+<div class="form-group">
+<label>Company Logo *</label>
+<input id="logo" type="file" accept="image/*">
+</div>
+
+<div class="form-group">
+<label>Business Location</label>
+<input id="location" placeholder="City / State">
+</div>
 
 <div class="form-group full">
+<label>Business Address</label>
+<textarea id="address" rows="3"></textarea>
+</div>
 
-<label>
-Business Description
-</label>
-
-<textarea
-id="description"
-placeholder="Tell customers about your business..."></textarea>
-
+<div class="form-group full">
+<label>Business Description</label>
+<textarea id="description" rows="3"></textarea>
 </div>
 
 </div>
 
-
-<div class="summary">
-
-<strong>Selected:</strong>
-<span id="summary">
-No space selected
-</span>
-
+<div class="form-summary" id="formSummary">
+Select a slot first.
 </div>
-
 
 <button
-class="reserve"
-onclick="reserve()">
-
+class="main-btn"
+onclick="startPayment()"
+>
 Continue to Payment
-
 </button>
 
-</section>
+</div>
 
 </div>
 
 
-<footer style="text-align:center;padding:20px;color:#64748b;font-size:12px">
+<!-- PAYMENT -->
 
-© 2026 ONE MILLION PIXELS HOMEPAGE • Digital Business Visibility Platform
+<div id="paymentModal" class="modal-bg">
 
-</footer>
+<div class="modal">
+
+<h2>💳 Complete Payment</h2>
+
+<div id="paymentDetails"></div>
+
+<div class="amount">
+₹<span id="paymentAmount">0</span>
+</div>
+
+<div class="upi-box">
+
+<div>UPI ID</div>
+
+<div class="upi-id" id="upiId">
+9640467264@ibl
+</div>
+
+<button
+class="cancel"
+onclick="copyUPI()"
+>
+📋 Copy UPI ID
+</button>
+
+</div>
+
+<button
+class="pay"
+onclick="payUPI()"
+>
+📲 Pay with UPI App
+</button>
+
+<button
+class="confirm"
+onclick="confirmPayment()"
+>
+✅ I Have Completed Payment
+</button>
+
+<button
+class="cancel"
+onclick="closePayment()"
+>
+Cancel
+</button>
+
+<p style="font-size:12px;color:#64748b;line-height:1.6">
+UPI intent opens your installed UPI application.
+For automatic bank/payment verification, a real payment
+gateway and backend are required.
+</p>
+
+</div>
+
+</div>
 
 
-<!-- VIEW PROFILE -->
+<!-- PROFILE -->
 
-<div
-id="profileOverlay"
-class="overlay">
+<div id="profileModal" class="modal-bg">
 
-<div class="profile-box">
+<div class="modal">
+
+<h2 id="profileName"></h2>
 
 <img
 id="profileLogo"
 class="profile-logo"
-src=""
-alt="Company Logo">
+>
 
-<h2 id="profileCompany">
-Company
-</h2>
-
-<p id="profileInfo">
-Business Profile
-</p>
+<div
+id="profileDetails"
+class="profile-box"
+></div>
 
 <button
-class="profile-btn view"
-onclick="openProfile()">
-
-View Profile
-
-</button>
-
-<button
-class="profile-btn close"
-onclick="closeProfile()">
-
-Close
-
+class="profile-close"
+onclick="closeProfile()"
+>
+Close Details
 </button>
 
 </div>
 
 </div>
 
-
-
-<!-- PAYMENT -->
-<div id="paymentOverlay" class="payment-overlay">
-  <div class="payment-box">
-    <h2>💳 Complete Payment</h2>
-    <p id="paymentCompany">Business</p>
-    <div class="payment-amount">₹<span id="paymentAmount">0</span></div>
-    <div class="upi-id">UPI ID: <span id="upiText">9640467264@ibl</span></div>
-    <button class="pay-btn" onclick="openUPI()">📲 Pay with UPI App</button>
-    <p style="font-size:12px;color:#64748b;margin:14px 0 5px;">Or scan this QR code</p>
-    <div id="qrcode"></div>
-    <button class="pay-btn copy-btn" onclick="copyUPI()">📋 Copy UPI ID</button>
-    <p style="font-size:11px;color:#64748b;line-height:1.6;margin-top:15px;">Pay the exact amount shown above. After completing payment, return here and press the button below.</p>
-    <button class="paid-btn" onclick="confirmPaymentSubmitted()">✅ I Have Completed Payment</button>
-    <button class="cancel-btn" onclick="closePayment()">Cancel</button>
-  </div>
-</div>
-<div id="statusMessage"></div>
 
 <script>
 
-/* =========================
-CONFIG
-========================= */
+/* ======================================================
+   CONFIG
+====================================================== */
 
-const ROWS = 10;
+const TOTAL_SLOTS = 100000;
 
-const BLOCKS = 100;
+const SLOTS_PER_PAGE = 500;
 
-const PIXELS_PER_BLOCK = 100;
+const TOTAL_PAGES =
+Math.ceil(
+TOTAL_SLOTS / SLOTS_PER_PAGE
+);
 
-const TOTAL_PIXELS = 100000;
+const UPI_ID =
+"9640467264@ibl";
 
-const UPI_ID = "9640467264@ibl";
-
-
-/* =========================
-PRICES
-========================= */
-
-const prices = {
-
-center:49,
-
-premium:69,
-
-edge:79,
-
-corner:99
-
+const PRICES = {
+    center:599,
+    premium:699,
+    edge:799,
+    corner:999
 };
 
 
-/* =========================
-BUSINESS DATA
-========================= */
+/* ======================================================
+   STORAGE
+====================================================== */
 
-let businesses = {};
+let bookings = {};
+
+try{
+
+    bookings =
+    JSON.parse(
+        localStorage.getItem(
+            "ONE_MILLION_PIXELS_FINAL_BOOKINGS"
+        ) || "{}"
+    );
+
+}catch(e){
+
+    bookings={};
+
+}
+
+let selectedSlot=null;
+let pendingBooking=null;
+let currentPage=1;
 
 
-/* =========================
-STATE
-========================= */
+/* ======================================================
+   ZONE
+====================================================== */
 
-let selected = null;
+function getZone(slot){
 
-let selectedBusiness = null;
+    const index=slot-1;
 
-let uploadedLogo = null;
+    const row=Math.floor(index/1000);
+
+    const col=index%1000;
+
+    if(
+        (row===0 || row===99) &&
+        (col===0 || col===999)
+    ){
+        return "corner";
+    }
+
+    if(
+        row===0 ||
+        row===99 ||
+        col===0 ||
+        col===999
+    ){
+        return "edge";
+    }
+
+    if(
+        row<10 ||
+        row>=90 ||
+        col<100 ||
+        col>=900
+    ){
+        return "premium";
+    }
+
+    return "center";
+}
 
 
-/* =========================
-LOGO
-========================= */
+/* ======================================================
+   SAVE
+====================================================== */
 
-function defaultLogo(){
+function saveBookings(){
 
-return "data:image/svg+xml," +
-encodeURIComponent(`
-
-<svg xmlns="http://www.w3.org/2000/svg"
-width="100"
-height="100">
-
-<rect
-width="100"
-height="100"
-rx="15"
-fill="#f1f5f9"/>
-
-<text
-x="50"
-y="63"
-text-anchor="middle"
-font-size="35">
-
-🏢
-
-</text>
-
-</svg>
-
-`);
+    localStorage.setItem(
+        "ONE_MILLION_PIXELS_FINAL_BOOKINGS",
+        JSON.stringify(bookings)
+    );
 
 }
 
 
-/* =========================
-ZONE
-========================= */
+/* ======================================================
+   WEBSITE
+====================================================== */
 
-function zone(row,block){
+function normalizeWebsite(url){
 
-/*
-Corner:
-first/last row + first/last 10 blocks
-*/
+    if(!url){
+        return "#";
+    }
 
-if(
-(row===0 || row===9) &&
-(block<10 || block>=90)
-){
+    url=url.trim();
 
-return "corner";
+    if(
+        !url.startsWith("http://") &&
+        !url.startsWith("https://")
+    ){
+        url="https://"+url;
+    }
 
+    return url;
 }
 
 
-/*
-Edge
-*/
+/* ======================================================
+   CREATE SLOT
+====================================================== */
 
-if(
-row===0 ||
-row===9 ||
-block<10 ||
-block>=90
-){
+function createSlot(number,wall){
 
-return "edge";
+    const zone=getZone(number);
 
+    const slot=document.createElement("div");
+
+    slot.className="slot "+zone;
+
+    slot.dataset.slot=number;
+
+
+    const numberLabel=
+    document.createElement("div");
+
+    numberLabel.className="slot-number";
+
+    numberLabel.textContent="#"+number;
+
+    slot.appendChild(numberLabel);
+
+
+    const priceLabel=
+    document.createElement("div");
+
+    priceLabel.className="slot-price";
+
+    priceLabel.textContent=
+    "₹"+PRICES[zone];
+
+    slot.appendChild(priceLabel);
+
+
+    if(bookings[number]){
+
+        slot.classList.add("booked");
+
+
+        const badge=
+        document.createElement("div");
+
+        badge.className="booked-badge";
+
+        badge.textContent="BOOKED";
+
+        slot.appendChild(badge);
+
+
+        /*
+          LOGO → REAL COMPANY WEBSITE
+        */
+
+        const link=
+        document.createElement("a");
+
+        const website=
+        normalizeWebsite(
+            bookings[number].website
+        );
+
+        if(website!=="#"){
+
+            link.href=website;
+
+            link.target="_blank";
+
+            link.rel=
+            "noopener noreferrer";
+
+            link.title=
+            "Visit "+
+            bookings[number].company;
+
+        }else{
+
+            link.href="#";
+
+            link.onclick=
+            function(e){
+                e.preventDefault();
+
+                showProfile(
+                    bookings[number],
+                    number
+                );
+            };
+
+        }
+
+
+        const image=
+        document.createElement("img");
+
+        image.src=
+        bookings[number].logo;
+
+        image.alt=
+        bookings[number].company;
+
+        link.appendChild(image);
+
+        slot.appendChild(link);
+
+
+        const name=
+        document.createElement("div");
+
+        name.className="business-name";
+
+        name.textContent=
+        bookings[number].company;
+
+        slot.appendChild(name);
+
+
+        /*
+          Click outside logo → details
+        */
+
+        slot.addEventListener(
+            "click",
+            function(e){
+
+                if(
+                    e.target===image
+                ){
+                    return;
+                }
+
+                if(
+                    e.target.closest("a")
+                ){
+                    return;
+                }
+
+                showProfile(
+                    bookings[number],
+                    number
+                );
+
+            }
+        );
+
+    }
+    else{
+
+        slot.onclick=
+        function(){
+
+            selectSlot(
+                number,
+                zone
+            );
+
+        };
+
+    }
+
+    wall.appendChild(slot);
 }
 
 
-/*
-Premium
-*/
-
-if(
-row===1 ||
-row===8 ||
-block<30 ||
-block>=70
-){
-
-return "premium";
-
-}
-
-
-return "center";
-
-}
-
-
-/* =========================
-BUILD WALL
-========================= */
+/* ======================================================
+   BUILD WALL
+====================================================== */
 
 function buildWall(){
 
-const board =
-document.getElementById(
-"board"
-);
+    const wall=
+    document.getElementById("wall");
 
-board.innerHTML = "";
+    wall.innerHTML="";
 
+    const start=
+    (currentPage-1)*
+    SLOTS_PER_PAGE+1;
 
-for(
-let row=0;
-row<ROWS;
-row++
-){
+    const end=
+    Math.min(
+        start+SLOTS_PER_PAGE-1,
+        TOTAL_SLOTS
+    );
 
-const rowDiv =
-document.createElement(
-"div"
-);
+    for(
+        let number=start;
+        number<=end;
+        number++
+    ){
 
-rowDiv.className =
-"row";
+        createSlot(
+            number,
+            wall
+        );
 
+    }
 
-const rowStart =
-row*10000+1;
+    updateStats();
 
-const rowEnd =
-(row+1)*10000;
-
-
-rowDiv.innerHTML = `
-
-<div class="row-head">
-
-<strong>
-ROW ${String(row+1).padStart(2,"0")}
-</strong>
-
-<span>
-${rowStart.toLocaleString("en-IN")}
--
-${rowEnd.toLocaleString("en-IN")}
-</span>
-
-</div>
-
-`;
-
-
-const grid =
-document.createElement(
-"div"
-);
-
-grid.className =
-"grid";
-
-
-for(
-let block=0;
-block<BLOCKS;
-block++
-){
-
-const id =
-row*BLOCKS+block;
-
-
-const start =
-rowStart+
-block*PIXELS_PER_BLOCK;
-
-
-const end =
-start+
-PIXELS_PER_BLOCK-
-1;
-
-
-const currentZone =
-zone(row,block);
-
-
-const pixel =
-document.createElement(
-"div"
-);
-
-
-pixel.className =
-"pixel " +
-currentZone;
-
-
-pixel.dataset.id =
-id;
-
-pixel.dataset.zone =
-currentZone;
-
-
-if(
-businesses[id]
-){
-
-pixel.classList.add(
-"is-sold"
-);
-
-
-const business =
-businesses[id];
-
-
-pixel.innerHTML = `
-
-<img
-class="logo"
-src="${business.logo || defaultLogo()}"
-alt="Logo">
-
-<div class="company-name">
-${escapeHtml(business.company)}
-</div>
-
-`;
-
-}
-else{
-
-pixel.innerHTML = `
-<span style="
-font-size:7px;
-color:#94a3b8">
-${block+1}
-</span>
-`;
+    updatePagination();
 
 }
 
 
-pixel.onclick =
-function(){
+/* ======================================================
+   SELECT
+====================================================== */
 
-if(
-businesses[id]
-){
+function selectSlot(number,zone){
 
-showProfile(
-businesses[id]
-);
+    if(bookings[number]){
+
+        showProfile(
+            bookings[number],
+            number
+        );
+
+        return;
+
+    }
+
+
+    selectedSlot={
+        number:number,
+        zone:zone,
+        price:PRICES[zone]
+    };
+
+
+    const selection=
+    document.getElementById(
+        "selection"
+    );
+
+    selection.classList.add("show");
+
+
+    document.getElementById(
+        "selectionText"
+    ).innerHTML=`
+
+    <div class="selected-info">
+
+        <div class="selected-item">
+            <small>Slot</small>
+            <strong>#${number}</strong>
+        </div>
+
+        <div class="selected-item">
+            <small>Area</small>
+            <strong>1 sq.ft</strong>
+        </div>
+
+        <div class="selected-item">
+            <small>Type</small>
+            <strong>${zone.toUpperCase()}</strong>
+        </div>
+
+        <div class="selected-item">
+            <small>Price</small>
+            <strong>₹${PRICES[zone]}</strong>
+        </div>
+
+    </div>
+    `;
+
+
+    document.getElementById(
+        "formSummary"
+    ).innerHTML=`
+
+    <b>Selected Slot:</b> #${number}
+    <br>
+    <b>Area:</b> 1 sq.ft
+    <br>
+    <b>Type:</b> ${zone.toUpperCase()}
+    <br>
+    <b>Amount:</b> ₹${PRICES[zone]}
+
+    `;
+
+
+    selection.scrollIntoView({
+        behavior:"smooth",
+        block:"nearest"
+    });
 
 }
-else{
 
-selectSpace(
-id,
-row,
-block,
-start,
-end,
-currentZone,
-pixel
-);
+
+/* ======================================================
+   OPEN FORM
+====================================================== */
+
+function openForm(){
+
+    if(!selectedSlot){
+
+        alert("Please select a slot.");
+
+        return;
+
+    }
+
+
+    if(
+        bookings[
+            selectedSlot.number
+        ]
+    ){
+
+        alert(
+            "This slot is already booked."
+        );
+
+        return;
+
+    }
+
+
+    document.getElementById(
+        "businessForm"
+    ).style.display="block";
+
+
+    document.getElementById(
+        "businessForm"
+    ).scrollIntoView({
+        behavior:"smooth"
+    });
 
 }
 
-};
 
-
-grid.appendChild(
-pixel
-);
-
-}
-
-
-rowDiv.appendChild(
-grid
-);
-
-
-board.appendChild(
-rowDiv
-);
-
-}
-
-
-updateStats();
-
-}
-
-
-/* =========================
-SELECT
-========================= */
-
-function selectSpace(
-id,
-row,
-block,
-start,
-end,
-currentZone,
-element
-){
+/* ======================================================
+   PHONE
+====================================================== */
 
 document
-.querySelectorAll(
-".pixel.highlight"
-)
-.forEach(
-x =>
-x.classList.remove(
-"highlight"
-)
-);
-
-
-element.classList.add(
-"highlight"
-);
-
-
-selected = {
-
-id,
-
-row,
-
-block,
-
-start,
-
-end,
-
-zone:currentZone,
-
-price:prices[currentZone],
-
-element
-
-};
-
-
-document.getElementById(
-"selRow"
-).innerText =
-"Row " +
-(row+1);
-
-
-document.getElementById(
-"selPixels"
-).innerText =
-start.toLocaleString("en-IN") +
-" - " +
-end.toLocaleString("en-IN");
-
-
-document.getElementById(
-"selZone"
-).innerText =
-currentZone.toUpperCase();
-
-
-document.getElementById(
-"selPrice"
-).innerText =
-prices[currentZone];
-
-
-document
-.getElementById(
-"selection"
-)
-.classList.add(
-"show"
-);
-
-
-document.getElementById(
-"summary"
-).innerText =
-
-`Row ${row+1} • ` +
-`${start.toLocaleString("en-IN")} - ` +
-`${end.toLocaleString("en-IN")} • ` +
-`${currentZone.toUpperCase()} • ` +
-`₹${prices[currentZone]}`;
-
-}
-
-
-/* =========================
-GO FORM
-========================= */
-
-function goRegistration(){
-
-if(!selected){
-
-alert(
-"Please select a space first."
-);
-
-return;
-
-}
-
-
-document
-.getElementById(
-"registration"
-)
-.scrollIntoView({
-behavior:"smooth"
-});
-
-}
-
-
-/* =========================
-LOGO UPLOAD
-========================= */
-
-document
-.getElementById(
-"logoInput"
-)
-.addEventListener(
-"change",
-function(e){
-
-const file =
-e.target.files[0];
-
-
-if(!file){
-
-uploadedLogo = null;
-
-return;
-
-}
-
-
-if(
-!file.type.startsWith(
-"image/"
-)
-){
-
-alert(
-"Please select an image."
-);
-
-this.value="";
-
-return;
-
-}
-
-
-const reader =
-new FileReader();
-
-
-reader.onload =
-function(event){
-
-uploadedLogo =
-event.target.result;
-
-};
-
-
-reader.readAsDataURL(
-file
-);
-
-}
-);
-
-
-/* =========================
-RESERVE
-========================= */
-
-function reserve(){
-
-if(!selected){
-alert("Please select a pixel block.");
-return;
-}
-
-const company=document.getElementById("company").value.trim();
-const website=document.getElementById("website").value.trim();
-const category=document.getElementById("category").value.trim();
-const description=document.getElementById("description").value.trim();
-
-if(!company){
-alert("Please enter company name.");
-return;
-}
-
-if(!uploadedLogo){
-alert("Please upload company logo.");
-return;
-}
-
-if(selected.zone === "corner") {
-const cornerCount=Object.keys(businesses).filter(id=>{
-const r=Math.floor(Number(id)/BLOCKS);
-const b=Number(id)%BLOCKS;
-return zone(r,b)==="corner";
-}).length;
-if(cornerCount>=20){
-alert("All 20 Corner spaces are currently reserved.");
-return;
-}
-}
-
-pendingBooking={
-company:company,
-website:website,
-category:category,
-description:description,
-logo:uploadedLogo,
-amount:selected.price,
-block:selected.id+1
-};
-
-showPayment();
-}
-
-let pendingBooking=null;
-
-function showPayment(){
-const p=pendingBooking;
-if(!p)return;
-document.getElementById("paymentCompany").innerText=p.company;
-document.getElementById("paymentAmount").innerText=Number(p.amount).toFixed(2);
-document.getElementById("upiText").innerText=UPI_ID;
-document.getElementById("paymentOverlay").classList.add("show");
-const qr=document.getElementById("qrcode");
-qr.innerHTML="";
-const upiUrl="upi://pay"+
-"?pa="+encodeURIComponent(UPI_ID)+
-"&pn="+encodeURIComponent("ONE MILLION PIXELS HOMEPAGE")+
-"&am="+encodeURIComponent(Number(p.amount).toFixed(2))+
-"&cu=INR"+
-"&tn="+encodeURIComponent("ONE MILLION PIXELS - Block "+p.block);
-new QRCode(qr,{text:upiUrl,width:220,height:220,correctLevel:QRCode.CorrectLevel.H});
-}
-
-function openUPI(){
-if(!pendingBooking)return;
-const upiUrl="upi://pay"+
-"?pa="+encodeURIComponent(UPI_ID)+
-"&pn="+encodeURIComponent("ONE MILLION PIXELS HOMEPAGE")+
-"&am="+encodeURIComponent(Number(pendingBooking.amount).toFixed(2))+
-"&cu=INR"+
-"&tn="+encodeURIComponent("ONE MILLION PIXELS - Block "+pendingBooking.block);
-window.location.href=upiUrl;
-}
-
-function copyUPI(){
-if(navigator.clipboard){
-navigator.clipboard.writeText(UPI_ID).then(()=>showStatus("UPI ID copied successfully ✓")).catch(()=>alert("UPI ID: "+UPI_ID));
-}else{alert("UPI ID: "+UPI_ID);}
-setTimeout(hideStatus,2500);
-}
-
-function confirmPaymentSubmitted(){
-if(!pendingBooking || !selected)return;
-const ok=confirm("Have you completed the UPI payment of ₹"+Number(pendingBooking.amount).toFixed(2)+"?");
-if(!ok)return;
-
-businesses[selected.id]={
-company:pendingBooking.company,
-website:pendingBooking.website,
-category:pendingBooking.category,
-description:pendingBooking.description,
-logo:pendingBooking.logo,
-payment_status:"PENDING",
-booking_status:"PENDING",
-block:selected.id+1
-};
-
-try{localStorage.setItem("one_million_pixels_businesses",JSON.stringify(businesses));}catch(e){}
-
-document.getElementById("paymentOverlay").classList.remove("show");
-clearRegistrationForm();
-uploadedLogo=null;
-selected=null;
-pendingBooking=null;
-document.getElementById("selection").classList.remove("show");
-buildWall();
-alert("Registration submitted successfully. Your business block is now registered. Payment verification status: PENDING.");
-}
-
-function closePayment(){
-document.getElementById("paymentOverlay").classList.remove("show");
-}
-
-function clearRegistrationForm(){
-["company","website","category","description"].forEach(id=>document.getElementById(id).value="");
-document.getElementById("logoInput").value="";
-}
-
-function showStatus(message){
-const box=document.getElementById("statusMessage");
-box.innerText=message;
-box.style.display="block";
-}
-
-function hideStatus(){
-document.getElementById("statusMessage").style.display="none";
-}
-
-
-/* =========================
-VIEW PROFILE
-========================= */
-
-function showProfile(
-business
-){
-
-selectedBusiness =
-business;
-
-
-document.getElementById(
-"profileLogo"
-).src =
-business.logo ||
-defaultLogo();
-
-
-document.getElementById(
-"profileCompany"
-).innerText =
-business.company;
-
-
-document.getElementById(
-"profileInfo"
-).innerText =
-business.category ||
-"Verified Business";
-
-
-document
-.getElementById(
-"profileOverlay"
-)
-.classList.add(
-"show"
-);
-
-}
-
-
-/* =========================
-FULL PROFILE
-========================= */
-
-function openProfile(){
-
-if(!selectedBusiness){
-
-return;
-
-}
-
-
-const business =
-selectedBusiness;
-
-
-const website =
-business.website;
-
-
-let message =
-
-`${business.company}\n\n` +
-
-`${business.description || "Verified Business"}\n\n` +
-
-`Category: ${
-business.category ||
-"Business"
-}`;
-
-
-if(website){
-
-const validWebsite =
-/^https?:\/\//i.test(
-website
-)
-?
-website
-:
-"https://" +
-website;
-
-
-const open =
-confirm(
-message +
-"\n\nOpen company website?"
-);
-
-
-if(open){
-
-window.open(
-validWebsite,
-"_blank"
-);
-
-}
-
-}
-else{
-
-alert(
-message
-);
-
-}
-
-}
-
-
-/* =========================
-CLOSE PROFILE
-========================= */
-
-function closeProfile(){
-
-document
-.getElementById(
-"profileOverlay"
-)
-.classList.remove(
-"show"
-);
-
-}
-
-
-/* =========================
-SEARCH
-========================= */
-
-document
-.getElementById(
-"search"
-)
+.getElementById("phone")
 .addEventListener(
 "input",
 function(){
 
-const value =
-this.value
-.toLowerCase()
-.trim();
+    this.value=
+    this.value
+    .replace(/\D/g,"")
+    .slice(0,10);
 
+});
+
+
+/* ======================================================
+   START PAYMENT
+====================================================== */
+
+function startPayment(){
+
+    if(!selectedSlot){
+
+        alert(
+            "Please select a slot."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        bookings[
+            selectedSlot.number
+        ]
+    ){
+
+        alert(
+            "This slot is already booked."
+        );
+
+        buildWall();
+
+        return;
+
+    }
+
+
+    const company=
+    document.getElementById(
+        "company"
+    ).value.trim();
+
+
+    const contactPerson=
+    document.getElementById(
+        "contactPerson"
+    ).value.trim();
+
+
+    const phone=
+    document.getElementById(
+        "phone"
+    ).value.trim();
+
+
+    const email=
+    document.getElementById(
+        "email"
+    ).value.trim();
+
+
+    const website=
+    document.getElementById(
+        "website"
+    ).value.trim();
+
+
+    const category=
+    document.getElementById(
+        "category"
+    ).value.trim();
+
+
+    const location=
+    document.getElementById(
+        "location"
+    ).value.trim();
+
+
+    const address=
+    document.getElementById(
+        "address"
+    ).value.trim();
+
+
+    const description=
+    document.getElementById(
+        "description"
+    ).value.trim();
+
+
+    const logoFile=
+    document.getElementById(
+        "logo"
+    ).files[0];
+
+
+    if(!company){
+
+        alert(
+            "Please enter company name."
+        );
+
+        return;
+
+    }
+
+
+    if(!contactPerson){
+
+        alert(
+            "Please enter contact person."
+        );
+
+        return;
+
+    }
+
+
+    if(
+        !/^[6-9][0-9]{9}$/.test(phone)
+    ){
+
+        alert(
+            "Enter a valid 10-digit Indian mobile number."
+        );
+
+        return;
+
+    }
+
+
+    if(!logoFile){
+
+        alert(
+            "Please upload company logo."
+        );
+
+        return;
+
+    }
+
+
+    const reader=
+    new FileReader();
+
+
+    reader.onload=
+    function(){
+
+        pendingBooking={
+
+            slot:selectedSlot.number,
+
+            area:1,
+
+            zone:selectedSlot.zone,
+
+            price:selectedSlot.price,
+
+            company:company,
+
+            contactPerson:contactPerson,
+
+            phone:phone,
+
+            email:email,
+
+            website:website,
+
+            category:category,
+
+            location:location,
+
+            address:address,
+
+            description:description,
+
+            logo:reader.result,
+
+            status:"BOOKED",
+
+            bookedAt:
+            new Date().toISOString()
+
+        };
+
+
+        document.getElementById(
+            "paymentDetails"
+        ).innerHTML=`
+
+        <p>
+        <b>Company:</b>
+        ${escapeHTML(company)}
+        </p>
+
+        <p>
+        <b>Contact:</b>
+        ${escapeHTML(contactPerson)}
+        </p>
+
+        <p>
+        <b>Slot:</b>
+        #${selectedSlot.number}
+        </p>
+
+        <p>
+        <b>Area:</b>
+        1 sq.ft
+        </p>
+
+        `;
+
+
+        document.getElementById(
+            "paymentAmount"
+        ).textContent=
+        selectedSlot.price;
+
+
+        document.getElementById(
+            "paymentModal"
+        ).classList.add("show");
+
+    };
+
+
+    reader.readAsDataURL(
+        logoFile
+    );
+
+}
+
+
+/* ======================================================
+   UPI
+====================================================== */
+
+function payUPI(){
+
+    if(!pendingBooking){
+        return;
+    }
+
+
+    const upiUrl=
+        "upi://pay"+
+        "?pa="+
+        encodeURIComponent(UPI_ID)+
+        "&pn="+
+        encodeURIComponent(
+            "ONE MILLION PIXELS"
+        )+
+        "&am="+
+        encodeURIComponent(
+            pendingBooking.price.toFixed(2)
+        )+
+        "&cu=INR"+
+        "&tn="+
+        encodeURIComponent(
+            "Pixel Slot #"+
+            pendingBooking.slot
+        );
+
+
+    window.location.href=upiUrl;
+
+}
+
+
+/* ======================================================
+   CONFIRM
+====================================================== */
+
+function confirmPayment(){
+
+    if(!pendingBooking){
+        return;
+    }
+
+
+    /*
+       DOUBLE CHECK
+    */
+
+    if(
+        bookings[
+            pendingBooking.slot
+        ]
+    ){
+
+        alert(
+            "Sorry! This slot has already been booked."
+        );
+
+        closePayment();
+
+        buildWall();
+
+        return;
+
+    }
+
+
+    /*
+       PERMANENT LOCAL BOOKING
+    */
+
+    bookings[
+        pendingBooking.slot
+    ]=pendingBooking;
+
+
+    saveBookings();
+
+
+    alert(
+        "🎉 BOOKING SUCCESSFUL!\n\n"+
+        "Slot #"+
+        pendingBooking.slot+
+        " is permanently locked on this browser."
+    );
+
+
+    closePayment();
+
+
+    pendingBooking=null;
+
+    selectedSlot=null;
+
+
+    document.getElementById(
+        "selection"
+    ).classList.remove("show");
+
+
+    document.getElementById(
+        "businessForm"
+    ).style.display="none";
+
+
+    clearForm();
+
+
+    buildWall();
+
+}
+
+
+/* ======================================================
+   PAYMENT CLOSE
+====================================================== */
+
+function closePayment(){
+
+    document.getElementById(
+        "paymentModal"
+    ).classList.remove("show");
+
+}
+
+
+/* ======================================================
+   PROFILE
+====================================================== */
+
+function showProfile(data,number){
+
+    document.getElementById(
+        "profileName"
+    ).textContent=
+    data.company;
+
+
+    document.getElementById(
+        "profileLogo"
+    ).src=
+    data.logo;
+
+
+    const website=
+    normalizeWebsite(
+        data.website
+    );
+
+
+    document.getElementById(
+        "profileDetails"
+    ).innerHTML=`
+
+    <p>
+    <b>🔢 Slot:</b>
+    #${Number(number).toLocaleString("en-IN")}
+    </p>
+
+    <p>
+    <b>📐 Area:</b>
+    ${data.area} sq.ft
+    </p>
+
+    <p>
+    <b>🏷️ Type:</b>
+    ${data.zone.toUpperCase()}
+    </p>
+
+    <p>
+    <b>💰 Price:</b>
+    ₹${data.price}
+    </p>
+
+    <p>
+    <b>👤 Contact Person:</b>
+    ${escapeHTML(data.contactPerson)}
+    </p>
+
+    <p>
+    <b>📞 Phone:</b>
+    <a href="tel:${escapeAttribute(data.phone)}">
+    ${escapeHTML(data.phone)}
+    </a>
+    </p>
+
+    <p>
+    <b>📧 Email:</b>
+    ${
+        data.email
+        ?
+        `<a href="mailto:${escapeAttribute(data.email)}">
+        ${escapeHTML(data.email)}
+        </a>`
+        :
+        "Not provided"
+    }
+    </p>
+
+    <p>
+    <b>🌐 Website:</b>
+    ${
+        website!=="#"
+        ?
+        `<a
+        href="${escapeAttribute(website)}"
+        target="_blank"
+        rel="noopener noreferrer"
+        >
+        ${escapeHTML(data.website)}
+        </a>`
+        :
+        "Not provided"
+    }
+    </p>
+
+    <p>
+    <b>🏢 Category:</b>
+    ${escapeHTML(data.category)}
+    </p>
+
+    <p>
+    <b>📍 Location:</b>
+    ${escapeHTML(data.location)}
+    </p>
+
+    <p>
+    <b>📍 Address:</b>
+    ${escapeHTML(data.address)}
+    </p>
+
+    <p>
+    <b>📝 About:</b>
+    ${escapeHTML(data.description)}
+    </p>
+
+    <p>
+    <b>🟢 Status:</b>
+    PERMANENTLY BOOKED
+    </p>
+
+    `;
+
+
+    document.getElementById(
+        "profileModal"
+    ).classList.add("show");
+
+}
+
+
+/* ======================================================
+   PROFILE CLOSE
+====================================================== */
+
+function closeProfile(){
+
+    document.getElementById(
+        "profileModal"
+    ).classList.remove("show");
+
+}
+
+
+/* ======================================================
+   COPY
+====================================================== */
+
+function copyUPI(){
+
+    if(navigator.clipboard){
+
+        navigator.clipboard
+        .writeText(UPI_ID)
+        .then(
+            ()=>{
+                alert(
+                    "UPI ID copied:\n"+
+                    UPI_ID
+                );
+            }
+        );
+
+    }else{
+
+        alert(
+            "UPI ID:\n"+
+            UPI_ID
+        );
+
+    }
+
+}
+
+
+/* ======================================================
+   CLEAR
+====================================================== */
+
+function clearForm(){
+
+    [
+        "company",
+        "contactPerson",
+        "phone",
+        "email",
+        "website",
+        "category",
+        "location",
+        "address",
+        "description"
+    ].forEach(
+        id=>{
+            document.getElementById(
+                id
+            ).value="";
+        }
+    );
+
+
+    document.getElementById(
+        "logo"
+    ).value="";
+
+}
+
+
+/* ======================================================
+   STATS
+====================================================== */
+
+function updateStats(){
+
+    const booked=
+    Object.keys(bookings).length;
+
+
+    document.getElementById(
+        "bookedCount"
+    ).textContent=
+    booked.toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "availableCount"
+    ).textContent=
+    (
+        TOTAL_SLOTS-booked
+    ).toLocaleString("en-IN");
+
+
+    document.getElementById(
+        "areaCount"
+    ).textContent=
+    booked.toLocaleString("en-IN")+
+    " sq.ft";
+
+}
+
+
+/* ======================================================
+   PAGINATION
+====================================================== */
+
+function updatePagination(){
+
+    const start=
+    (currentPage-1)*
+    SLOTS_PER_PAGE+1;
+
+
+    const end=
+    Math.min(
+        currentPage*SLOTS_PER_PAGE,
+        TOTAL_SLOTS
+    );
+
+
+    document.getElementById(
+        "pageInfo"
+    ).textContent=
+    "Showing slots "+
+    start.toLocaleString("en-IN")+
+    " - "+
+    end.toLocaleString("en-IN")+
+    " of "+
+    TOTAL_SLOTS.toLocaleString("en-IN");
+
+
+    const box=
+    document.getElementById(
+        "pageNumbers"
+    );
+
+    box.innerHTML="";
+
+
+    let from=
+    Math.max(
+        1,
+        currentPage-2
+    );
+
+
+    let to=
+    Math.min(
+        TOTAL_PAGES,
+        currentPage+2
+    );
+
+
+    for(
+        let p=from;
+        p<=to;
+        p++
+    ){
+
+        const button=
+        document.createElement("button");
+
+        button.textContent=p;
+
+
+        if(p===currentPage){
+
+            button.classList.add(
+                "active"
+            );
+
+        }
+
+
+        button.onclick=
+        function(){
+
+            currentPage=p;
+
+            buildWall();
+
+        };
+
+
+        box.appendChild(button);
+
+    }
+
+}
+
+
+function nextPage(){
+
+    if(
+        currentPage<TOTAL_PAGES
+    ){
+
+        currentPage++;
+
+        buildWall();
+
+    }
+
+}
+
+
+function previousPage(){
+
+    if(
+        currentPage>1
+    ){
+
+        currentPage--;
+
+        buildWall();
+
+    }
+
+}
+
+
+/* ======================================================
+   SEARCH
+====================================================== */
 
 document
-.querySelectorAll(
-".pixel"
-)
-.forEach(
-pixel => {
+.getElementById("search")
+.addEventListener(
+"input",
+function(){
 
-pixel.classList.remove(
-"highlight"
-);
-
-
-const id =
-Number(
-pixel.dataset.id
-);
+    const query=
+    this.value
+    .toLowerCase()
+    .trim();
 
 
-if(
-value &&
-businesses[id] &&
-businesses[id]
-.company
-.toLowerCase()
-.includes(value)
-){
+    if(!query){
 
-pixel.classList.add(
-"highlight"
-);
+        buildWall();
 
-}
+        return;
 
-}
-);
-
-}
-);
+    }
 
 
-/* =========================
-FILTER
-========================= */
+    const wall=
+    document.getElementById("wall");
+
+    wall.innerHTML="";
+
+
+    let found=0;
+
+
+    Object.keys(bookings)
+    .forEach(
+        number=>{
+
+            const data=
+            bookings[number];
+
+
+            if(
+                data.company
+                .toLowerCase()
+                .includes(query)
+            ){
+
+                createSlot(
+                    Number(number),
+                    wall
+                );
+
+                found++;
+
+            }
+
+        }
+    );
+
+
+    if(found===0){
+
+        wall.innerHTML=`
+
+        <div style="
+        padding:35px;
+        font-weight:bold;
+        color:#64748b;
+        ">
+        No company found.
+        </div>
+
+        `;
+
+    }
+
+});
+
+
+/* ======================================================
+   FILTER
+====================================================== */
 
 document
-.getElementById(
-"filter"
-)
+.getElementById("filter")
 .addEventListener(
 "change",
 function(){
 
-const value =
-this.value;
+    const value=this.value;
+
+    document
+    .querySelectorAll(".slot")
+    .forEach(
+        slot=>{
+
+            const number=
+            Number(
+                slot.dataset.slot
+            );
+
+            const booked=
+            !!bookings[number];
 
 
-document
-.querySelectorAll(
-".pixel"
-)
-.forEach(
-pixel => {
+            if(value==="all"){
 
-if(
-value === "all" ||
-pixel.dataset.zone ===
-value
-){
+                slot.style.display=
+                "flex";
 
-pixel.style.display =
-"flex";
+            }
+            else if(
+                value==="booked" &&
+                booked
+            ){
 
-}
-else{
+                slot.style.display=
+                "flex";
 
-pixel.style.display =
-"none";
+            }
+            else if(
+                value==="available" &&
+                !booked
+            ){
 
-}
+                slot.style.display=
+                "flex";
 
-}
-);
+            }
+            else{
 
-}
-);
+                slot.style.display=
+                "none";
 
+            }
 
-/* =========================
-STATS
-========================= */
+        }
+    );
 
-function updateStats(){
-
-const blocks =
-Object.keys(
-businesses
-).length;
+});
 
 
-const sold =
-blocks *
-PIXELS_PER_BLOCK;
+/* ======================================================
+   ESCAPE
+====================================================== */
 
+function escapeHTML(value){
 
-document.getElementById(
-"soldBlocks"
-).innerText =
-blocks.toLocaleString(
-"en-IN"
-);
-
-
-document.getElementById(
-"soldPixels"
-).innerText =
-sold.toLocaleString(
-"en-IN"
-);
-
-
-document.getElementById(
-"availablePixels"
-).innerText =
-(
-TOTAL_PIXELS -
-sold
-).toLocaleString(
-"en-IN"
-);
+    return String(value||"")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
 
 }
 
 
-/* =========================
-ESCAPE
-========================= */
+function escapeAttribute(value){
 
-function escapeHtml(value){
-
-return String(
-value || ""
-)
-.replace(/&/g,"&amp;")
-.replace(/</g,"&lt;")
-.replace(/>/g,"&gt;")
-.replace(/"/g,"&quot;")
-.replace(/'/g,"&#039;");
+    return String(value||"")
+    .replace(/&/g,"&amp;")
+    .replace(/"/g,"&quot;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;");
 
 }
 
 
-/* =========================
-START
-========================= */
-
-try{
-const saved=localStorage.getItem("one_million_pixels_businesses");
-if(saved) businesses=JSON.parse(saved)||{};
-}catch(e){}
+/* ======================================================
+   START
+====================================================== */
 
 buildWall();
 
