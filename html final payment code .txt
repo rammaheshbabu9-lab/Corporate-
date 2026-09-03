@@ -1,0 +1,1730 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ONE MILLION PIXELS HOMEPAGE</title>
+
+<style>
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
+
+body{
+    font-family:Inter,Arial,sans-serif;
+    background:#f7f8fa;
+    color:#111827;
+}
+
+.container{
+    width:min(1180px,94%);
+    margin:auto;
+}
+
+header{
+    background:#fff;
+    border-bottom:1px solid #e5e7eb;
+    position:sticky;
+    top:0;
+    z-index:100;
+}
+
+.nav{
+    height:70px;
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+}
+
+.logo{
+    font-size:20px;
+    font-weight:800;
+    letter-spacing:-.5px;
+}
+
+.logo span{
+    color:#2563eb;
+}
+
+.nav a{
+    text-decoration:none;
+    color:#374151;
+    font-weight:600;
+    margin-left:24px;
+}
+
+.btn{
+    border:0;
+    border-radius:9px;
+    padding:12px 20px;
+    font-weight:700;
+    cursor:pointer;
+}
+
+.btn-primary{
+    background:#111827;
+    color:white;
+}
+
+.btn-blue{
+    background:#2563eb;
+    color:white;
+}
+
+.hero{
+    background:#fff;
+    text-align:center;
+    padding:70px 20px 55px;
+}
+
+.badge{
+    display:inline-block;
+    background:#eff6ff;
+    color:#2563eb;
+    padding:8px 14px;
+    border-radius:30px;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:18px;
+}
+
+.hero h1{
+    font-size:clamp(34px,6vw,68px);
+    line-height:1;
+    letter-spacing:-2px;
+    margin-bottom:20px;
+}
+
+.hero p{
+    max-width:700px;
+    margin:auto;
+    color:#6b7280;
+    line-height:1.7;
+    font-size:16px;
+}
+
+.stats{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:15px;
+    margin-top:35px;
+}
+
+.stat{
+    border:1px solid #e5e7eb;
+    border-radius:14px;
+    padding:22px;
+    background:white;
+}
+
+.stat strong{
+    display:block;
+    font-size:27px;
+    margin-bottom:6px;
+}
+
+.stat span{
+    color:#6b7280;
+    font-size:13px;
+}
+
+section{
+    padding:60px 0;
+}
+
+.title{
+    text-align:center;
+    margin-bottom:28px;
+}
+
+.title h2{
+    font-size:32px;
+    margin-bottom:8px;
+}
+
+.title p{
+    color:#6b7280;
+}
+
+.toolbar{
+    display:flex;
+    gap:12px;
+    flex-wrap:wrap;
+    margin-bottom:20px;
+}
+
+input,
+select,
+textarea{
+    width:100%;
+    padding:13px 14px;
+    border:1px solid #d1d5db;
+    border-radius:9px;
+    outline:none;
+    background:white;
+    font:inherit;
+}
+
+.toolbar input{
+    flex:1;
+    min-width:220px;
+}
+
+.toolbar select{
+    width:210px;
+}
+
+.wall-box{
+    background:white;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:14px;
+    overflow:auto;
+}
+
+.wall{
+    display:grid;
+    grid-template-columns:repeat(20,minmax(35px,1fr));
+    gap:3px;
+    min-width:760px;
+}
+
+.pixel{
+    aspect-ratio:1;
+    border:1px solid #e5e7eb;
+    background:#fafafa;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    transition:.15s;
+}
+
+.pixel:hover{
+    transform:scale(1.05);
+    z-index:2;
+    border-color:#2563eb;
+}
+
+.pixel.sold{
+    background:#fff;
+    border-color:#bfdbfe;
+}
+
+.pixel img{
+    width:100%;
+    height:100%;
+    object-fit:contain;
+    padding:3px;
+}
+
+.pixel-no{
+    position:absolute;
+    bottom:1px;
+    right:2px;
+    font-size:7px;
+    color:#9ca3af;
+    background:rgba(255,255,255,.8);
+    padding:1px 2px;
+}
+
+.sold-label{
+    position:absolute;
+    top:1px;
+    left:1px;
+    font-size:6px;
+    background:#16a34a;
+    color:#fff;
+    padding:2px 3px;
+    border-radius:2px;
+    font-weight:800;
+}
+
+.pricing{
+    display:grid;
+    grid-template-columns:repeat(4,1fr);
+    gap:18px;
+}
+
+.price-card{
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:16px;
+    padding:25px;
+    text-align:center;
+}
+
+.price-card h3{
+    margin-bottom:10px;
+}
+
+.price{
+    font-size:32px;
+    font-weight:800;
+    margin-bottom:8px;
+}
+
+.price-card p{
+    color:#6b7280;
+    font-size:14px;
+}
+
+.form-box{
+    max-width:720px;
+    margin:auto;
+    background:#fff;
+    border:1px solid #e5e7eb;
+    border-radius:18px;
+    padding:28px;
+}
+
+.form-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:16px;
+}
+
+.field{
+    margin-bottom:16px;
+}
+
+.field.full{
+    grid-column:1/-1;
+}
+
+.field label{
+    display:block;
+    font-size:13px;
+    font-weight:700;
+    margin-bottom:7px;
+}
+
+.file-note{
+    font-size:12px;
+    color:#6b7280;
+    margin-top:6px;
+}
+
+.form-actions{
+    display:flex;
+    justify-content:flex-end;
+    gap:10px;
+    margin-top:8px;
+}
+
+.preview-note{
+    text-align:center;
+    margin-bottom:18px;
+    color:#6b7280;
+    font-size:14px;
+}
+
+.modal{
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,.55);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    padding:20px;
+    z-index:999;
+}
+
+.modal.show{
+    display:flex;
+}
+
+.modal-box{
+    width:min(520px,100%);
+    max-height:90vh;
+    overflow:auto;
+    background:#fff;
+    border-radius:18px;
+    padding:26px;
+    position:relative;
+}
+
+.close{
+    position:absolute;
+    top:12px;
+    right:14px;
+    border:0;
+    background:#f3f4f6;
+    width:35px;
+    height:35px;
+    border-radius:50%;
+    cursor:pointer;
+    font-size:18px;
+}
+
+.details-logo{
+    width:90px;
+    height:90px;
+    object-fit:contain;
+    border:1px solid #e5e7eb;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.detail-row{
+    padding:11px 0;
+    border-bottom:1px solid #f0f0f0;
+}
+
+.detail-row strong{
+    display:block;
+    font-size:12px;
+    color:#6b7280;
+    margin-bottom:3px;
+}
+
+.payment-box{
+    text-align:center;
+}
+
+.upi{
+    background:#f3f4f6;
+    border-radius:10px;
+    padding:14px;
+    margin:18px 0;
+    font-weight:800;
+    word-break:break-all;
+}
+
+.payment-actions{
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+.status{
+    display:none;
+    padding:13px;
+    border-radius:9px;
+    margin-bottom:18px;
+    font-weight:600;
+    font-size:14px;
+}
+
+.status.success{
+    display:block;
+    background:#ecfdf5;
+    color:#047857;
+}
+
+.status.error{
+    display:block;
+    background:#fef2f2;
+    color:#b91c1c;
+}
+
+@media(max-width:800px){
+    .stats,
+    .pricing{
+        grid-template-columns:repeat(2,1fr);
+    }
+
+    .form-grid{
+        grid-template-columns:1fr;
+    }
+
+    .field.full{
+        grid-column:auto;
+    }
+
+    .nav a{
+        display:none;
+    }
+}
+
+@media(max-width:500px){
+    .stats,
+    .pricing{
+        grid-template-columns:1fr;
+    }
+
+    .hero{
+        padding-top:45px;
+    }
+
+    .hero h1{
+        letter-spacing:-1px;
+    }
+
+    section{
+        padding:45px 0;
+    }
+
+    .form-box{
+        padding:20px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<header>
+    <div class="container nav">
+        <div class="logo">
+            ONE MILLION <span>PIXELS</span>
+        </div>
+
+        <nav>
+            <a href="#wallSection">Wall</a>
+            <a href="#pricingSection">Pricing</a>
+            <a href="#registerSection">Register</a>
+            <a href="#previewSection">Preview</a>
+        </nav>
+
+        <a href="#registerSection" class="btn btn-primary">
+            Book a Pixel
+        </a>
+    </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+    <div class="container">
+
+        <div class="badge">
+            ✦ 1,00,000 Pixel Business Wall
+        </div>
+
+        <h1>ONE MILLION<br>PIXELS HOMEPAGE</h1>
+
+        <p>
+            Give your brand a permanent place on our digital business wall.
+            Book your pixel block and showcase your business to visitors.
+        </p>
+
+        <div class="stats">
+            <div class="stat">
+                <strong id="totalPixels">1,00,000</strong>
+                <span>Total Pixels</span>
+            </div>
+
+            <div class="stat">
+                <strong id="soldPixels">0</strong>
+                <span>Sold Pixels</span>
+            </div>
+
+            <div class="stat">
+                <strong id="availablePixels">1,00,000</strong>
+                <span>Available Pixels</span>
+            </div>
+
+            <div class="stat">
+                <strong id="businessBlocks">0</strong>
+                <span>Business Blocks</span>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+<!-- WALL -->
+<section id="wallSection">
+    <div class="container">
+
+        <div class="title">
+            <h2>Live Business Wall</h2>
+            <p>1 block = 100 pixels · 1,000 blocks available</p>
+        </div>
+
+        <div class="toolbar">
+            <input
+                id="searchInput"
+                type="text"
+                placeholder="Search company, sector or block..."
+                oninput="applyFilters()"
+            >
+
+            <select id="sectorFilter" onchange="applyFilters()">
+                <option value="">All Sectors</option>
+            </select>
+
+            <select id="zoneFilter" onchange="applyFilters()">
+                <option value="">All Spaces</option>
+                <option value="center">Center ₹599</option>
+                <option value="premium">Premium ₹699</option>
+                <option value="edge">Edge ₹799</option>
+                <option value="corner">Corner ₹999</option>
+            </select>
+        </div>
+
+        <div class="wall-box">
+            <div id="wall" class="wall"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- PRICING -->
+<section id="pricingSection">
+    <div class="container">
+
+        <div class="title">
+            <h2>Pixel Pricing</h2>
+            <p>Choose the location that suits your business.</p>
+        </div>
+
+        <div class="pricing">
+
+            <div class="price-card">
+                <h3>Center</h3>
+                <div class="price">₹599</div>
+                <p>Standard business block</p>
+            </div>
+
+            <div class="price-card">
+                <h3>Premium</h3>
+                <div class="price">₹699</div>
+                <p>High visibility location</p>
+            </div>
+
+            <div class="price-card">
+                <h3>Edge</h3>
+                <div class="price">₹799</div>
+                <p>Edge position</p>
+            </div>
+
+            <div class="price-card">
+                <h3>Corner</h3>
+                <div class="price">₹999</div>
+                <p>Premium corner position</p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+<!-- REGISTRATION -->
+<section id="registerSection">
+    <div class="container">
+
+        <div class="title">
+            <h2>Register Your Business</h2>
+            <p>Submit your details. Our team will review them.</p>
+        </div>
+
+        <div class="form-box">
+
+            <div id="statusBox" class="status"></div>
+
+            <form id="businessForm">
+
+                <div class="form-grid">
+
+                    <div class="field">
+                        <label>Company / Brand Name *</label>
+                        <input id="companyName" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Contact Person *</label>
+                        <input id="contactPerson" required>
+                    </div>
+
+                    <div class="field">
+                        <label>Mobile Number *</label>
+                        <input
+                            id="mobile"
+                            required
+                            maxlength="10"
+                            inputmode="numeric"
+                            placeholder="10 digit mobile"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Website</label>
+                        <input
+                            id="website"
+                            placeholder="www.example.com"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Business Sector *</label>
+                        <select id="sector" required>
+                            <option value="">Select Sector</option>
+                            <option>Banking</option>
+                            <option>IT</option>
+                            <option>Finance</option>
+                            <option>Education</option>
+                            <option>Healthcare</option>
+                            <option>Real Estate</option>
+                            <option>Retail</option>
+                            <option>Food & Restaurant</option>
+                            <option>Travel</option>
+                            <option>Manufacturing</option>
+                            <option>Services</option>
+                            <option>Other</option>
+                        </select>
+                    </div>
+
+                    <div class="field">
+                        <label>Block Number *</label>
+                        <input
+                            id="blockNumber"
+                            type="number"
+                            min="1"
+                            max="1000"
+                            required
+                            placeholder="1 - 1000"
+                            onchange="updatePrice()"
+                        >
+                    </div>
+
+                    <div class="field">
+                        <label>Selected Price</label>
+                        <input id="price" readonly value="₹599">
+                    </div>
+
+                    <div class="field full">
+                        <label>Description</label>
+                        <textarea
+                            id="description"
+                            rows="4"
+                            maxlength="500"
+                            placeholder="Tell visitors about your business..."
+                        ></textarea>
+                    </div>
+
+                    <div class="field full">
+                        <label>Business Logo *</label>
+                        <input
+                            id="logo"
+                            type="file"
+                            accept="image/*"
+                            required
+                        >
+                        <div class="file-note">
+                            JPG, PNG or WEBP recommended.
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="reset" class="btn">
+                        Clear
+                    </button>
+
+                    <button
+                        type="submit"
+                        class="btn btn-blue"
+                        id="submitBtn"
+                    >
+                        Submit Registration
+                    </button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</section>
+
+<!-- PREVIEW -->
+<section id="previewSection">
+    <div class="container">
+
+        <div class="title">
+            <h2>Preview</h2>
+            <p>
+                All 1,000 business blocks are shown below.
+                Approved businesses display their logo.
+            </p>
+        </div>
+
+        <div class="preview-note">
+            Click a booked logo/block to view business details.
+        </div>
+
+        <div class="wall-box">
+            <div id="previewWall" class="wall"></div>
+        </div>
+
+    </div>
+</section>
+
+<!-- PAYMENT MODAL -->
+<div id="paymentModal" class="modal">
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('paymentModal')">
+            ×
+        </button>
+
+        <div class="payment-box">
+
+            <h2>Complete Payment</h2>
+
+            <p style="margin-top:10px;color:#6b7280;">
+                Your registration has been submitted.
+                Please complete the payment using the UPI ID below.
+            </p>
+
+            <div class="upi" id="upiText">
+                yourplaystory-1@oksbi
+            </div>
+
+            <p>
+                Amount:
+                <strong id="paymentAmount">₹599</strong>
+            </p>
+
+            <div class="payment-actions">
+
+                <button
+                    class="btn"
+                    onclick="copyUPI()"
+                >
+                    Copy UPI ID
+                </button>
+
+                <button
+                    class="btn btn-blue"
+                    onclick="makePayment()"
+                >
+                    Make Payment
+                </button>
+
+                <button
+                    class="btn btn-primary"
+                    onclick="paidMessage()"
+                >
+                    I Have Paid
+                </button>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<!-- DETAILS MODAL -->
+<div id="detailsModal" class="modal">
+    <div class="modal-box">
+
+        <button class="close" onclick="closeModal('detailsModal')">
+            ×
+        </button>
+
+        <div id="detailsContent"></div>
+
+    </div>
+</div>
+
+<script>
+/* =========================================================
+   SUPABASE
+========================================================= */
+
+const SUPABASE_URL =
+    "https://eaowxilhfzyukzetgqxo.supabase.co";
+
+const SUPABASE_KEY =
+    "sb_publishable_Z3xsADypaOjX8GEQEOLUdg_vbxynHRx";
+
+const API_URL =
+    SUPABASE_URL + "/rest/v1/businesses";
+
+const STORAGE_URL =
+    SUPABASE_URL +
+    "/storage/v1/object/business-logos";
+
+const UPI_ID =
+    "yourplaystory-1@oksbi";
+
+const TOTAL_BLOCKS = 1000;
+const PIXELS_PER_BLOCK = 100;
+const TOTAL_PIXELS = 100000;
+
+const PRICES = {
+    center: 599,
+    premium: 699,
+    edge: 799,
+    corner: 999
+};
+
+let businesses = [];
+let currentPaymentAmount = 599;
+
+
+/* =========================================================
+   HELPERS
+========================================================= */
+
+function headers(extra = {}) {
+    return {
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Content-Type": "application/json",
+        ...extra
+    };
+}
+
+function escapeHtml(value) {
+    return String(value ?? "")
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
+}
+
+function escapeAttr(value) {
+    return escapeHtml(value);
+}
+
+function getZone(block) {
+
+    const row = Math.ceil(block / 20);
+    const col = ((block - 1) % 20) + 1;
+
+    const lastRow = 50;
+
+    if (
+        (row === 1 || row === lastRow) &&
+        (col === 1 || col === 20)
+    ) {
+        return "corner";
+    }
+
+    if (
+        row === 1 ||
+        row === lastRow ||
+        col === 1 ||
+        col === 20
+    ) {
+        return "edge";
+    }
+
+    if (
+        row >= 2 &&
+        row <= 10 &&
+        col >= 2 &&
+        col <= 19
+    ) {
+        return "premium";
+    }
+
+    return "center";
+}
+
+function getPrice(block) {
+    return PRICES[getZone(block)];
+}
+
+
+/* =========================================================
+   PRICE
+========================================================= */
+
+function updatePrice() {
+
+    const block =
+        Number(document.getElementById("blockNumber").value);
+
+    if (!block || block < 1 || block > 1000) {
+        document.getElementById("price").value = "₹599";
+        return;
+    }
+
+    const price = getPrice(block);
+
+    document.getElementById("price").value =
+        "₹" + price;
+}
+
+
+/* =========================================================
+   LOAD BUSINESSES
+========================================================= */
+
+async function loadBusinesses() {
+
+    try {
+
+        const response = await fetch(
+            API_URL +
+            "?approval_status=eq.approved&order=block_number.asc",
+            {
+                method:"GET",
+                headers:headers()
+            }
+        );
+
+        if (!response.ok) {
+            throw new Error("Unable to load businesses");
+        }
+
+        businesses = await response.json();
+
+        renderWall();
+        showPreviewWall();
+        updateStats();
+        populateSectorFilter();
+
+    } catch(error) {
+
+        console.error(error);
+
+        businesses = [];
+
+        renderWall();
+        showPreviewWall();
+        updateStats();
+    }
+}
+
+
+/* =========================================================
+   STATS
+========================================================= */
+
+function updateStats() {
+
+    const count = businesses.length;
+
+    const soldPixels =
+        count * PIXELS_PER_BLOCK;
+
+    const available =
+        TOTAL_PIXELS - soldPixels;
+
+    document.getElementById("soldPixels")
+        .textContent =
+        soldPixels.toLocaleString("en-IN");
+
+    document.getElementById("availablePixels")
+        .textContent =
+        Math.max(0,available).toLocaleString("en-IN");
+
+    document.getElementById("businessBlocks")
+        .textContent = count.toLocaleString("en-IN");
+}
+
+
+/* =========================================================
+   SECTOR FILTER
+========================================================= */
+
+function populateSectorFilter() {
+
+    const select =
+        document.getElementById("sectorFilter");
+
+    const sectors =
+        [...new Set(
+            businesses
+                .map(b => b.sector)
+                .filter(Boolean)
+        )]
+        .sort();
+
+    select.innerHTML =
+        `<option value="">All Sectors</option>`;
+
+    sectors.forEach(sector => {
+
+        const option =
+            document.createElement("option");
+
+        option.value = sector;
+        option.textContent = sector;
+
+        select.appendChild(option);
+    });
+}
+
+
+/* =========================================================
+   FILTER
+========================================================= */
+
+function getFilteredBusinesses() {
+
+    const search =
+        document.getElementById("searchInput")
+        .value
+        .trim()
+        .toLowerCase();
+
+    const sector =
+        document.getElementById("sectorFilter").value;
+
+    const zone =
+        document.getElementById("zoneFilter").value;
+
+    return businesses.filter(b => {
+
+        const block =
+            Number(b.block_number);
+
+        const matchesSearch =
+            !search ||
+            String(b.company_name || "")
+                .toLowerCase()
+                .includes(search) ||
+            String(b.sector || "")
+                .toLowerCase()
+                .includes(search) ||
+            String(block).includes(search);
+
+        const matchesSector =
+            !sector ||
+            b.sector === sector;
+
+        const matchesZone =
+            !zone ||
+            getZone(block) === zone;
+
+        return matchesSearch &&
+               matchesSector &&
+               matchesZone;
+    });
+}
+
+function applyFilters() {
+    renderWall();
+    showPreviewWall();
+}
+
+
+/* =========================================================
+   WALL
+========================================================= */
+
+function renderWall() {
+
+    const wall =
+        document.getElementById("wall");
+
+    if (!wall) return;
+
+    wall.innerHTML = "";
+
+    const filtered =
+        getFilteredBusinesses();
+
+    const businessMap = new Map();
+
+    filtered.forEach(b => {
+
+        if (b.block_number) {
+            businessMap.set(
+                Number(b.block_number),
+                b
+            );
+        }
+    });
+
+    for (let i = 1; i <= TOTAL_BLOCKS; i++) {
+
+        const business =
+            businessMap.get(i);
+
+        const pixel =
+            createPixel(i,business);
+
+        wall.appendChild(pixel);
+    }
+}
+
+
+/* =========================================================
+   PREVIEW
+========================================================= */
+
+function showPreviewWall() {
+
+    const wall =
+        document.getElementById("previewWall");
+
+    if (!wall) return;
+
+    wall.innerHTML = "";
+
+    const filtered =
+        getFilteredBusinesses();
+
+    const businessMap = new Map();
+
+    filtered.forEach(b => {
+
+        if (b.block_number) {
+
+            businessMap.set(
+                Number(b.block_number),
+                b
+            );
+        }
+    });
+
+    for (
+        let i = 1;
+        i <= TOTAL_BLOCKS;
+        i++
+    ) {
+
+        const business =
+            businessMap.get(i);
+
+        const pixel =
+            createPixel(i,business);
+
+        wall.appendChild(pixel);
+    }
+}
+
+
+/* =========================================================
+   CREATE PIXEL
+========================================================= */
+
+function createPixel(blockNumber,business) {
+
+    const pixel =
+        document.createElement("div");
+
+    pixel.className =
+        "pixel" +
+        (business ? " sold" : "");
+
+    pixel.dataset.block =
+        blockNumber;
+
+    if (!business) {
+
+        pixel.title =
+            `Block #${blockNumber} Available`;
+
+        pixel.innerHTML = `
+            <div class="pixel-no">
+                ${blockNumber}
+            </div>
+        `;
+
+        pixel.onclick = function() {
+
+            document.getElementById("blockNumber")
+                .value = blockNumber;
+
+            updatePrice();
+
+            document.getElementById("registerSection")
+                .scrollIntoView({
+                    behavior:"smooth"
+                });
+        };
+
+    } else {
+
+        pixel.title =
+            "Click to view details";
+
+        if (business.logo_url) {
+
+            pixel.innerHTML = `
+                <img
+                    src="${escapeAttr(business.logo_url)}"
+                    alt="${escapeAttr(business.company_name)}"
+                >
+
+                <div class="sold-label">
+                    SOLD
+                </div>
+
+                <div class="pixel-no">
+                    ${blockNumber}
+                </div>
+            `;
+
+        } else {
+
+            pixel.innerHTML = `
+                <div style="
+                    width:100%;
+                    height:100%;
+                    display:flex;
+                    align-items:center;
+                    justify-content:center;
+                    text-align:center;
+                    padding:3px;
+                    font-size:9px;
+                    font-weight:700;
+                ">
+                    ${escapeHtml(
+                        business.company_name
+                    )}
+                </div>
+
+                <div class="sold-label">
+                    SOLD
+                </div>
+
+                <div class="pixel-no">
+                    ${blockNumber}
+                </div>
+            `;
+        }
+
+        pixel.onclick = function() {
+            openDetails(business);
+        };
+    }
+
+    return pixel;
+}
+
+
+/* =========================================================
+   DETAILS
+========================================================= */
+
+function openDetails(business) {
+
+    const content =
+        document.getElementById("detailsContent");
+
+    const logo =
+        business.logo_url
+        ? `
+            <img
+                class="details-logo"
+                src="${escapeAttr(business.logo_url)}"
+                alt="${escapeAttr(business.company_name)}"
+            >
+          `
+        : "";
+
+    content.innerHTML = `
+
+        <div style="text-align:center;margin-bottom:18px;">
+            ${logo}
+
+            <h2>
+                ${escapeHtml(
+                    business.company_name
+                )}
+            </h2>
+
+            <p style="
+                color:#16a34a;
+                font-weight:700;
+                margin-top:5px;
+            ">
+                ✓ Permanently Booked
+            </p>
+        </div>
+
+        <div class="detail-row">
+            <strong>Block Number</strong>
+            #${escapeHtml(business.block_number)}
+        </div>
+
+        <div class="detail-row">
+            <strong>Pixels</strong>
+            ${PIXELS_PER_BLOCK} Pixels
+        </div>
+
+        <div class="detail-row">
+            <strong>Business Sector</strong>
+            ${escapeHtml(business.sector)}
+        </div>
+
+        <div class="detail-row">
+            <strong>Contact Person</strong>
+            ${escapeHtml(business.contact_person)}
+        </div>
+
+        <div class="detail-row">
+            <strong>Website</strong>
+            ${escapeHtml(business.website || "Not provided")}
+        </div>
+
+        <div class="detail-row">
+            <strong>Description</strong>
+            ${escapeHtml(
+                business.description ||
+                "No description provided."
+            )}
+        </div>
+
+    `;
+
+    document
+        .getElementById("detailsModal")
+        .classList.add("show");
+}
+
+
+/* =========================================================
+   MODALS
+========================================================= */
+
+function closeModal(id) {
+
+    document
+        .getElementById(id)
+        .classList.remove("show");
+}
+
+window.addEventListener("click",function(e){
+
+    if(e.target.classList.contains("modal")) {
+        e.target.classList.remove("show");
+    }
+
+});
+
+
+/* =========================================================
+   LOGO UPLOAD
+========================================================= */
+
+async function uploadLogo(file) {
+
+    const extension =
+        file.name
+            .split(".")
+            .pop()
+            .toLowerCase();
+
+    const fileName =
+        Date.now() +
+        "_" +
+        Math.random()
+            .toString(36)
+            .substring(2,10) +
+        "." +
+        extension;
+
+    const uploadResponse =
+        await fetch(
+            STORAGE_URL +
+            "/" +
+            encodeURIComponent(fileName),
+            {
+                method:"POST",
+                headers:{
+                    "apikey":SUPABASE_KEY,
+                    "Authorization":
+                        "Bearer " + SUPABASE_KEY,
+                    "Content-Type":
+                        file.type || "application/octet-stream"
+                },
+                body:file
+            }
+        );
+
+    if (!uploadResponse.ok) {
+
+        const text =
+            await uploadResponse.text();
+
+        throw new Error(
+            "Logo upload failed: " + text
+        );
+    }
+
+    return (
+        SUPABASE_URL +
+        "/storage/v1/object/public/business-logos/" +
+        encodeURIComponent(fileName)
+    );
+}
+
+
+/* =========================================================
+   REGISTRATION
+========================================================= */
+
+document
+.getElementById("businessForm")
+.addEventListener("submit",async function(e){
+
+    e.preventDefault();
+
+    const status =
+        document.getElementById("statusBox");
+
+    status.className = "status";
+    status.textContent = "";
+
+    const submitBtn =
+        document.getElementById("submitBtn");
+
+    const companyName =
+        document.getElementById("companyName")
+        .value.trim();
+
+    const contactPerson =
+        document.getElementById("contactPerson")
+        .value.trim();
+
+    const mobile =
+        document.getElementById("mobile")
+        .value.trim();
+
+    const website =
+        document.getElementById("website")
+        .value.trim();
+
+    const sector =
+        document.getElementById("sector")
+        .value;
+
+    const blockNumber =
+        Number(
+            document.getElementById("blockNumber")
+            .value
+        );
+
+    const description =
+        document.getElementById("description")
+        .value.trim();
+
+    const logoFile =
+        document.getElementById("logo")
+        .files[0];
+
+    if (!/^[6-9]\d{9}$/.test(mobile)) {
+
+        status.className =
+            "status error";
+
+        status.textContent =
+            "Please enter a valid 10-digit Indian mobile number.";
+
+        return;
+    }
+
+    if (
+        !blockNumber ||
+        blockNumber < 1 ||
+        blockNumber > 1000
+    ) {
+
+        status.className =
+            "status error";
+
+        status.textContent =
+            "Please select a block between 1 and 1000.";
+
+        return;
+    }
+
+    if (!logoFile) {
+
+        status.className =
+            "status error";
+
+        status.textContent =
+            "Please select your business logo.";
+
+        return;
+    }
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = "Submitting...";
+
+    try {
+
+        const price =
+            getPrice(blockNumber);
+
+        /*
+         * Upload logo first
+         */
+        const logoUrl =
+            await uploadLogo(logoFile);
+
+        /*
+         * IMPORTANT:
+         * Public registration must use
+         * available + pending + pending
+         */
+        const payload = {
+
+            company_name:companyName,
+
+            contact_person:contactPerson,
+
+            mobile:mobile,
+
+            website:website,
+
+            sector:sector,
+
+            description:description,
+
+            logo_url:logoUrl,
+
+            block_number:blockNumber,
+
+            pixel_count:PIXELS_PER_BLOCK,
+
+            price:price,
+
+            booking_status:"available",
+
+            approval_status:"pending",
+
+            payment_status:"pending"
+        };
+
+        const response =
+            await fetch(API_URL,{
+                method:"POST",
+                headers:headers({
+                    "Prefer":"return=representation"
+                }),
+                body:JSON.stringify(payload)
+            });
+
+        if (!response.ok) {
+
+            const errorText =
+                await response.text();
+
+            throw new Error(errorText);
+        }
+
+        currentPaymentAmount = price;
+
+        document.getElementById("paymentAmount")
+            .textContent =
+            "₹" + price;
+
+        status.className =
+            "status success";
+
+        status.textContent =
+            "Registration submitted successfully! Our team will review your details and contact you for payment confirmation.";
+
+        document.getElementById("paymentModal")
+            .classList.add("show");
+
+        document.getElementById("businessForm")
+            .reset();
+
+        document.getElementById("price")
+            .value = "₹599";
+
+    } catch(error) {
+
+        console.error(error);
+
+        status.className =
+            "status error";
+
+        status.textContent =
+            "Registration failed. Please try again.";
+
+    } finally {
+
+        submitBtn.disabled = false;
+
+        submitBtn.textContent =
+            "Submit Registration";
+    }
+
+});
+
+
+/* =========================================================
+   PAYMENT
+========================================================= */
+
+function copyUPI() {
+
+    navigator.clipboard
+        .writeText(UPI_ID)
+        .then(() => {
+
+            alert(
+                "UPI ID copied: " +
+                UPI_ID
+            );
+
+        })
+        .catch(() => {
+
+            alert(
+                "UPI ID: " +
+                UPI_ID
+            );
+        });
+}
+
+
+function makePayment() {
+
+    const amount =
+        Number(currentPaymentAmount)
+        .toFixed(2);
+
+    const url =
+        "upi://pay?" +
+        "pa=" +
+        encodeURIComponent(UPI_ID) +
+        "&pn=" +
+        encodeURIComponent(
+            "One Million Pixels"
+        ) +
+        "&am=" +
+        amount +
+        "&cu=INR" +
+        "&tn=" +
+        encodeURIComponent(
+            "Pixel Business Booking"
+        );
+
+    window.location.href = url;
+}
+
+
+function paidMessage() {
+
+    alert(
+        "Thank you! Your payment confirmation has been submitted. Our team will verify the payment and approve your business listing."
+    );
+
+    closeModal("paymentModal");
+}
+
+
+/* =========================================================
+   INITIAL LOAD
+========================================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    function(){
+
+        document.getElementById("totalPixels")
+            .textContent =
+            TOTAL_PIXELS.toLocaleString("en-IN");
+
+        document.getElementById("availablePixels")
+            .textContent =
+            TOTAL_PIXELS.toLocaleString("en-IN");
+
+        showPreviewWall();
+
+        loadBusinesses();
+    }
+);
+</script>
+
+</body>
+</html>
