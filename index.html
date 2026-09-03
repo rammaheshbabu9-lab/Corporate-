@@ -1,145 +1,230 @@
+```html
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>One Million Pixels - Admin</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Panel - ONE MILLION PIXELS HOMEPAGE</title>
 
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
+*{
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+}
 
 body{
-    font-family:Arial,Inter,sans-serif;
-    background:#f5f7fa;
-    color:#111827;
+    font-family:Arial,Helvetica,sans-serif;
+    background:#f5f7fb;
+    color:#172033;
 }
 
 header{
-    background:#fff;
+    background:#ffffff;
     border-bottom:1px solid #e5e7eb;
-    padding:18px 0;
+    padding:18px 25px;
+    position:sticky;
+    top:0;
+    z-index:20;
 }
 
-.container{
-    width:min(1250px,94%);
+.header-inner{
+    max-width:1400px;
     margin:auto;
-}
-
-.header{
     display:flex;
-    align-items:center;
     justify-content:space-between;
-    gap:15px;
+    align-items:center;
+    gap:20px;
 }
 
 .brand{
     font-size:21px;
     font-weight:800;
+    letter-spacing:.4px;
 }
 
-.brand span{color:#2563eb}
-
-.refresh{
-    border:0;
-    background:#111827;
-    color:#fff;
-    padding:11px 17px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
+.brand span{
+    color:#2563eb;
 }
 
-h1{
-    margin:30px 0 8px;
-    font-size:32px;
+.header-right{
+    display:flex;
+    align-items:center;
+    gap:10px;
 }
 
-.subtitle{
-    color:#6b7280;
-    margin-bottom:25px;
+.status-dot{
+    width:9px;
+    height:9px;
+    background:#16a34a;
+    border-radius:50%;
+    display:inline-block;
+}
+
+.container{
+    max-width:1400px;
+    margin:30px auto;
+    padding:0 20px;
+}
+
+.page-title{
+    margin-bottom:22px;
+}
+
+.page-title h1{
+    font-size:30px;
+    margin-bottom:6px;
+}
+
+.page-title p{
+    color:#64748b;
 }
 
 .stats{
     display:grid;
-    grid-template-columns:repeat(4,1fr);
+    grid-template-columns:repeat(5,1fr);
     gap:15px;
-    margin-bottom:25px;
+    margin-bottom:22px;
 }
 
 .stat{
     background:#fff;
     border:1px solid #e5e7eb;
-    border-radius:12px;
+    border-radius:14px;
     padding:20px;
 }
 
-.stat strong{
+.stat small{
+    color:#64748b;
     display:block;
-    font-size:28px;
-    margin-bottom:5px;
+    margin-bottom:8px;
 }
 
-.stat span{
-    color:#6b7280;
-    font-size:13px;
+.stat strong{
+    font-size:27px;
 }
 
 .toolbar{
     background:#fff;
     border:1px solid #e5e7eb;
-    padding:16px;
-    border-radius:12px;
-    display:grid;
-    grid-template-columns:2fr 1fr 1fr 1fr;
-    gap:12px;
-    margin-bottom:20px;
+    border-radius:14px;
+    padding:15px;
+    display:flex;
+    gap:10px;
+    flex-wrap:wrap;
+    margin-bottom:18px;
 }
 
-input,select,textarea{
-    width:100%;
-    padding:12px;
-    border:1px solid #d1d5db;
-    border-radius:8px;
-    outline:none;
-    font:inherit;
+input,
+select{
+    border:1px solid #d7dce5;
+    border-radius:9px;
+    padding:11px 12px;
+    font-size:14px;
     background:#fff;
+    outline:none;
 }
 
-.table-box{
+input:focus,
+select:focus{
+    border-color:#2563eb;
+}
+
+.search{
+    flex:1;
+    min-width:220px;
+}
+
+button{
+    border:0;
+    border-radius:9px;
+    padding:10px 14px;
+    cursor:pointer;
+    font-weight:700;
+    font-size:13px;
+}
+
+.refresh{
+    background:#172033;
+    color:white;
+}
+
+.view{
+    background:#e8f0ff;
+    color:#1d4ed8;
+}
+
+.edit{
+    background:#f1f5f9;
+    color:#334155;
+}
+
+.payment{
+    background:#dcfce7;
+    color:#166534;
+}
+
+.approve{
+    background:#16a34a;
+    color:white;
+}
+
+.reject{
+    background:#fee2e2;
+    color:#b91c1c;
+}
+
+button:hover{
+    opacity:.85;
+}
+
+.table-card{
     background:#fff;
     border:1px solid #e5e7eb;
-    border-radius:12px;
-    overflow:auto;
+    border-radius:14px;
+    overflow:hidden;
+}
+
+.table-scroll{
+    overflow-x:auto;
 }
 
 table{
     width:100%;
     border-collapse:collapse;
-    min-width:1050px;
-}
-
-th,td{
-    padding:14px 12px;
-    border-bottom:1px solid #edf0f3;
-    text-align:left;
-    vertical-align:middle;
-    font-size:13px;
+    min-width:1150px;
 }
 
 th{
-    background:#f9fafb;
+    background:#f8fafc;
+    color:#475569;
+    text-align:left;
     font-size:12px;
-    color:#4b5563;
     text-transform:uppercase;
+    letter-spacing:.5px;
+    padding:14px;
+    border-bottom:1px solid #e5e7eb;
 }
 
-.logo{
-    width:48px;
-    height:48px;
-    border:1px solid #e5e7eb;
-    border-radius:8px;
-    object-fit:contain;
-    background:#fff;
+td{
+    padding:14px;
+    border-bottom:1px solid #edf0f4;
+    font-size:14px;
+    vertical-align:middle;
+}
+
+tr:last-child td{
+    border-bottom:0;
+}
+
+.company{
+    font-weight:700;
+}
+
+.muted{
+    color:#64748b;
+    font-size:12px;
+    margin-top:4px;
 }
 
 .badge{
@@ -147,202 +232,239 @@ th{
     padding:5px 9px;
     border-radius:20px;
     font-size:11px;
-    font-weight:700;
+    font-weight:800;
 }
 
 .pending{
-    background:#fff7ed;
-    color:#c2410c;
+    background:#fef3c7;
+    color:#92400e;
 }
 
 .approved{
-    background:#ecfdf5;
-    color:#047857;
+    background:#dcfce7;
+    color:#166534;
 }
 
 .rejected{
-    background:#fef2f2;
+    background:#fee2e2;
     color:#b91c1c;
+}
+
+.sold{
+    background:#dbeafe;
+    color:#1d4ed8;
+}
+
+.available{
+    background:#f1f5f9;
+    color:#475569;
 }
 
 .received{
-    background:#ecfdf5;
-    color:#047857;
+    background:#dcfce7;
+    color:#166534;
 }
 
 .notreceived{
-    background:#fef2f2;
+    background:#fee2e2;
     color:#b91c1c;
 }
 
-.btn{
-    border:0;
-    border-radius:7px;
-    padding:8px 11px;
-    cursor:pointer;
-    font-weight:700;
-    font-size:12px;
-    margin:2px;
+.actions{
+    display:flex;
+    flex-wrap:wrap;
+    gap:6px;
 }
 
-.view{background:#eef2ff;color:#3730a3}
-.edit{background:#f3f4f6;color:#111827}
-.approve{background:#dcfce7;color:#166534}
-.reject{background:#fee2e2;color:#991b1b}
-.payment{background:#dbeafe;color:#1d4ed8}
+.logo{
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    object-fit:cover;
+    border:1px solid #e5e7eb;
+    background:#f8fafc;
+}
+
+.no-logo{
+    width:42px;
+    height:42px;
+    border-radius:8px;
+    background:#f1f5f9;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#94a3b8;
+    font-size:11px;
+}
 
 .empty{
     text-align:center;
-    padding:50px;
-    color:#6b7280;
+    padding:60px 20px;
+    color:#64748b;
+}
+
+#connectionStatus{
+    margin-bottom:15px;
+    padding:11px 14px;
+    border-radius:9px;
+    background:#eff6ff;
+    color:#1d4ed8;
+    font-size:13px;
+    border:1px solid #dbeafe;
+}
+
+.error-status{
+    background:#fef2f2 !important;
+    color:#b91c1c !important;
+    border-color:#fecaca !important;
+}
+
+.success-status{
+    background:#f0fdf4 !important;
+    color:#166534 !important;
+    border-color:#bbf7d0 !important;
+}
+
+/* MODAL */
+
+.modal-bg{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(15,23,42,.55);
+    z-index:100;
+    padding:20px;
+    overflow:auto;
 }
 
 .modal{
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,.55);
-    display:none;
-    align-items:center;
-    justify-content:center;
-    padding:20px;
-    z-index:1000;
-}
-
-.modal.show{display:flex}
-
-.modal-box{
-    width:min(600px,100%);
-    max-height:92vh;
-    overflow:auto;
-    background:#fff;
-    border-radius:15px;
+    background:white;
+    max-width:650px;
+    margin:40px auto;
+    border-radius:16px;
     padding:25px;
-    position:relative;
+    box-shadow:0 20px 60px rgba(0,0,0,.2);
 }
 
-.close{
-    position:absolute;
-    right:15px;
-    top:15px;
-    border:0;
-    width:34px;
-    height:34px;
-    border-radius:50%;
-    background:#f3f4f6;
-    cursor:pointer;
-    font-size:18px;
-}
-
-.modal h2{
+.modal-head{
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
     margin-bottom:20px;
 }
 
-.field{
-    margin-bottom:14px;
+.modal-head h2{
+    font-size:21px;
 }
 
-.field label{
+.close{
+    background:#f1f5f9;
+    color:#334155;
+    font-size:18px;
+    padding:7px 11px;
+}
+
+.detail-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:14px;
+}
+
+.detail{
+    border:1px solid #e5e7eb;
+    border-radius:10px;
+    padding:13px;
+}
+
+.detail.full{
+    grid-column:1/-1;
+}
+
+.detail label{
     display:block;
-    font-size:12px;
-    font-weight:700;
-    margin-bottom:6px;
+    color:#64748b;
+    font-size:11px;
+    margin-bottom:5px;
+    text-transform:uppercase;
 }
 
-.form-grid{
+.detail strong{
+    word-break:break-word;
+}
+
+.edit-form{
+    display:grid;
+    gap:14px;
+}
+
+.edit-row{
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:12px;
 }
 
-.full{
-    grid-column:1/-1;
-}
-
-.modal-actions{
+.edit-group{
     display:flex;
-    justify-content:flex-end;
-    gap:8px;
-    margin-top:20px;
+    flex-direction:column;
+    gap:6px;
 }
 
-.save{
-    border:0;
+.edit-group label{
+    font-size:12px;
+    font-weight:700;
+    color:#475569;
+}
+
+.edit-group input,
+.edit-group select,
+.edit-group textarea{
+    width:100%;
+}
+
+textarea{
+    min-height:100px;
+    resize:vertical;
+    border:1px solid #d7dce5;
+    border-radius:9px;
+    padding:11px;
+    font-family:inherit;
+    font-size:14px;
+}
+
+.save-btn{
     background:#2563eb;
-    color:#fff;
-    padding:11px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
+    color:white;
+    padding:13px;
 }
 
-.cancel{
-    border:0;
-    background:#e5e7eb;
-    padding:11px 18px;
-    border-radius:8px;
-    cursor:pointer;
-    font-weight:700;
-}
-
-.detail-logo{
-    width:100px;
-    height:100px;
-    object-fit:contain;
-    border:1px solid #e5e7eb;
-    border-radius:12px;
-    margin-bottom:15px;
-}
-
-.detail{
-    border-bottom:1px solid #eee;
-    padding:11px 0;
-}
-
-.detail strong{
-    display:block;
-    color:#6b7280;
-    font-size:11px;
-    margin-bottom:3px;
-}
-
-.message{
-    display:none;
-    padding:12px;
-    border-radius:8px;
-    margin-bottom:15px;
-    font-weight:600;
-    font-size:13px;
-}
-
-.message.show{display:block}
-.success{background:#ecfdf5;color:#047857}
-.error{background:#fef2f2;color:#b91c1c}
-
-@media(max-width:850px){
+@media(max-width:900px){
     .stats{
         grid-template-columns:repeat(2,1fr);
     }
-
-    .toolbar{
-        grid-template-columns:1fr 1fr;
-    }
 }
 
-@media(max-width:550px){
+@media(max-width:600px){
+    .container{
+        padding:0 12px;
+        margin-top:20px;
+    }
+
+    .header-inner{
+        align-items:flex-start;
+        flex-direction:column;
+    }
+
     .stats{
         grid-template-columns:1fr 1fr;
     }
 
-    .toolbar{
-        grid-template-columns:1fr;
+    .stat strong{
+        font-size:22px;
     }
 
-    .form-grid{
+    .detail-grid,
+    .edit-row{
         grid-template-columns:1fr;
-    }
-
-    .full{
-        grid-column:auto;
     }
 }
 </style>
@@ -351,355 +473,392 @@ th{
 <body>
 
 <header>
-<div class="container header">
-    <div class="brand">
-        ONE MILLION <span>PIXELS</span> — ADMIN
-    </div>
+    <div class="header-inner">
+        <div class="brand">
+            ONE MILLION <span>PIXELS</span> HOMEPAGE
+        </div>
 
-    <button class="refresh" onclick="loadBusinesses()">
-        ↻ Refresh
-    </button>
-</div>
+        <div class="header-right">
+            <span class="status-dot"></span>
+            <span>Admin Panel</span>
+        </div>
+    </div>
 </header>
 
-<main class="container">
+<div class="container">
 
-<h1>Business Management</h1>
-
-<p class="subtitle">
-    Review registrations, verify payments and manage pixel bookings.
-</p>
-
-<div id="message" class="message"></div>
-
-<div class="stats">
-
-    <div class="stat">
-        <strong id="totalCount">0</strong>
-        <span>Total Registrations</span>
+    <div class="page-title">
+        <h1>Business Administration</h1>
+        <p>Review registrations, verify payments and manage the pixel business wall.</p>
     </div>
 
-    <div class="stat">
-        <strong id="pendingCount">0</strong>
-        <span>Pending</span>
+    <div id="connectionStatus">
+        Connecting to Supabase...
     </div>
 
-    <div class="stat">
-        <strong id="approvedCount">0</strong>
-        <span>Approved</span>
+    <div class="stats">
+        <div class="stat">
+            <small>Total</small>
+            <strong id="totalCount">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Pending</small>
+            <strong id="pendingCount">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Approved</small>
+            <strong id="approvedCount">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Rejected</small>
+            <strong id="rejectedCount">0</strong>
+        </div>
+
+        <div class="stat">
+            <small>Payment Received</small>
+            <strong id="paymentCount">0</strong>
+        </div>
     </div>
 
-    <div class="stat">
-        <strong id="rejectedCount">0</strong>
-        <span>Rejected</span>
+    <div class="toolbar">
+
+        <input
+            id="searchInput"
+            class="search"
+            type="text"
+            placeholder="Search company, mobile, contact person..."
+        >
+
+        <select id="statusFilter">
+            <option value="all">All Status</option>
+            <option value="pending">Pending</option>
+            <option value="approved">Approved</option>
+            <option value="rejected">Rejected</option>
+        </select>
+
+        <select id="paymentFilter">
+            <option value="all">All Payments</option>
+            <option value="pending">Pending</option>
+            <option value="received">Received</option>
+            <option value="not_received">Not Received</option>
+        </select>
+
+        <select id="sectorFilter">
+            <option value="all">All Sectors</option>
+        </select>
+
+        <button class="refresh" onclick="loadBusinesses()">
+            ↻ Refresh
+        </button>
+
+    </div>
+
+    <div class="table-card">
+
+        <div class="table-scroll">
+
+            <table>
+
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Business</th>
+                        <th>Contact</th>
+                        <th>Sector</th>
+                        <th>Block</th>
+                        <th>Price</th>
+                        <th>Booking</th>
+                        <th>Approval</th>
+                        <th>Payment</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+
+                <tbody id="businessTableBody"></tbody>
+
+            </table>
+
+        </div>
+
     </div>
 
 </div>
-
-<div class="toolbar">
-
-    <input
-        id="search"
-        placeholder="Search company, mobile, block..."
-        oninput="renderTable()"
-    >
-
-    <select id="statusFilter" onchange="renderTable()">
-        <option value="">All Status</option>
-        <option value="pending">Pending</option>
-        <option value="approved">Approved</option>
-        <option value="rejected">Rejected</option>
-    </select>
-
-    <select id="paymentFilter" onchange="renderTable()">
-        <option value="">All Payments</option>
-        <option value="pending">Payment Pending</option>
-        <option value="received">Payment Received</option>
-        <option value="not_received">Not Received</option>
-    </select>
-
-    <select id="sectorFilter" onchange="renderTable()">
-        <option value="">All Sectors</option>
-    </select>
-
-</div>
-
-<div class="table-box">
-
-<table>
-
-<thead>
-<tr>
-    <th>Logo</th>
-    <th>Company</th>
-    <th>Contact</th>
-    <th>Sector</th>
-    <th>Block</th>
-    <th>Price</th>
-    <th>Approval</th>
-    <th>Payment</th>
-    <th>Actions</th>
-</tr>
-</thead>
-
-<tbody id="businessTable">
-</tbody>
-
-</table>
-
-</div>
-
-</main>
 
 
 <!-- VIEW MODAL -->
 
-<div id="viewModal" class="modal">
+<div id="viewModal" class="modal-bg">
 
-<div class="modal-box">
+    <div class="modal">
 
-<button class="close" onclick="closeModal('viewModal')">×</button>
+        <div class="modal-head">
+            <h2>Business Details</h2>
+            <button class="close" onclick="closeModal('viewModal')">×</button>
+        </div>
 
-<div id="viewContent"></div>
+        <div id="viewContent"></div>
 
-</div>
+    </div>
 
 </div>
 
 
 <!-- EDIT MODAL -->
 
-<div id="editModal" class="modal">
+<div id="editModal" class="modal-bg">
 
-<div class="modal-box">
+    <div class="modal">
 
-<button class="close" onclick="closeModal('editModal')">×</button>
+        <div class="modal-head">
+            <h2>Edit Business</h2>
+            <button class="close" onclick="closeModal('editModal')">×</button>
+        </div>
 
-<h2>Edit Business</h2>
+        <form class="edit-form" onsubmit="saveEdit(event)">
 
-<form id="editForm">
+            <input type="hidden" id="editId">
 
-<input type="hidden" id="editId">
+            <div class="edit-row">
 
-<div class="form-grid">
+                <div class="edit-group">
+                    <label>Company Name</label>
+                    <input id="editCompany" required>
+                </div>
 
-<div class="field">
-<label>Company / Brand Name</label>
-<input id="editCompany" required>
-</div>
+                <div class="edit-group">
+                    <label>Contact Person</label>
+                    <input id="editContact">
+                </div>
 
-<div class="field">
-<label>Contact Person</label>
-<input id="editContact">
-</div>
+            </div>
 
-<div class="field">
-<label>Mobile</label>
-<input id="editMobile">
-</div>
+            <div class="edit-row">
 
-<div class="field">
-<label>Website</label>
-<input id="editWebsite">
-</div>
+                <div class="edit-group">
+                    <label>Mobile</label>
+                    <input id="editMobile">
+                </div>
 
-<div class="field">
-<label>Sector</label>
-<select id="editSector">
-<option>Banking</option>
-<option>IT</option>
-<option>Finance</option>
-<option>Education</option>
-<option>Healthcare</option>
-<option>Real Estate</option>
-<option>Retail</option>
-<option>Food & Restaurant</option>
-<option>Travel</option>
-<option>Manufacturing</option>
-<option>Services</option>
-<option>Other</option>
-</select>
-</div>
+                <div class="edit-group">
+                    <label>Website</label>
+                    <input id="editWebsite">
+                </div>
 
-<div class="field">
-<label>Block Number</label>
-<input id="editBlock" type="number" min="1" max="1000">
-</div>
+            </div>
 
-<div class="field full">
-<label>Description</label>
-<textarea id="editDescription" rows="4"></textarea>
-</div>
+            <div class="edit-row">
 
-</div>
+                <div class="edit-group">
+                    <label>Sector</label>
 
-<div class="modal-actions">
+                    <select id="editSector">
+                        <option>IT</option>
+                        <option>Banking</option>
+                        <option>Finance</option>
+                        <option>Healthcare</option>
+                        <option>Education</option>
+                        <option>Retail</option>
+                        <option>Real Estate</option>
+                        <option>Food</option>
+                        <option>Travel</option>
+                        <option>Other</option>
+                    </select>
 
-<button
-type="button"
-class="cancel"
-onclick="closeModal('editModal')">
-Cancel
-</button>
+                </div>
 
-<button
-type="submit"
-class="save">
-Save Changes
-</button>
+                <div class="edit-group">
+                    <label>Block Number</label>
+                    <input id="editBlock" type="number" min="1" max="1000">
+                </div>
 
-</div>
+            </div>
 
-</form>
+            <div class="edit-row">
 
-</div>
+                <div class="edit-group">
+                    <label>Price</label>
+                    <input id="editPrice" type="number" step="0.01">
+                </div>
+
+                <div class="edit-group">
+                    <label>Booking Status</label>
+
+                    <select id="editBooking">
+                        <option value="available">Available</option>
+                        <option value="reserved">Reserved</option>
+                        <option value="sold">Sold</option>
+                    </select>
+
+                </div>
+
+            </div>
+
+            <div class="edit-group">
+                <label>Description</label>
+                <textarea id="editDescription"></textarea>
+            </div>
+
+            <button class="save-btn" type="submit">
+                Save Changes
+            </button>
+
+        </form>
+
+    </div>
 
 </div>
 
 
 <script>
 
-/* =====================================================
-   SUPABASE CONFIG
-===================================================== */
-
 const SUPABASE_URL =
-"https://eaowxilhfzyukzetgqxo.supabase.co";
+    "https://eaowxilhfzyukzetgqxo.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_Z3xsADypaOjX8GEQEOLUdg_vbxynHRx";
+    "sb_publishable_Z3xsADypaOjX8GEQEOLUdg_vbxynHRx";
 
-const API_URL =
-SUPABASE_URL + "/rest/v1/businesses";
 
 let businesses = [];
+let currentEditId = null;
 
 
-/* =====================================================
+/* =========================
    HEADERS
-===================================================== */
+========================= */
 
 function apiHeaders(){
 
     return {
-        "apikey":SUPABASE_KEY,
-        "Authorization":"Bearer " + SUPABASE_KEY,
-        "Content-Type":"application/json"
+        "apikey": SUPABASE_KEY,
+        "Authorization": "Bearer " + SUPABASE_KEY,
+        "Accept": "application/json",
+        "Content-Type": "application/json"
     };
 
 }
 
 
-/* =====================================================
-   ESCAPE
-===================================================== */
+/* =========================
+   ESCAPE HTML
+========================= */
 
 function escapeHtml(value){
 
-    return String(value ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+    if(value === null || value === undefined){
+        return "";
+    }
+
+    return String(value)
+        .replace(/&/g,"&amp;")
+        .replace(/</g,"&lt;")
+        .replace(/>/g,"&gt;")
+        .replace(/"/g,"&quot;")
+        .replace(/'/g,"&#039;");
 
 }
 
 
-/* =====================================================
-   MESSAGE
-===================================================== */
-
-function showMessage(text,type){
-
-    const box =
-        document.getElementById("message");
-
-    box.className =
-        "message show " + type;
-
-    box.textContent = text;
-
-    setTimeout(()=>{
-        box.className="message";
-    },4000);
-
-}
-
-
-/* =====================================================
-   LOAD ALL DATA
-===================================================== */
+/* =========================
+   LOAD DATA
+========================= */
 
 async function loadBusinesses(){
 
-    const table =
-        document.getElementById("businessTable");
+    const status =
+        document.getElementById("connectionStatus");
 
-    table.innerHTML = `
-        <tr>
-            <td colspan="9" class="empty">
-                Loading businesses...
-            </td>
-        </tr>
-    `;
+    const tbody =
+        document.getElementById("businessTableBody");
+
+    status.className = "";
+    status.textContent =
+        "Loading registrations from Supabase...";
 
     try{
 
-        /*
-         * IMPORTANT:
-         * Admin prototype uses anon SELECT.
-         */
-        const response =
-            await fetch(
-                API_URL +
-                "?select=*&order=created_at.desc",
-                {
-                    method:"GET",
-                    headers:apiHeaders()
-                }
-            );
+        const response = await fetch(
+            SUPABASE_URL +
+            "/rest/v1/businesses?select=*",
+            {
+                method:"GET",
+                headers:apiHeaders()
+            }
+        );
+
+        const text = await response.text();
+
+        console.log("SUPABASE STATUS:",response.status);
+        console.log("SUPABASE RESPONSE:",text);
 
         if(!response.ok){
 
-            const error =
-                await response.text();
+            throw new Error(
+                "HTTP " +
+                response.status +
+                " - " +
+                text
+            );
 
-            throw new Error(error);
         }
 
         businesses =
-            await response.json();
+            JSON.parse(text);
+
+        businesses.sort(function(a,b){
+
+            return new Date(b.created_at) -
+                   new Date(a.created_at);
+
+        });
+
+        status.className =
+            "success-status";
+
+        status.textContent =
+            "✓ Supabase connected — " +
+            businesses.length +
+            " registrations found.";
 
         updateStats();
-        populateSectors();
-        renderTable();
+        populateSectorFilter();
+        applyFilters();
 
     }catch(error){
 
-        console.error(error);
+        console.error(
+            "ADMIN LOAD ERROR:",
+            error
+        );
 
-        table.innerHTML = `
+        status.className =
+            "error-status";
+
+        status.textContent =
+            "❌ ADMIN ERROR: " +
+            error.message;
+
+        tbody.innerHTML = `
             <tr>
-                <td colspan="9" class="empty">
-                    Unable to load data.<br><br>
-                    ${escapeHtml(error.message)}
+                <td colspan="10">
+                    <div class="empty">
+                        <h3>Unable to load registrations</h3>
+                        <p>${escapeHtml(error.message)}</p>
+                    </div>
                 </td>
             </tr>
         `;
 
-        showMessage(
-            "Failed to load businesses. Check Supabase RLS policies.",
-            "error"
-        );
     }
 
 }
 
 
-/* =====================================================
+/* =========================
    STATS
-===================================================== */
+========================= */
 
 function updateStats(){
 
@@ -708,45 +867,55 @@ function updateStats(){
 
     document.getElementById("pendingCount")
         .textContent =
-        businesses.filter(
-            b => b.approval_status === "pending"
+        businesses.filter(x =>
+            x.approval_status === "pending"
         ).length;
 
     document.getElementById("approvedCount")
         .textContent =
-        businesses.filter(
-            b => b.approval_status === "approved"
+        businesses.filter(x =>
+            x.approval_status === "approved"
         ).length;
 
     document.getElementById("rejectedCount")
         .textContent =
-        businesses.filter(
-            b => b.approval_status === "rejected"
+        businesses.filter(x =>
+            x.approval_status === "rejected"
+        ).length;
+
+    document.getElementById("paymentCount")
+        .textContent =
+        businesses.filter(x =>
+            x.payment_status === "received"
         ).length;
 
 }
 
 
-/* =====================================================
-   SECTORS
-===================================================== */
+/* =========================
+   SECTOR FILTER
+========================= */
 
-function populateSectors(){
+function populateSectorFilter(){
 
     const select =
         document.getElementById("sectorFilter");
 
-    const sectors =
-        [...new Set(
+    const current =
+        select.value;
+
+    const sectors = [
+        ...new Set(
             businesses
-            .map(b => b.sector)
-            .filter(Boolean)
-        )].sort();
+                .map(x => x.sector)
+                .filter(Boolean)
+        )
+    ].sort();
 
     select.innerHTML =
-        `<option value="">All Sectors</option>`;
+        `<option value="all">All Sectors</option>`;
 
-    sectors.forEach(sector=>{
+    sectors.forEach(function(sector){
 
         const option =
             document.createElement("option");
@@ -758,68 +927,112 @@ function populateSectors(){
 
     });
 
+    if(
+        sectors.includes(current)
+    ){
+        select.value = current;
+    }
+
 }
 
 
-/* =====================================================
-   FILTER + TABLE
-===================================================== */
+/* =========================
+   FILTER
+========================= */
 
-function renderTable(){
+function applyFilters(){
 
     const search =
-        document.getElementById("search")
-        .value
-        .trim()
-        .toLowerCase();
+        document.getElementById("searchInput")
+            .value
+            .trim()
+            .toLowerCase();
 
-    const status =
+    const approval =
         document.getElementById("statusFilter")
-        .value;
+            .value;
 
     const payment =
         document.getElementById("paymentFilter")
-        .value;
+            .value;
 
     const sector =
         document.getElementById("sectorFilter")
-        .value;
+            .value;
+
 
     const filtered =
-        businesses.filter(b=>{
+        businesses.filter(function(item){
 
-            const text =
-                (
-                    (b.company_name || "") +
-                    " " +
-                    (b.mobile || "") +
-                    " " +
-                    (b.contact_person || "") +
-                    " " +
-                    (b.block_number || "")
-                ).toLowerCase();
+            const searchable = [
+
+                item.company_name,
+                item.contact_person,
+                item.mobile,
+                item.website,
+                item.sector,
+                item.block_number
+
+            ]
+            .join(" ")
+            .toLowerCase();
+
+
+            const searchOK =
+                !search ||
+                searchable.includes(search);
+
+
+            const approvalOK =
+                approval === "all" ||
+                item.approval_status === approval;
+
+
+            const paymentOK =
+                payment === "all" ||
+                item.payment_status === payment;
+
+
+            const sectorOK =
+                sector === "all" ||
+                item.sector === sector;
+
 
             return (
-                (!search || text.includes(search)) &&
-                (!status ||
-                    b.approval_status === status) &&
-                (!payment ||
-                    b.payment_status === payment) &&
-                (!sector ||
-                    b.sector === sector)
+                searchOK &&
+                approvalOK &&
+                paymentOK &&
+                sectorOK
             );
 
         });
 
-    const tbody =
-        document.getElementById("businessTable");
 
-    if(!filtered.length){
+    renderBusinesses(filtered);
+
+}
+
+
+/* =========================
+   RENDER
+========================= */
+
+function renderBusinesses(list){
+
+    const tbody =
+        document.getElementById(
+            "businessTableBody"
+        );
+
+    if(!list.length){
 
         tbody.innerHTML = `
             <tr>
-                <td colspan="9" class="empty">
-                    No businesses found.
+                <td colspan="10">
+                    <div class="empty">
+                        <h3>No registrations found</h3>
+                        <p>Try changing your filters.</p>
+                    </div>
                 </td>
             </tr>
         `;
@@ -827,111 +1040,195 @@ function renderTable(){
         return;
     }
 
+
     tbody.innerHTML =
-        filtered.map(b=>{
+        list.map(function(item){
 
             const logo =
-                b.logo_url
+                item.logo_url
                 ? `
                     <img
-                    class="logo"
-                    src="${escapeHtml(b.logo_url)}"
-                    alt="logo">
+                        class="logo"
+                        src="${escapeHtml(item.logo_url)}"
+                        alt="Logo"
+                    >
                   `
-                : "—";
+                : `
+                    <div class="no-logo">
+                        No Logo
+                    </div>
+                  `;
+
+
+            const approvalClass =
+                item.approval_status || "pending";
+
+            const bookingClass =
+                item.booking_status || "available";
+
+            const paymentClass =
+                item.payment_status === "received"
+                ? "received"
+                : item.payment_status === "not_received"
+                    ? "notreceived"
+                    : "pending";
+
 
             return `
-            <tr>
 
-                <td>${logo}</td>
+                <tr>
 
-                <td>
-                    <strong>
-                        ${escapeHtml(b.company_name)}
-                    </strong>
-                </td>
+                    <td>
+                        <strong>#${item.id}</strong>
+                    </td>
 
-                <td>
-                    ${escapeHtml(b.contact_person || "-")}
-                    <br>
-                    <small>
-                        ${escapeHtml(b.mobile || "-")}
-                    </small>
-                </td>
+                    <td>
 
-                <td>
-                    ${escapeHtml(b.sector || "-")}
-                </td>
+                        <div style="
+                            display:flex;
+                            align-items:center;
+                            gap:10px;
+                        ">
 
-                <td>
-                    #${escapeHtml(b.block_number || "-")}
-                </td>
+                            ${logo}
 
-                <td>
-                    ₹${escapeHtml(b.price || "0")}
-                </td>
+                            <div>
 
-                <td>
-                    ${approvalBadge(b.approval_status)}
-                </td>
+                                <div class="company">
+                                    ${escapeHtml(
+                                        item.company_name ||
+                                        "Unnamed Business"
+                                    )}
+                                </div>
 
-                <td>
-                    ${paymentBadge(b.payment_status)}
-                </td>
+                                <div class="muted">
+                                    ${escapeHtml(
+                                        item.website || ""
+                                    )}
+                                </div>
 
-                <td>
+                            </div>
 
-                    <button
-                        class="btn view"
-                        onclick="viewBusiness(${b.id})">
-                        View
-                    </button>
+                        </div>
 
-                    <button
-                        class="btn edit"
-                        onclick="editBusiness(${b.id})">
-                        Edit
-                    </button>
+                    </td>
 
-                    ${
-                        b.payment_status !== "received"
-                        ? `
-                        <button
-                            class="btn payment"
-                            onclick="paymentReceived(${b.id})">
-                            Payment Received
-                        </button>
-                        `
-                        : ""
-                    }
+                    <td>
 
-                    ${
-                        b.approval_status !== "approved"
-                        ? `
-                        <button
-                            class="btn approve"
-                            onclick="approveBusiness(${b.id})">
-                            Approve
-                        </button>
-                        `
-                        : ""
-                    }
+                        <strong>
+                            ${escapeHtml(
+                                item.contact_person || "-"
+                            )}
+                        </strong>
 
-                    ${
-                        b.approval_status !== "rejected"
-                        ? `
-                        <button
-                            class="btn reject"
-                            onclick="rejectBusiness(${b.id})">
-                            Reject
-                        </button>
-                        `
-                        : ""
-                    }
+                        <div class="muted">
+                            ${escapeHtml(
+                                item.mobile || "-"
+                            )}
+                        </div>
 
-                </td>
+                    </td>
 
-            </tr>
+                    <td>
+                        ${escapeHtml(
+                            item.sector || "Other"
+                        )}
+                    </td>
+
+                    <td>
+                        <strong>
+                            ${item.block_number || "-"}
+                        </strong>
+                    </td>
+
+                    <td>
+                        ₹${Number(
+                            item.price || 0
+                        ).toFixed(2)}
+                    </td>
+
+                    <td>
+                        <span class="badge ${bookingClass}">
+                            ${escapeHtml(
+                                item.booking_status || "-"
+                            )}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="badge ${approvalClass}">
+                            ${escapeHtml(
+                                item.approval_status || "-"
+                            )}
+                        </span>
+                    </td>
+
+                    <td>
+                        <span class="badge ${paymentClass}">
+                            ${escapeHtml(
+                                item.payment_status || "-"
+                            )}
+                        </span>
+                    </td>
+
+                    <td>
+
+                        <div class="actions">
+
+                            <button
+                                class="view"
+                                onclick="viewBusiness(${item.id})">
+                                View
+                            </button>
+
+                            <button
+                                class="edit"
+                                onclick="editBusiness(${item.id})">
+                                Edit
+                            </button>
+
+                            ${
+                                item.payment_status !== "received"
+                                ? `
+                                    <button
+                                        class="payment"
+                                        onclick="paymentReceived(${item.id})">
+                                        Payment Received
+                                    </button>
+                                  `
+                                : ""
+                            }
+
+                            ${
+                                item.approval_status !== "approved"
+                                ? `
+                                    <button
+                                        class="approve"
+                                        onclick="approveBusiness(${item.id})">
+                                        Approve
+                                    </button>
+                                  `
+                                : ""
+                            }
+
+                            ${
+                                item.approval_status !== "rejected"
+                                ? `
+                                    <button
+                                        class="reject"
+                                        onclick="rejectBusiness(${item.id})">
+                                        Reject
+                                    </button>
+                                  `
+                                : ""
+                            }
+
+                        </div>
+
+                    </td>
+
+                </tr>
+
             `;
 
         }).join("");
@@ -939,474 +1236,587 @@ function renderTable(){
 }
 
 
-/* =====================================================
-   BADGES
-===================================================== */
-
-function approvalBadge(status){
-
-    if(status === "approved")
-        return `<span class="badge approved">APPROVED</span>`;
-
-    if(status === "rejected")
-        return `<span class="badge rejected">REJECTED</span>`;
-
-    return `<span class="badge pending">PENDING</span>`;
-}
-
-
-function paymentBadge(status){
-
-    if(status === "received")
-        return `<span class="badge received">RECEIVED</span>`;
-
-    if(status === "not_received")
-        return `<span class="badge notreceived">NOT RECEIVED</span>`;
-
-    return `<span class="badge pending">PENDING</span>`;
-}
-
-
-/* =====================================================
-   FIND BUSINESS
-===================================================== */
-
-function findBusiness(id){
-
-    return businesses.find(
-        b => Number(b.id) === Number(id)
-    );
-
-}
-
-
-/* =====================================================
+/* =========================
    VIEW
-===================================================== */
+========================= */
 
 function viewBusiness(id){
 
-    const b =
-        findBusiness(id);
+    const item =
+        businesses.find(x =>
+            Number(x.id) === Number(id)
+        );
 
-    if(!b) return;
+    if(!item) return;
 
-    const logo =
-        b.logo_url
-        ? `
-        <img
-        src="${escapeHtml(b.logo_url)}"
-        class="detail-logo">
-        `
-        : "";
 
-    document.getElementById("viewContent")
-    .innerHTML = `
+    document.getElementById(
+        "viewContent"
+    ).innerHTML = `
 
-        <div style="text-align:center">
-            ${logo}
+        <div class="detail-grid">
 
-            <h2>
-                ${escapeHtml(b.company_name)}
-            </h2>
-
-            <div style="margin-top:7px">
-                ${approvalBadge(b.approval_status)}
-                ${paymentBadge(b.payment_status)}
+            <div class="detail">
+                <label>ID</label>
+                <strong>#${item.id}</strong>
             </div>
-        </div>
 
-        <div class="detail">
-            <strong>Block Number</strong>
-            #${escapeHtml(b.block_number)}
-        </div>
+            <div class="detail">
+                <label>Block Number</label>
+                <strong>${item.block_number || "-"}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Pixel Count</strong>
-            ${escapeHtml(b.pixel_count || 100)} Pixels
-        </div>
+            <div class="detail">
+                <label>Company</label>
+                <strong>${escapeHtml(
+                    item.company_name || "-"
+                )}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Price</strong>
-            ₹${escapeHtml(b.price)}
-        </div>
+            <div class="detail">
+                <label>Contact Person</label>
+                <strong>${escapeHtml(
+                    item.contact_person || "-"
+                )}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Contact Person</strong>
-            ${escapeHtml(b.contact_person)}
-        </div>
+            <div class="detail">
+                <label>Mobile</label>
+                <strong>${escapeHtml(
+                    item.mobile || "-"
+                )}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Mobile</strong>
-            ${escapeHtml(b.mobile)}
-        </div>
+            <div class="detail">
+                <label>Website</label>
+                <strong>${escapeHtml(
+                    item.website || "-"
+                )}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Website</strong>
-            ${escapeHtml(b.website || "-")}
-        </div>
+            <div class="detail">
+                <label>Sector</label>
+                <strong>${escapeHtml(
+                    item.sector || "-"
+                )}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Sector</strong>
-            ${escapeHtml(b.sector)}
-        </div>
+            <div class="detail">
+                <label>Price</label>
+                <strong>₹${Number(
+                    item.price || 0
+                ).toFixed(2)}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Description</strong>
-            ${escapeHtml(b.description || "-")}
-        </div>
+            <div class="detail">
+                <label>Booking Status</label>
+                <strong>${escapeHtml(
+                    item.booking_status || "-"
+                )}</strong>
+            </div>
 
-        <div class="detail">
-            <strong>Created</strong>
-            ${b.created_at
-                ? new Date(b.created_at)
-                    .toLocaleString("en-IN")
-                : "-"
+            <div class="detail">
+                <label>Approval Status</label>
+                <strong>${escapeHtml(
+                    item.approval_status || "-"
+                )}</strong>
+            </div>
+
+            <div class="detail">
+                <label>Payment Status</label>
+                <strong>${escapeHtml(
+                    item.payment_status || "-"
+                )}</strong>
+            </div>
+
+            <div class="detail">
+                <label>Created</label>
+                <strong>${item.created_at
+                    ? new Date(
+                        item.created_at
+                    ).toLocaleString()
+                    : "-"
+                }</strong>
+            </div>
+
+            <div class="detail full">
+                <label>Description</label>
+                <strong>${escapeHtml(
+                    item.description || "-"
+                )}</strong>
+            </div>
+
+            ${
+                item.logo_url
+                ? `
+                    <div class="detail full">
+                        <label>Logo</label>
+                        <img
+                            src="${escapeHtml(item.logo_url)}"
+                            style="
+                                max-width:160px;
+                                max-height:120px;
+                                object-fit:contain;
+                                margin-top:8px;
+                            "
+                        >
+                    </div>
+                  `
+                : ""
             }
+
         </div>
 
     `;
 
-    document
-        .getElementById("viewModal")
-        .classList.add("show");
+    openModal("viewModal");
 
 }
 
 
-/* =====================================================
+/* =========================
    EDIT
-===================================================== */
+========================= */
 
 function editBusiness(id){
 
-    const b =
-        findBusiness(id);
+    const item =
+        businesses.find(x =>
+            Number(x.id) === Number(id)
+        );
 
-    if(!b) return;
+    if(!item) return;
+
+    currentEditId = id;
 
     document.getElementById("editId").value =
-        b.id;
+        item.id;
 
     document.getElementById("editCompany").value =
-        b.company_name || "";
+        item.company_name || "";
 
     document.getElementById("editContact").value =
-        b.contact_person || "";
+        item.contact_person || "";
 
     document.getElementById("editMobile").value =
-        b.mobile || "";
+        item.mobile || "";
 
     document.getElementById("editWebsite").value =
-        b.website || "";
+        item.website || "";
 
     document.getElementById("editSector").value =
-        b.sector || "Other";
+        item.sector || "Other";
 
     document.getElementById("editBlock").value =
-        b.block_number || "";
+        item.block_number || "";
+
+    document.getElementById("editPrice").value =
+        item.price || "";
+
+    document.getElementById("editBooking").value =
+        item.booking_status || "available";
 
     document.getElementById("editDescription").value =
-        b.description || "";
+        item.description || "";
 
-    document
-        .getElementById("editModal")
-        .classList.add("show");
+    openModal("editModal");
 
 }
 
 
-/* =====================================================
+/* =========================
    SAVE EDIT
-===================================================== */
+========================= */
 
-document
-.getElementById("editForm")
-.addEventListener(
-"submit",
-async function(e){
+async function saveEdit(event){
 
-    e.preventDefault();
+    event.preventDefault();
 
-    const id =
-        document.getElementById("editId").value;
+    const id = currentEditId;
 
     const payload = {
 
         company_name:
-            document.getElementById("editCompany").value.trim(),
+            document.getElementById(
+                "editCompany"
+            ).value.trim(),
 
         contact_person:
-            document.getElementById("editContact").value.trim(),
+            document.getElementById(
+                "editContact"
+            ).value.trim(),
 
         mobile:
-            document.getElementById("editMobile").value.trim(),
+            document.getElementById(
+                "editMobile"
+            ).value.trim(),
 
         website:
-            document.getElementById("editWebsite").value.trim(),
+            document.getElementById(
+                "editWebsite"
+            ).value.trim(),
 
         sector:
-            document.getElementById("editSector").value,
+            document.getElementById(
+                "editSector"
+            ).value,
 
         block_number:
             Number(
-                document.getElementById("editBlock").value
+                document.getElementById(
+                    "editBlock"
+                ).value
             ),
 
+        price:
+            Number(
+                document.getElementById(
+                    "editPrice"
+                ).value
+            ),
+
+        booking_status:
+            document.getElementById(
+                "editBooking"
+            ).value,
+
         description:
-            document.getElementById("editDescription").value.trim()
+            document.getElementById(
+                "editDescription"
+            ).value.trim()
 
     };
 
+
     try{
 
-        const response =
-            await fetch(
-                API_URL +
-                "?id=eq." +
-                encodeURIComponent(id),
-                {
-                    method:"PATCH",
-                    headers:apiHeaders({
-                        "Prefer":"return=representation"
-                    }),
-                    body:JSON.stringify(payload)
-                }
-            );
-
-        if(!response.ok){
-
-            const error =
-                await response.text();
-
-            throw new Error(error);
-        }
+        await updateBusiness(
+            id,
+            payload
+        );
 
         closeModal("editModal");
 
-        showMessage(
-            "Business updated successfully.",
-            "success"
-        );
-
         await loadBusinesses();
+
+        alert("Business updated successfully.");
 
     }catch(error){
 
-        console.error(error);
-
-        showMessage(
-            "Edit failed: " + error.message,
-            "error"
+        alert(
+            "Update failed:\n" +
+            error.message
         );
 
     }
 
-});
+}
 
 
-/* =====================================================
+/* =========================
    PAYMENT RECEIVED
-===================================================== */
+========================= */
 
 async function paymentReceived(id){
 
-    const b =
-        findBusiness(id);
+    const item =
+        businesses.find(x =>
+            Number(x.id) === Number(id)
+        );
 
-    if(!b) return;
+    if(!item) return;
 
-    const ok =
+
+    const confirmPayment =
         confirm(
-            "Confirm that payment has been manually verified for " +
-            b.company_name +
+            "Have you manually verified the payment for " +
+            (item.company_name || "this business") +
             "?"
         );
 
-    if(!ok) return;
+    if(!confirmPayment) return;
 
-    await updateBusiness(
-        id,
-        {
-            payment_status:"received"
-        },
-        "Payment marked as received."
-    );
-
-}
-
-
-/* =====================================================
-   APPROVE
-===================================================== */
-
-async function approveBusiness(id){
-
-    const b =
-        findBusiness(id);
-
-    if(!b) return;
-
-    if(
-        b.payment_status !== "received"
-    ){
-
-        const confirmWithoutPayment =
-            confirm(
-                "Payment is not marked as received. Approve anyway?"
-            );
-
-        if(!confirmWithoutPayment)
-            return;
-    }
-
-    const ok =
-        confirm(
-            "Approve " +
-            b.company_name +
-            "?\n\nThis will make the business LIVE on the public website."
-        );
-
-    if(!ok) return;
-
-    await updateBusiness(
-        id,
-        {
-            approval_status:"approved",
-            booking_status:"sold"
-        },
-        "Business approved successfully."
-    );
-
-}
-
-
-/* =====================================================
-   REJECT
-===================================================== */
-
-async function rejectBusiness(id){
-
-    const b =
-        findBusiness(id);
-
-    if(!b) return;
-
-    const ok =
-        confirm(
-            "Reject " +
-            b.company_name +
-            "?"
-        );
-
-    if(!ok) return;
-
-    await updateBusiness(
-        id,
-        {
-            approval_status:"rejected",
-            booking_status:"available",
-            payment_status:"not_received"
-        },
-        "Business rejected successfully."
-    );
-
-}
-
-
-/* =====================================================
-   UPDATE DATABASE
-===================================================== */
-
-async function updateBusiness(
-    id,
-    changes,
-    successText
-){
 
     try{
 
-        const response =
-            await fetch(
-                API_URL +
-                "?id=eq." +
-                encodeURIComponent(id),
-                {
-                    method:"PATCH",
-                    headers:apiHeaders({
-                        "Prefer":"return=representation"
-                    }),
-                    body:JSON.stringify(changes)
-                }
-            );
-
-        if(!response.ok){
-
-            const error =
-                await response.text();
-
-            throw new Error(error);
-        }
-
-        showMessage(
-            successText,
-            "success"
+        await updateBusiness(
+            id,
+            {
+                payment_status:"received"
+            }
         );
 
         await loadBusinesses();
 
+        alert(
+            "Payment marked as RECEIVED."
+        );
+
     }catch(error){
 
-        console.error(error);
-
-        showMessage(
-            "Update failed: " +
-            error.message,
-            "error"
+        alert(
+            "Payment update failed:\n" +
+            error.message
         );
+
     }
 
 }
 
 
-/* =====================================================
-   CLOSE MODAL
-===================================================== */
+/* =========================
+   APPROVE
+========================= */
+
+async function approveBusiness(id){
+
+    const item =
+        businesses.find(x =>
+            Number(x.id) === Number(id)
+        );
+
+    if(!item) return;
+
+
+    const confirmApprove =
+        confirm(
+            "Approve this business?\n\n" +
+            "Company: " +
+            (item.company_name || "-") +
+            "\nBlock: " +
+            (item.block_number || "-") +
+            "\nPayment: " +
+            (item.payment_status || "-")
+        );
+
+    if(!confirmApprove) return;
+
+
+    try{
+
+        await updateBusiness(
+            id,
+            {
+                approval_status:"approved",
+                booking_status:"sold"
+            }
+        );
+
+        await loadBusinesses();
+
+        alert(
+            "Business APPROVED successfully.\n" +
+            "Block is now SOLD."
+        );
+
+    }catch(error){
+
+        alert(
+            "Approve failed:\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================
+   REJECT
+========================= */
+
+async function rejectBusiness(id){
+
+    const item =
+        businesses.find(x =>
+            Number(x.id) === Number(id)
+        );
+
+    if(!item) return;
+
+
+    const confirmReject =
+        confirm(
+            "Reject this business?\n\n" +
+            "Company: " +
+            (item.company_name || "-")
+        );
+
+    if(!confirmReject) return;
+
+
+    try{
+
+        await updateBusiness(
+            id,
+            {
+                approval_status:"rejected",
+                booking_status:"available",
+                payment_status:"not_received"
+            }
+        );
+
+        await loadBusinesses();
+
+        alert(
+            "Business REJECTED successfully."
+        );
+
+    }catch(error){
+
+        alert(
+            "Reject failed:\n" +
+            error.message
+        );
+
+    }
+
+}
+
+
+/* =========================
+   UPDATE DATABASE
+========================= */
+
+async function updateBusiness(id,payload){
+
+    const response =
+        await fetch(
+            SUPABASE_URL +
+            "/rest/v1/businesses?id=eq." +
+            encodeURIComponent(id),
+            {
+                method:"PATCH",
+
+                headers:{
+                    ...apiHeaders(),
+                    "Prefer":"return=representation"
+                },
+
+                body:JSON.stringify(payload)
+            }
+        );
+
+
+    const text =
+        await response.text();
+
+
+    console.log(
+        "UPDATE STATUS:",
+        response.status
+    );
+
+    console.log(
+        "UPDATE RESPONSE:",
+        text
+    );
+
+
+    if(!response.ok){
+
+        throw new Error(
+            "HTTP " +
+            response.status +
+            " - " +
+            text
+        );
+
+    }
+
+
+    return text
+        ? JSON.parse(text)
+        : [];
+
+}
+
+
+/* =========================
+   MODALS
+========================= */
+
+function openModal(id){
+
+    document.getElementById(id)
+        .style.display = "block";
+
+    document.body.style.overflow =
+        "hidden";
+
+}
+
 
 function closeModal(id){
 
-    document
-        .getElementById(id)
-        .classList.remove("show");
+    document.getElementById(id)
+        .style.display = "none";
+
+    document.body.style.overflow =
+        "auto";
 
 }
 
+
 window.addEventListener(
-"click",
-function(e){
+    "click",
+    function(event){
 
-    if(
-        e.target.classList.contains("modal")
-    ){
-        e.target.classList.remove("show");
+        if(event.target.classList.contains("modal-bg")){
+
+            event.target.style.display =
+                "none";
+
+            document.body.style.overflow =
+                "auto";
+
+        }
+
     }
+);
 
-});
+
+/* =========================
+   FILTER EVENTS
+========================= */
+
+document.getElementById(
+    "searchInput"
+).addEventListener(
+    "input",
+    applyFilters
+);
+
+document.getElementById(
+    "statusFilter"
+).addEventListener(
+    "change",
+    applyFilters
+);
+
+document.getElementById(
+    "paymentFilter"
+).addEventListener(
+    "change",
+    applyFilters
+);
+
+document.getElementById(
+    "sectorFilter"
+).addEventListener(
+    "change",
+    applyFilters
+);
 
 
-/* =====================================================
-   INITIAL LOAD
-===================================================== */
+/* =========================
+   START
+========================= */
 
-document.addEventListener(
-"DOMContentLoaded",
-function(){
-
-    loadBusinesses();
-
-});
+loadBusinesses();
 
 </script>
 
 </body>
 </html>
+```
