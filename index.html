@@ -167,6 +167,8 @@ textarea{
     font:inherit;
 }
 
+.state-selector{min-width:220px}
+
 .toolbar input{
     flex:1;
     min-width:220px;
@@ -174,6 +176,10 @@ textarea{
 
 .toolbar select{
     width:210px;
+}
+
+.toolbar #stateFilter{
+    width:220px;
 }
 
 .wall-box{
@@ -232,17 +238,6 @@ textarea{
     padding:1px 2px;
 }
 
-.sold-label{
-    position:absolute;
-    top:1px;
-    left:1px;
-    font-size:6px;
-    background:#16a34a;
-    color:#fff;
-    padding:2px 3px;
-    border-radius:2px;
-    font-weight:800;
-}
 
 .pricing{
     display:grid;
@@ -464,6 +459,31 @@ textarea{
         padding:20px;
     }
 }
+
+/* Reliable native dropdowns */
+select {
+    appearance: auto !important;
+    -webkit-appearance: menulist !important;
+    pointer-events: auto !important;
+    position: relative;
+    z-index: 10;
+    cursor: pointer;
+}
+.field select {
+    display: block !important;
+    pointer-events: auto !important;
+    cursor: pointer;
+}
+
+/* Guaranteed clickable Business Sector dropdown */
+.sector-dropdown{position:relative;width:100%;z-index:50;}
+.sector-trigger{width:100%;padding:13px 14px;border:1px solid #d1d5db;border-radius:9px;background:#fff;font:inherit;display:flex;align-items:center;justify-content:space-between;cursor:pointer;text-align:left;color:#111827;}
+.sector-trigger:focus{outline:2px solid #93c5fd;outline-offset:1px;}
+.sector-chevron{font-size:16px;color:#6b7280;}
+.sector-menu{display:none;position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:1px solid #d1d5db;border-radius:9px;box-shadow:0 12px 30px rgba(0,0,0,.14);max-height:260px;overflow:auto;z-index:9999;padding:5px;}
+.sector-dropdown.open .sector-menu{display:block;}
+.sector-option{padding:11px 12px;border-radius:7px;cursor:pointer;font-size:14px;}
+.sector-option:hover,.sector-option.active{background:#eff6ff;color:#1d4ed8;}
 </style>
 </head>
 
@@ -479,7 +499,6 @@ textarea{
             <a href="#wallSection">Wall</a>
             <a href="#pricingSection">Pricing</a>
             <a href="#registerSection">Register</a>
-            <a href="#previewSection">Preview</a>
         </nav>
 
         <a href="#registerSection" class="btn btn-primary">
@@ -493,10 +512,10 @@ textarea{
     <div class="container">
 
         <div class="badge">
-            ✦ 1,00,000 Pixel Business Wall
+            âœ¦ 1,00,000 Pixel Business Wall
         </div>
 
-        <h1>ONE MILLION<br>PIXELS HOMEPAGE</h1>
+        <h1>ONE MILLION<br>PIXELS</h1>
 
         <p>
             Give your brand a permanent place on our digital business wall.
@@ -534,10 +553,14 @@ textarea{
 
         <div class="title">
             <h2>Live Business Wall</h2>
-            <p>1 block = 100 pixels · 1,000 blocks available</p>
+            <p>1 block = 100 pixels Â· 1,000 blocks available</p>
         </div>
 
         <div class="toolbar">
+            <select id="stateFilter" onchange="changeState()">
+                <option value="Telangana">Telangana</option>
+            </select>
+
             <input
                 id="searchInput"
                 type="text"
@@ -545,16 +568,20 @@ textarea{
                 oninput="applyFilters()"
             >
 
-            <select id="sectorFilter" onchange="applyFilters()">
-                <option value="">All Sectors</option>
-            </select>
+            <div class="sector-dropdown toolbar-sector" id="sectorFilterDropdown">
+                <button type="button" class="sector-trigger" id="sectorFilterTrigger" aria-haspopup="listbox" aria-expanded="false">
+                    <span id="sectorFilterTriggerText">All Sectors</span><span class="sector-chevron">â–¾</span>
+                </button>
+                <div class="sector-menu" id="sectorFilterMenu" role="listbox" aria-label="Filter by Business Sector"></div>
+            </div>
+            <input type="hidden" id="sectorFilter" value="">
 
             <select id="zoneFilter" onchange="applyFilters()">
                 <option value="">All Spaces</option>
-                <option value="center">Center ₹599</option>
-                <option value="premium">Premium ₹699</option>
-                <option value="edge">Edge ₹799</option>
-                <option value="corner">Corner ₹999</option>
+                <option value="center">Center â‚¹599</option>
+                <option value="premium">Premium â‚¹699</option>
+                <option value="edge">Edge â‚¹799</option>
+                <option value="corner">Corner â‚¹999</option>
             </select>
         </div>
 
@@ -578,25 +605,25 @@ textarea{
 
             <div class="price-card">
                 <h3>Center</h3>
-                <div class="price">₹599</div>
+                <div class="price">â‚¹599</div>
                 <p>Standard business block</p>
             </div>
 
             <div class="price-card">
                 <h3>Premium</h3>
-                <div class="price">₹699</div>
+                <div class="price">â‚¹699</div>
                 <p>High visibility location</p>
             </div>
 
             <div class="price-card">
                 <h3>Edge</h3>
-                <div class="price">₹799</div>
+                <div class="price">â‚¹799</div>
                 <p>Edge position</p>
             </div>
 
             <div class="price-card">
                 <h3>Corner</h3>
-                <div class="price">₹999</div>
+                <div class="price">â‚¹999</div>
                 <p>Premium corner position</p>
             </div>
 
@@ -620,6 +647,11 @@ textarea{
             <form id="businessForm">
 
                 <div class="form-grid">
+
+                    <div class="field">
+                        <label>State *</label>
+                        <select id="state" required onchange="syncRegistrationState()"></select>
+                    </div>
 
                     <div class="field">
                         <label>Company / Brand Name *</label>
@@ -652,21 +684,14 @@ textarea{
 
                     <div class="field">
                         <label>Business Sector *</label>
-                        <select id="sector" required>
-                            <option value="">Select Sector</option>
-                            <option>Banking</option>
-                            <option>IT</option>
-                            <option>Finance</option>
-                            <option>Education</option>
-                            <option>Healthcare</option>
-                            <option>Real Estate</option>
-                            <option>Retail</option>
-                            <option>Food & Restaurant</option>
-                            <option>Travel</option>
-                            <option>Manufacturing</option>
-                            <option>Services</option>
-                            <option>Other</option>
-                        </select>
+                        <input type="hidden" id="sector" name="sector" value="">
+                        <div class="sector-dropdown" id="sectorDropdown">
+                            <button type="button" class="sector-trigger" id="sectorTrigger" aria-haspopup="listbox" aria-expanded="false">
+                                <span id="sectorTriggerText">Select Business Sector</span>
+                                <span class="sector-chevron">â–¾</span>
+                            </button>
+                            <div class="sector-menu" id="sectorMenu" role="listbox" aria-label="Business Sector"></div>
+                        </div>
                     </div>
 
                     <div class="field">
@@ -684,7 +709,7 @@ textarea{
 
                     <div class="field">
                         <label>Selected Price</label>
-                        <input id="price" readonly value="₹599">
+                        <input id="price" readonly value="â‚¹599">
                     </div>
 
                     <div class="field full">
@@ -710,6 +735,14 @@ textarea{
                         </div>
                     </div>
 
+                    <div class="field full">
+                        <label>Advertisement Video *</label>
+                        <input id="adVideo" type="file" accept="video/*,.mp4,.webm,.mov,.m4v,.avi,.mkv,.3gp,.mpeg,.mpg,.wmv,.flv,.ogv" required>
+                        <div class="file-note">
+                            Any video format accepted by upload storage. Duration is not checked.
+                        </div>
+                    </div>
+
                 </div>
 
                 <div class="form-actions">
@@ -731,35 +764,12 @@ textarea{
     </div>
 </section>
 
-<!-- PREVIEW -->
-<section id="previewSection">
-    <div class="container">
-
-        <div class="title">
-            <h2>Preview</h2>
-            <p>
-                All 1,000 business blocks are shown below.
-                Approved businesses display their logo.
-            </p>
-        </div>
-
-        <div class="preview-note">
-            Click a booked logo/block to view business details.
-        </div>
-
-        <div class="wall-box">
-            <div id="previewWall" class="wall"></div>
-        </div>
-
-    </div>
-</section>
-
 <!-- PAYMENT MODAL -->
 <div id="paymentModal" class="modal">
     <div class="modal-box">
 
         <button class="close" onclick="closeModal('paymentModal')">
-            ×
+            Ã—
         </button>
 
         <div class="payment-box">
@@ -777,7 +787,7 @@ textarea{
 
             <p>
                 Amount:
-                <strong id="paymentAmount">₹599</strong>
+                <strong id="paymentAmount">â‚¹599</strong>
             </p>
 
             <div class="payment-actions">
@@ -814,7 +824,7 @@ textarea{
     <div class="modal-box">
 
         <button class="close" onclick="closeModal('detailsModal')">
-            ×
+            Ã—
         </button>
 
         <div id="detailsContent"></div>
@@ -840,12 +850,54 @@ const STORAGE_URL =
     SUPABASE_URL +
     "/storage/v1/object/business-logos";
 
+const AD_VIDEO_STORAGE_URL =
+    SUPABASE_URL +
+    "/storage/v1/object/pixel-ad-videos";
+
 const UPI_ID =
     "yourplaystory-1@oksbi";
 
 const TOTAL_BLOCKS = 1000;
 const PIXELS_PER_BLOCK = 100;
 const TOTAL_PIXELS = 100000;
+
+const SECTORS = [
+    "Banking",
+    "IT & Software",
+    "Finance & Insurance",
+    "Education",
+    "Healthcare & Medical",
+    "Real Estate",
+    "Retail & E-commerce",
+    "Food & Restaurant",
+    "Travel & Tourism",
+    "Manufacturing",
+    "Automobile",
+    "Construction",
+    "Media & Entertainment",
+    "Telecommunications",
+    "Logistics & Transportation",
+    "Agriculture",
+    "Pharmaceuticals",
+    "Beauty & Wellness",
+    "Legal Services",
+    "Professional Services",
+    "Government Services",
+    "Other"
+];
+
+const STATES = [
+    "Andhra Pradesh","Arunachal Pradesh","Assam","Bihar","Chhattisgarh",
+    "Goa","Gujarat","Haryana","Himachal Pradesh","Jharkhand",
+    "Karnataka","Kerala","Madhya Pradesh","Maharashtra","Manipur",
+    "Meghalaya","Mizoram","Nagaland","Odisha","Punjab","Rajasthan",
+    "Sikkim","Tamil Nadu","Telangana","Tripura","Uttar Pradesh",
+    "Uttarakhand","West Bengal","Andaman and Nicobar Islands","Chandigarh",
+    "Dadra and Nagar Haveli and Daman and Diu","Delhi","Jammu and Kashmir",
+    "Ladakh","Lakshadweep","Puducherry"
+];
+
+let selectedState = "Telangana";
 
 const PRICES = {
     center: 599,
@@ -863,12 +915,26 @@ let currentPaymentAmount = 599;
 ========================================================= */
 
 function headers(extra = {}) {
+    // This project uses a Supabase publishable key (sb_publishable_...).
+    // Do not send it as a JWT in Authorization; Supabase accepts the
+    // publishable key through the apikey header.
     return {
         "apikey": SUPABASE_KEY,
-        "Authorization": "Bearer " + SUPABASE_KEY,
         "Content-Type": "application/json",
         ...extra
     };
+}
+
+async function readApiError(response, fallback) {
+    let text = "";
+    try { text = await response.text(); } catch (_) {}
+    if (!text) return fallback;
+    try {
+        const data = JSON.parse(text);
+        return data.message || data.error_description || data.error || data.hint || text;
+    } catch (_) {
+        return text;
+    }
 }
 
 function escapeHtml(value) {
@@ -929,19 +995,27 @@ function getPrice(block) {
 ========================================================= */
 
 function updatePrice() {
+    const blockInput = document.getElementById("blockNumber");
+    const priceInput = document.getElementById("price");
+    if (!blockInput || !priceInput) return;
 
-    const block =
-        Number(document.getElementById("blockNumber").value);
+    const raw = String(blockInput.value || "").trim();
+    const block = Number(raw);
 
-    if (!block || block < 1 || block > 1000) {
-        document.getElementById("price").value = "₹599";
+    // Do not allow a manual price. Block number is the only source of price.
+    if (!raw || !Number.isInteger(block) || block < 1 || block > TOTAL_BLOCKS) {
+        priceInput.value = "";
+        currentPaymentAmount = 0;
         return;
     }
 
-    const price = getPrice(block);
+    const zone = getZone(block);
+    const price = PRICES[zone];
 
-    document.getElementById("price").value =
-        "₹" + price;
+    priceInput.value = "â‚¹" + price;
+    priceInput.dataset.zone = zone;
+    priceInput.dataset.price = String(price);
+    currentPaymentAmount = price;
 }
 
 
@@ -955,7 +1029,7 @@ async function loadBusinesses() {
 
         const response = await fetch(
             API_URL +
-            "?approval_status=eq.approved&order=block_number.asc",
+            "?approval_status=eq.approved&state=eq." + encodeURIComponent(selectedState) + "&order=block_number.asc",
             {
                 method:"GET",
                 headers:headers()
@@ -963,13 +1037,12 @@ async function loadBusinesses() {
         );
 
         if (!response.ok) {
-            throw new Error("Unable to load businesses");
+            throw new Error("Unable to load businesses for " + selectedState);
         }
 
         businesses = await response.json();
 
         renderWall();
-        showPreviewWall();
         updateStats();
         populateSectorFilter();
 
@@ -980,7 +1053,6 @@ async function loadBusinesses() {
         businesses = [];
 
         renderWall();
-        showPreviewWall();
         updateStats();
     }
 }
@@ -1017,32 +1089,54 @@ function updateStats() {
    SECTOR FILTER
 ========================================================= */
 
+function getSectorList(){
+    return [...new Set([
+        ...SECTORS,
+        ...businesses.map(b => String(b.sector || "").trim()).filter(Boolean)
+    ])].sort((a,b)=>a.localeCompare(b));
+}
+
+function buildSectorMenus(){
+    const sectors=getSectorList();
+    const regMenu=document.getElementById("sectorMenu");
+    const filterMenu=document.getElementById("sectorFilterMenu");
+    if(regMenu){
+        regMenu.innerHTML=sectors.map(s=>`<div class="sector-option" role="option" data-value="${escapeAttr(s)}">${escapeHtml(s)}</div>`).join("");
+    }
+    if(filterMenu){
+        filterMenu.innerHTML='<div class="sector-option" role="option" data-value="">All Sectors</div>'+sectors.map(s=>`<div class="sector-option" role="option" data-value="${escapeAttr(s)}">${escapeHtml(s)}</div>`).join("");
+    }
+}
+
+function chooseRegistrationSector(value){
+    const input=document.getElementById("sector");
+    const text=document.getElementById("sectorTriggerText");
+    const dropdown=document.getElementById("sectorDropdown");
+    if(input) input.value=value;
+    if(text) text.textContent=value || "Select Business Sector";
+    if(dropdown) dropdown.classList.remove("open");
+    const trigger=document.getElementById("sectorTrigger");
+    if(trigger) trigger.setAttribute("aria-expanded","false");
+}
+
+function chooseSectorFilter(value){
+    const input=document.getElementById("sectorFilter");
+    const text=document.getElementById("sectorFilterTriggerText");
+    const dropdown=document.getElementById("sectorFilterDropdown");
+    if(input) input.value=value;
+    if(text) text.textContent=value || "All Sectors";
+    if(dropdown) dropdown.classList.remove("open");
+    const trigger=document.getElementById("sectorFilterTrigger");
+    if(trigger) trigger.setAttribute("aria-expanded","false");
+    applyFilters();
+}
+
+function populateSectorOptions(){
+    buildSectorMenus();
+}
+
 function populateSectorFilter() {
-
-    const select =
-        document.getElementById("sectorFilter");
-
-    const sectors =
-        [...new Set(
-            businesses
-                .map(b => b.sector)
-                .filter(Boolean)
-        )]
-        .sort();
-
-    select.innerHTML =
-        `<option value="">All Sectors</option>`;
-
-    sectors.forEach(sector => {
-
-        const option =
-            document.createElement("option");
-
-        option.value = sector;
-        option.textContent = sector;
-
-        select.appendChild(option);
-    });
+    populateSectorOptions();
 }
 
 
@@ -1065,6 +1159,7 @@ function getFilteredBusinesses() {
         document.getElementById("zoneFilter").value;
 
     return businesses.filter(b => {
+        if (b.state && b.state !== selectedState) return false;
 
         const block =
             Number(b.block_number);
@@ -1095,7 +1190,6 @@ function getFilteredBusinesses() {
 
 function applyFilters() {
     renderWall();
-    showPreviewWall();
 }
 
 
@@ -1141,52 +1235,6 @@ function renderWall() {
 
 
 /* =========================================================
-   PREVIEW
-========================================================= */
-
-function showPreviewWall() {
-
-    const wall =
-        document.getElementById("previewWall");
-
-    if (!wall) return;
-
-    wall.innerHTML = "";
-
-    const filtered =
-        getFilteredBusinesses();
-
-    const businessMap = new Map();
-
-    filtered.forEach(b => {
-
-        if (b.block_number) {
-
-            businessMap.set(
-                Number(b.block_number),
-                b
-            );
-        }
-    });
-
-    for (
-        let i = 1;
-        i <= TOTAL_BLOCKS;
-        i++
-    ) {
-
-        const business =
-            businessMap.get(i);
-
-        const pixel =
-            createPixel(i,business);
-
-        wall.appendChild(pixel);
-    }
-}
-
-
-/* =========================================================
    CREATE PIXEL
 ========================================================= */
 
@@ -1197,7 +1245,7 @@ function createPixel(blockNumber,business) {
 
     pixel.className =
         "pixel" +
-        (business ? " sold" : "");
+        "";
 
     pixel.dataset.block =
         blockNumber;
@@ -1239,10 +1287,6 @@ function createPixel(blockNumber,business) {
                     alt="${escapeAttr(business.company_name)}"
                 >
 
-                <div class="sold-label">
-                    SOLD
-                </div>
-
                 <div class="pixel-no">
                     ${blockNumber}
                 </div>
@@ -1265,10 +1309,6 @@ function createPixel(blockNumber,business) {
                     ${escapeHtml(
                         business.company_name
                     )}
-                </div>
-
-                <div class="sold-label">
-                    SOLD
                 </div>
 
                 <div class="pixel-no">
@@ -1306,10 +1346,17 @@ function openDetails(business) {
           `
         : "";
 
+    const adVideo = business.ad_video_url
+        ? `<video controls autoplay muted playsinline
+            style="width:100%;max-height:320px;border-radius:12px;background:#000;margin:15px 0;"
+            src="${escapeAttr(business.ad_video_url)}"></video>`
+        : "";
+
     content.innerHTML = `
 
         <div style="text-align:center;margin-bottom:18px;">
             ${logo}
+            ${adVideo}
 
             <h2>
                 ${escapeHtml(
@@ -1322,8 +1369,13 @@ function openDetails(business) {
                 font-weight:700;
                 margin-top:5px;
             ">
-                ✓ Permanently Booked
+                âœ“ Permanently Booked
             </p>
+        </div>
+
+        <div class="detail-row">
+            <strong>State</strong>
+            ${escapeHtml(business.state || selectedState)}
         </div>
 
         <div class="detail-row">
@@ -1417,8 +1469,6 @@ async function uploadLogo(file) {
                 method:"POST",
                 headers:{
                     "apikey":SUPABASE_KEY,
-                    "Authorization":
-                        "Bearer " + SUPABASE_KEY,
                     "Content-Type":
                         file.type || "application/octet-stream"
                 },
@@ -1432,7 +1482,7 @@ async function uploadLogo(file) {
             await uploadResponse.text();
 
         throw new Error(
-            "Logo upload failed: " + text
+            "Logo upload failed: " + (text || "Supabase Storage rejected the upload.")
         );
     }
 
@@ -1443,6 +1493,64 @@ async function uploadLogo(file) {
     );
 }
 
+
+/* =========================================================
+   AD VIDEO UPLOAD
+========================================================= */
+
+async function validateVideoDuration(file) {
+    if (!file) throw new Error("Please select an advertisement video.");
+
+    // Do NOT try to read video metadata/duration here.
+    // Different browsers/codecs can fail metadata parsing even when the
+    // video file itself is perfectly valid and uploadable.
+    const name = (file.name || "").toLowerCase();
+    const mime = (file.type || "").toLowerCase();
+    const videoExtensions = [
+        ".mp4", ".webm", ".mov", ".m4v", ".avi", ".mkv",
+        ".3gp", ".mpeg", ".mpg", ".wmv", ".flv", ".ogv"
+    ];
+
+    const looksLikeVideo = mime.startsWith("video/") ||
+        videoExtensions.some(ext => name.endsWith(ext));
+
+    if (!looksLikeVideo) {
+        throw new Error("Please select a video file.");
+    }
+
+    // Duration is intentionally not required. Any video file can be uploaded.
+    return null;
+}
+
+async function uploadAdVideo(file) {
+    await validateVideoDuration(file);
+
+    const ext = file.name.split(".").pop().toLowerCase();
+    const fileName = Date.now() + "_" +
+        Math.random().toString(36).substring(2,10) + "." + ext;
+
+    const response = await fetch(
+        AD_VIDEO_STORAGE_URL + "/" + encodeURIComponent(fileName),
+        {
+            method:"POST",
+            headers:{
+                "apikey":SUPABASE_KEY,
+                "Content-Type":file.type || "application/octet-stream",
+                "x-upsert":"false"
+            },
+            body:file
+        }
+    );
+
+    if (!response.ok) {
+        const text = await response.text();
+        throw new Error("Advertisement video upload failed: " + (text || "Supabase Storage rejected the upload."));
+    }
+
+    return SUPABASE_URL +
+        "/storage/v1/object/public/pixel-ad-videos/" +
+        encodeURIComponent(fileName);
+}
 
 /* =========================================================
    REGISTRATION
@@ -1497,6 +1605,25 @@ document
         document.getElementById("logo")
         .files[0];
 
+    const adVideoFile =
+        document.getElementById("adVideo")
+        .files[0];
+
+    const state =
+        document.getElementById("state").value || selectedState;
+
+    if (!state || !STATES.includes(state)) {
+        status.className = "status error";
+        status.textContent = "Please select a state.";
+        return;
+    }
+
+    if (!sector || !SECTORS.includes(sector)) {
+        status.className = "status error";
+        status.textContent = "Please select a Business Sector.";
+        return;
+    }
+
     if (!/^[6-9]\d{9}$/.test(mobile)) {
 
         status.className =
@@ -1534,10 +1661,35 @@ document
         return;
     }
 
+    if (!adVideoFile) {
+        status.className = "status error";
+        status.textContent = "Please select an advertisement video.";
+        return;
+    }
+
     submitBtn.disabled = true;
     submitBtn.textContent = "Submitting...";
 
     try {
+
+        // Prevent booking a block that is already permanently approved
+        // in the selected state. Each state has its own independent wall.
+        const availabilityResponse = await fetch(
+            API_URL +
+            "?state=eq." + encodeURIComponent(state) +
+            "&block_number=eq." + encodeURIComponent(blockNumber) +
+            "&approval_status=eq.approved&select=id",
+            { method:"GET", headers:headers() }
+        );
+
+        if (!availabilityResponse.ok) {
+            throw new Error("Block availability check failed: " + await readApiError(availabilityResponse, "Unable to verify the selected block."));
+        }
+
+        const existing = await availabilityResponse.json();
+        if (existing.length > 0) {
+            throw new Error(`Block #${blockNumber} is already permanently booked in ${state}. Please select another block.`);
+        }
 
         const price =
             getPrice(blockNumber);
@@ -1548,6 +1700,9 @@ document
         const logoUrl =
             await uploadLogo(logoFile);
 
+        const adVideoUrl =
+            await uploadAdVideo(adVideoFile);
+
         /*
          * IMPORTANT:
          * Public registration must use
@@ -1555,6 +1710,7 @@ document
          */
         const payload = {
 
+            state:state,
             company_name:companyName,
 
             contact_person:contactPerson,
@@ -1568,6 +1724,8 @@ document
             description:description,
 
             logo_url:logoUrl,
+
+            ad_video_url:adVideoUrl,
 
             block_number:blockNumber,
 
@@ -1592,18 +1750,14 @@ document
             });
 
         if (!response.ok) {
-
-            const errorText =
-                await response.text();
-
-            throw new Error(errorText);
+            throw new Error(await readApiError(response, "Supabase rejected the registration."));
         }
 
         currentPaymentAmount = price;
 
         document.getElementById("paymentAmount")
             .textContent =
-            "₹" + price;
+            "â‚¹" + price;
 
         status.className =
             "status success";
@@ -1617,18 +1771,26 @@ document
         document.getElementById("businessForm")
             .reset();
 
+        const sectorInput = document.getElementById("sector");
+        const sectorText = document.getElementById("sectorTriggerText");
+        if (sectorInput) sectorInput.value = "";
+        if (sectorText) sectorText.textContent = "Select Business Sector";
+
         document.getElementById("price")
-            .value = "₹599";
+            .value = "";
+        currentPaymentAmount = 0;
 
     } catch(error) {
 
-        console.error(error);
+        console.error("Registration error:", error);
 
-        status.className =
-            "status error";
+        status.className = "status error";
 
+        // Never hide the real Supabase error. This makes configuration
+        // problems (RLS, bucket permissions, missing columns, etc.)
+        // immediately visible instead of showing a generic message.
         status.textContent =
-            "Registration failed. Please try again.";
+            "Registration failed: " + (error?.message || "Unknown error");
 
     } finally {
 
@@ -1703,6 +1865,100 @@ function paidMessage() {
 }
 
 
+
+function populateStates(){
+    const filter=document.getElementById("stateFilter");
+    const form=document.getElementById("state");
+    if(filter){
+        filter.innerHTML=STATES.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+        filter.value=selectedState;
+    }
+    if(form){
+        form.innerHTML=`<option value="">Select State</option>`+STATES.map(x=>`<option value="${escapeHtml(x)}">${escapeHtml(x)}</option>`).join("");
+        form.value=selectedState;
+    }
+}
+
+function syncRegistrationState(){
+    const form = document.getElementById("state");
+    if (!form || !STATES.includes(form.value)) return;
+
+    selectedState = form.value;
+
+    const filter = document.getElementById("stateFilter");
+    if (filter) filter.value = selectedState;
+
+    const title = document.querySelector(".hero h1");
+    if (title) {
+        title.innerHTML = `ONE MILLION PIXELS HOMEPAGE<br><span style="font-size:.45em;opacity:.9">${escapeHtml(selectedState)} â€¢ 1,00,000 Pixels</span>`;
+    }
+
+    const sectorFilter = document.getElementById("sectorFilter");
+    if (sectorFilter) { sectorFilter.value = ""; const t=document.getElementById("sectorFilterTriggerText"); if(t) t.textContent="All Sectors"; }
+
+    loadBusinesses();
+}
+
+function changeState(){
+    const value=document.getElementById("stateFilter").value;
+    if(!STATES.includes(value)) return;
+    selectedState=value;
+    const form=document.getElementById("state");
+    if(form) form.value=selectedState;
+    const search=document.getElementById("searchInput");
+    const sectorFilter=document.getElementById("sectorFilter");
+    const zoneFilter=document.getElementById("zoneFilter");
+    if(search) search.value="";
+    if(sectorFilter) { sectorFilter.value=""; const t=document.getElementById("sectorFilterTriggerText"); if(t) t.textContent="All Sectors"; }
+    if(zoneFilter) zoneFilter.value="";
+    const title=document.querySelector(".hero h1");
+    if(title) title.innerHTML=`ONE MILLION PIXELS HOMEPAGE<br><span style="font-size:.45em;opacity:.9">${escapeHtml(selectedState)} â€¢ 1,00,000 Pixels</span>`;
+    loadBusinesses();
+}
+
+/* =========================================================
+   GUARANTEED SECTOR DROPDOWN EVENTS
+========================================================= */
+function initSectorDropdowns(){
+    const reg=document.getElementById("sectorDropdown");
+    const regTrigger=document.getElementById("sectorTrigger");
+    const filter=document.getElementById("sectorFilterDropdown");
+    const filterTrigger=document.getElementById("sectorFilterTrigger");
+
+    if(regTrigger){
+        regTrigger.addEventListener("click",function(e){
+            e.preventDefault(); e.stopPropagation();
+            if(filter) filter.classList.remove("open");
+            reg.classList.toggle("open");
+            regTrigger.setAttribute("aria-expanded",reg.classList.contains("open")?"true":"false");
+        });
+    }
+    if(reg){
+        reg.addEventListener("click",function(e){
+            const option=e.target.closest(".sector-option");
+            if(option) chooseRegistrationSector(option.dataset.value || "");
+        });
+    }
+    if(filterTrigger){
+        filterTrigger.addEventListener("click",function(e){
+            e.preventDefault(); e.stopPropagation();
+            if(reg) reg.classList.remove("open");
+            filter.classList.toggle("open");
+            filterTrigger.setAttribute("aria-expanded",filter.classList.contains("open")?"true":"false");
+        });
+    }
+    if(filter){
+        filter.addEventListener("click",function(e){
+            const option=e.target.closest(".sector-option");
+            if(option) chooseSectorFilter(option.dataset.value || "");
+        });
+    }
+    document.addEventListener("click",function(e){
+        if(reg && !reg.contains(e.target)){reg.classList.remove("open"); if(regTrigger) regTrigger.setAttribute("aria-expanded","false");}
+        if(filter && !filter.contains(e.target)){filter.classList.remove("open"); if(filterTrigger) filterTrigger.setAttribute("aria-expanded","false");}
+    });
+}
+
 /* =========================================================
    INITIAL LOAD
 ========================================================= */
@@ -1711,6 +1967,18 @@ document.addEventListener(
     "DOMContentLoaded",
     function(){
 
+        populateStates();
+        initSectorDropdowns();
+        populateSectorOptions();
+
+        // Price is always derived automatically from the selected block.
+        const blockInput = document.getElementById("blockNumber");
+        if (blockInput) {
+            ["input", "change", "keyup", "blur"].forEach(evt => {
+                blockInput.addEventListener(evt, updatePrice);
+            });
+        }
+        updatePrice();
         document.getElementById("totalPixels")
             .textContent =
             TOTAL_PIXELS.toLocaleString("en-IN");
@@ -1719,7 +1987,6 @@ document.addEventListener(
             .textContent =
             TOTAL_PIXELS.toLocaleString("en-IN");
 
-        showPreviewWall();
 
         loadBusinesses();
     }
