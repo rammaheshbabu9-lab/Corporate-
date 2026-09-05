@@ -151,8 +151,24 @@ section{
 .toolbar{
     display:flex;
     gap:12px;
-    flex-wrap:wrap;
+    flex-wrap:nowrap;
+    align-items:center;
     margin-bottom:20px;
+}
+.toolbar .toolbar-sector{
+    flex:0 0 210px;
+}
+.toolbar #zoneFilter{
+    flex:0 0 210px;
+}
+@media(max-width:800px){
+    .toolbar{
+        flex-wrap:wrap;
+    }
+    .toolbar .toolbar-sector,
+    .toolbar #zoneFilter{
+        flex:1 1 200px;
+    }
 }
 
 input,
@@ -170,8 +186,8 @@ textarea{
 .state-selector{min-width:220px}
 
 .toolbar input{
-    flex:1;
-    min-width:220px;
+    flex:1 1 260px;
+    min-width:180px;
 }
 
 .toolbar select{
@@ -512,7 +528,7 @@ select {
     <div class="container">
 
         <div class="badge">
-            âœ¦ 1,00,000 Pixel Business Wall
+            ✦ 1,00,000 Pixel Business Wall
         </div>
 
         <h1>ONE MILLION<br>PIXELS</h1>
@@ -553,7 +569,7 @@ select {
 
         <div class="title">
             <h2>Live Business Wall</h2>
-            <p>1 block = 100 pixels Â· 1,000 blocks available</p>
+            <p>1 block = 100 pixels · 1,000 blocks available</p>
         </div>
 
         <div class="toolbar">
@@ -570,7 +586,7 @@ select {
 
             <div class="sector-dropdown toolbar-sector" id="sectorFilterDropdown">
                 <button type="button" class="sector-trigger" id="sectorFilterTrigger" aria-haspopup="listbox" aria-expanded="false">
-                    <span id="sectorFilterTriggerText">All Sectors</span><span class="sector-chevron">â–¾</span>
+                    <span id="sectorFilterTriggerText">All Sectors</span><span class="sector-chevron">▾</span>
                 </button>
                 <div class="sector-menu" id="sectorFilterMenu" role="listbox" aria-label="Filter by Business Sector"></div>
             </div>
@@ -578,10 +594,10 @@ select {
 
             <select id="zoneFilter" onchange="applyFilters()">
                 <option value="">All Spaces</option>
-                <option value="center">Center â‚¹599</option>
-                <option value="premium">Premium â‚¹699</option>
-                <option value="edge">Edge â‚¹799</option>
-                <option value="corner">Corner â‚¹999</option>
+                <option value="center">Center ₹599</option>
+                <option value="premium">Premium ₹699</option>
+                <option value="edge">Edge ₹799</option>
+                <option value="corner">Corner ₹999</option>
             </select>
         </div>
 
@@ -605,25 +621,25 @@ select {
 
             <div class="price-card">
                 <h3>Center</h3>
-                <div class="price">â‚¹599</div>
+                <div class="price">₹599</div>
                 <p>Standard business block</p>
             </div>
 
             <div class="price-card">
                 <h3>Premium</h3>
-                <div class="price">â‚¹699</div>
+                <div class="price">₹699</div>
                 <p>High visibility location</p>
             </div>
 
             <div class="price-card">
                 <h3>Edge</h3>
-                <div class="price">â‚¹799</div>
+                <div class="price">₹799</div>
                 <p>Edge position</p>
             </div>
 
             <div class="price-card">
                 <h3>Corner</h3>
-                <div class="price">â‚¹999</div>
+                <div class="price">₹999</div>
                 <p>Premium corner position</p>
             </div>
 
@@ -688,7 +704,7 @@ select {
                         <div class="sector-dropdown" id="sectorDropdown">
                             <button type="button" class="sector-trigger" id="sectorTrigger" aria-haspopup="listbox" aria-expanded="false">
                                 <span id="sectorTriggerText">Select Business Sector</span>
-                                <span class="sector-chevron">â–¾</span>
+                                <span class="sector-chevron">▾</span>
                             </button>
                             <div class="sector-menu" id="sectorMenu" role="listbox" aria-label="Business Sector"></div>
                         </div>
@@ -709,7 +725,7 @@ select {
 
                     <div class="field">
                         <label>Selected Price</label>
-                        <input id="price" readonly value="â‚¹599">
+                        <input id="price" readonly value="₹599">
                     </div>
 
                     <div class="field full">
@@ -769,7 +785,7 @@ select {
     <div class="modal-box">
 
         <button class="close" onclick="closeModal('paymentModal')">
-            Ã—
+            ×
         </button>
 
         <div class="payment-box">
@@ -787,7 +803,7 @@ select {
 
             <p>
                 Amount:
-                <strong id="paymentAmount">â‚¹599</strong>
+                <strong id="paymentAmount">₹599</strong>
             </p>
 
             <div class="payment-actions">
@@ -824,7 +840,7 @@ select {
     <div class="modal-box">
 
         <button class="close" onclick="closeModal('detailsModal')">
-            Ã—
+            ×
         </button>
 
         <div id="detailsContent"></div>
@@ -1012,7 +1028,7 @@ function updatePrice() {
     const zone = getZone(block);
     const price = PRICES[zone];
 
-    priceInput.value = "â‚¹" + price;
+    priceInput.value = "₹" + price;
     priceInput.dataset.zone = zone;
     priceInput.dataset.price = String(price);
     currentPaymentAmount = price;
@@ -1369,7 +1385,7 @@ function openDetails(business) {
                 font-weight:700;
                 margin-top:5px;
             ">
-                âœ“ Permanently Booked
+                ✓ Permanently Booked
             </p>
         </div>
 
@@ -1757,7 +1773,7 @@ document
 
         document.getElementById("paymentAmount")
             .textContent =
-            "â‚¹" + price;
+            "₹" + price;
 
         status.className =
             "status success";
@@ -1890,7 +1906,7 @@ function syncRegistrationState(){
 
     const title = document.querySelector(".hero h1");
     if (title) {
-        title.innerHTML = `ONE MILLION PIXELS HOMEPAGE<br><span style="font-size:.45em;opacity:.9">${escapeHtml(selectedState)} â€¢ 1,00,000 Pixels</span>`;
+        title.innerHTML = `ONE MILLION PIXELS HOMEPAGE<br><span style="font-size:.45em;opacity:.9">${escapeHtml(selectedState)} • 1,00,000 Pixels</span>`;
     }
 
     const sectorFilter = document.getElementById("sectorFilter");
@@ -1912,7 +1928,7 @@ function changeState(){
     if(sectorFilter) { sectorFilter.value=""; const t=document.getElementById("sectorFilterTriggerText"); if(t) t.textContent="All Sectors"; }
     if(zoneFilter) zoneFilter.value="";
     const title=document.querySelector(".hero h1");
-    if(title) title.innerHTML=`ONE MILLION PIXELS HOMEPAGE<br><span style="font-size:.45em;opacity:.9">${escapeHtml(selectedState)} â€¢ 1,00,000 Pixels</span>`;
+    if(title) title.innerHTML=`ONE MILLION PIXELS HOMEPAGE<br><span style="font-size:.45em;opacity:.9">${escapeHtml(selectedState)} • 1,00,000 Pixels</span>`;
     loadBusinesses();
 }
 
